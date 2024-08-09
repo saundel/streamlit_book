@@ -1,0 +1,160 @@
+---
+title: "Basic Inputs"
+filters:
+  - whitphx/stlite
+---
+
+One of the most important things about Streamlit apps is that they can take and react to user input.
+
+There are a huge range of input types available - but let's start with a simple one.
+
+Let's create a drop-down select box with a couple of options.
+
+The function we need is `st.selectbox()`.
+
+We first pass in a label that will be displayed to the user so they know what the input is for.
+
+We then pass in a list of possible options as a list (square brackets) or a tuple (curved brackets).
+
+We assign the output of `st.selectbox()` to a variable.
+
+We can then use `st.write()` to print out a string that includes the selected option from our list of options.
+
+We've also got a dictionary of links to the posters for each of these movies -
+
+```{python}
+#| eval: false
+import streamlit as st
+
+chosen_option = st.selectbox(
+    "What is your favourite movie?",
+    ["Back to the Future", "Home Alone", "Bicentennial Man"],
+)
+
+st.write(f"You selected: {chosen_option}")
+
+image_url = {
+    "Back to the Future": "https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg",
+    "Home Alone": "https://upload.wikimedia.org/wikipedia/en/7/76/Home_alone_poster.jpg",
+    "Bicentennial Man": "https://upload.wikimedia.org/wikipedia/en/f/fc/Bicentennial_man_film_poster.jpg"
+    }
+
+st.image(image_url[chosen_option])
+```
+
+Try it out in the interactive version of the app below.
+
+See how the value changes?
+
+```{stlite-python}
+import streamlit as st
+
+chosen_option = st.selectbox(
+    "What is your favourite movie?",
+    ["Back to the Future", "Home Alone", "Bicentennial Man"],
+)
+
+st.write("You selected:", chosen_option)
+
+image_url = {"Back to the Future": "https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg",
+            "Home Alone": "https://upload.wikimedia.org/wikipedia/en/7/76/Home_alone_poster.jpg",
+            "Bicentennial Man": "https://upload.wikimedia.org/wikipedia/en/f/fc/Bicentennial_man_film_poster.jpg"}
+
+st.image(image_url[chosen_option])
+```
+
+## Streamlit Running Order
+
+A key concept of Streamlit is that each time something changes, the app reruns from top to bottom.
+
+This is a good thing for simple apps - but it can become problematic as your app becomes more complex and if you have things that take longer to rerun.
+
+Let's make a new app that takes some different inputs.
+
+:::{.callout-note}
+Here we artifically induce a wait for the loading phase so you can more clearly see the process by which the app reruns.
+
+You don't need to do this in your own apps! They will just run as fast as the code possibly can - but that can still not be fast enough if there are lots of things that need to be recalculated.
+:::
+
+Here, despite the fact that the dataframe does not change between runs
+
+```{python}
+#| eval: false
+import streamlit as st
+import time
+import pandas as pd
+
+st.write("Loading the name popularity lookup")
+time.sleep(3)
+st.write("Still Loading...")
+time.sleep(3)
+
+url = 'https://www.dropbox.com/scl/fi/yxrc1ll9o3kpg5b1ekm5b/girl_boy_names_2022.csv?rlkey=eq3uv3ms5441gqxchnnom1h6b&st=d53l3q1q&dl=1'
+name_lookup = pd.read_csv(url)
+st.write("Done!")
+
+input_name = st.text_input("What is your name?")
+
+boy_name_lookup = name_lookup[name_lookup["Boy Name"] == input_name]
+girl_name_lookup = name_lookup[name_lookup["Girl Name"] == input_name]
+
+if len(boy_name_lookup) > 0:
+    st.write(f"{input_name} was in popularity position {boy_name_lookup["Rank"].values[0]} for boys in 2022.")
+else:
+    st.write(f"{input_name} was not in the most popular 1000 names for boys in 2022.")
+
+if len(girl_name_lookup) > 0:
+    st.write(f"{input_name} was in popularity position {girl_name_lookup["Rank"].values[0]} for girls in 2022.")
+else:
+    st.write(f"{input_name} was not in the most popular 1000 names for girls in 2022.")
+
+```
+
+```{stlite-python}
+# stlite quirks mean we need (in reality) to use await asyncio.sleep instead of time.sleep
+# and we also need to point towards a different file upload service as google drive, dropbox and
+# github raw file storage all return errors when trying to access valid files via the stlite
+# interface
+import streamlit as st
+import asyncio
+import pandas as pd
+
+st.write("Loading the name popularity lookup")
+await asyncio.sleep(3)
+st.write("Still Loading...")
+await asyncio.sleep(3)
+
+url = 'https://files.catbox.moe/16k7td.csv'
+name_lookup = pd.read_csv(url)
+st.write("Done!")
+
+input_name = st.text_input("What is your name?")
+
+boy_name_lookup = name_lookup[name_lookup["Boy Name"] == input_name]
+girl_name_lookup = name_lookup[name_lookup["Girl Name"] == input_name]
+
+if len(boy_name_lookup) > 0:
+    st.write(f"{input_name} was in popularity position {boy_name_lookup["Rank"].values[0]} for boys in 2022.")
+else:
+    st.write(f"{input_name} was not in the most popular 1000 names for boys in 2022.")
+
+if len(girl_name_lookup) > 0:
+    st.write(f"{input_name} was in popularity position {girl_name_lookup["Rank"].values[0]} for girls in 2022.")
+else:
+    st.write(f"{input_name} was not in the most popular 1000 names for girls in 2022.")
+
+```
+
+
+:::{.callout-tip}
+There are some more advanced features of Streamlit you can call upon when you want to minimize the number of code reruns that occur unnecessarily.
+
+We'll cover these - such as caching, partial reruns, activation buttons and session state - later in the book.
+
+For now, it's just important to be aware that a Streamlit app behaves a lot like a Python script - it's almost like a frontend that reruns a script each time an input value is changed.
+
+This design decision keeps the code as simple as possible - and it's often not a big problem for simpler apps.
+
+Still, you will need to keep it in mind as your apps grow in complexity.
+:::

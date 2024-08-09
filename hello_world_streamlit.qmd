@@ -1,0 +1,22 @@
+---
+title: "Hello World (Wide Web)!"
+filters:
+  - whitphx/stlite
+---
+
+Streamlit apps are remarkably simple to initialise!
+
+Let's create a web app that just has a heading.
+
+```{python}
+#| eval: false
+import streamlit as st
+
+st.title("Hello World (Wide Web)!")
+```
+
+```{stlite-python}
+import streamlit as st
+
+st.title("Hello World (Wide Web)!")
+```

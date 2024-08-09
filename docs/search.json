@@ -1,0 +1,45 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "HSMA - Web Apps with Streamlit",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "hello_world_streamlit.html",
+    "href": "hello_world_streamlit.html",
+    "title": "1  Hello World (Wide Web)!",
+    "section": "",
+    "text": "Streamlit apps are remarkably simple to initialise!\nLet’s create a web app that just has a heading.\n\nimport streamlit as st\n\nst.title(\"Hello World (Wide Web)!\")",
+    "crumbs": [
+      "An Introduction to Streamlit",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hello World (Wide Web)!</span>"
+    ]
+  },
+  {
+    "objectID": "introduction_to_inputs.html",
+    "href": "introduction_to_inputs.html",
+    "title": "2  Basic Inputs",
+    "section": "",
+    "text": "2.1 Streamlit Running Order\nA key concept of Streamlit is that each time something changes, the app reruns from top to bottom.\nThis is a good thing for simple apps - but it can become problematic as your app becomes more complex and if you have things that take longer to rerun.\nLet’s make a new app that takes some different inputs.\nHere, despite the fact that the dataframe does not change between runs\nimport streamlit as st\nimport time\nimport pandas as pd\n\nst.write(\"Loading the name popularity lookup\")\ntime.sleep(3)\nst.write(\"Still Loading...\")\ntime.sleep(3)\n\nurl = 'https://www.dropbox.com/scl/fi/yxrc1ll9o3kpg5b1ekm5b/girl_boy_names_2022.csv?rlkey=eq3uv3ms5441gqxchnnom1h6b&st=d53l3q1q&dl=1'\nname_lookup = pd.read_csv(url)\nst.write(\"Done!\")\n\ninput_name = st.text_input(\"What is your name?\")\n\nboy_name_lookup = name_lookup[name_lookup[\"Boy Name\"] == input_name]\ngirl_name_lookup = name_lookup[name_lookup[\"Girl Name\"] == input_name]\n\nif len(boy_name_lookup) &gt; 0:\n    st.write(f\"{input_name} was in popularity position {boy_name_lookup[\"Rank\"].values[0]} for boys in 2022.\")\nelse:\n    st.write(f\"{input_name} was not in the most popular 1000 names for boys in 2022.\")\n\nif len(girl_name_lookup) &gt; 0:\n    st.write(f\"{input_name} was in popularity position {girl_name_lookup[\"Rank\"].values[0]} for girls in 2022.\")\nelse:\n    st.write(f\"{input_name} was not in the most popular 1000 names for girls in 2022.\")",
+    "crumbs": [
+      "An Introduction to Streamlit",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basic Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "introduction_to_inputs.html#streamlit-running-order",
+    "href": "introduction_to_inputs.html#streamlit-running-order",
+    "title": "2  Basic Inputs",
+    "section": "",
+    "text": "Note\n\n\n\nHere we artifically induce a wait for the loading phase so you can more clearly see the process by which the app reruns.\nYou don’t need to do this in your own apps! They will just run as fast as the code possibly can - but that can still not be fast enough if there are lots of things that need to be recalculated.\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nThere are some more advanced features of Streamlit you can call upon when you want to minimize the number of code reruns that occur unnecessarily.\nWe’ll cover these - such as caching, partial reruns, activation buttons and session state - later in the book.\nFor now, it’s just important to be aware that a Streamlit app behaves a lot like a Python script - it’s almost like a frontend that reruns a script each time an input value is changed.\nThis design decision keeps the code as simple as possible - and it’s often not a big problem for simpler apps.\nStill, you will need to keep it in mind as your apps grow in complexity.",
+    "crumbs": [
+      "An Introduction to Streamlit",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basic Inputs</span>"
+    ]
+  }
+]
