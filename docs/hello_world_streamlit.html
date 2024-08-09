@@ -207,7 +207,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#previewing-your-app" id="toc-previewing-your-app" class="nav-link active" data-scroll-target="#previewing-your-app"><span class="header-section-number">1.1</span> Previewing your app</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -233,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Streamlit apps are remarkably simple to initialise!</p>
 <p>Let’s create a web app that just has a heading.</p>
-<div id="4b307873" class="cell" data-execution_count="1">
+<div id="795012e0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"Hello World (Wide Web)!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -241,8 +247,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0A%0Ast.title%28%22Hello%20World%20%28Wide%20Web%29%21%22%29
 
 " class="stlite"></iframe>
+<section id="previewing-your-app" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="previewing-your-app"><span class="header-section-number">1.1</span> Previewing your app</h2>
+<p>When you are writing streamlit apps from within your IDE - such as vscode - you will need to run some extra code to preview your app.</p>
+<p>First, you must make sure you save your app!</p>
+<p>Let’s save our app as <code>main.py</code>.</p>
+<p><img src="assets/2024-08-09-15-03-25.png" class="img-fluid"></p>
+<p>Then we need to open a terminal.</p>
+<p><img src="assets/2024-08-09-14-55-13.png" class="img-fluid"></p>
+<p><img src="assets/2024-08-09-14-55-53.png" class="img-fluid"></p>
+<p>In the terminal, we then run the command <code>streamlit run main.py</code></p>
+<p><img src="assets/2024-08-09-15-04-01.png" class="img-fluid"></p>
+<p>This will spin up a temporary server to run your app from.</p>
+<p><img src="assets/2024-08-09-15-04-43.png" class="img-fluid"></p>
+<p>Your app will then automatically open in a browser window in your default browser.</p>
+<p><img src="assets/2024-08-09-15-05-10.png" class="img-fluid"></p>
+<p>If we change and save our source file, like so…</p>
+<p><img src="assets/2024-08-09-15-06-40.png" class="img-fluid"></p>
+<p>Our running app will recognise that there has been a change and give us the option to rerun to incorporate the new change without having to close and restart our temporary server.</p>
+<p>This is really handy as it allows us to rapdily tweak and iterate our Streamlit apps!</p>
+<p><img src="assets/2024-08-09-15-07-34.png" class="img-fluid"></p>
+<p>You can also just use the refresh button in your browser if you would prefer.</p>
+<p><img src="assets/2024-08-09-15-08-02.png" class="img-fluid"></p>
+<p>The ‘always rerun’ option will mean that changes made to your source file will automatically trigger a rerun/refresh without you having to do it manually - it’s up to you if that’s something you’d prefer.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>

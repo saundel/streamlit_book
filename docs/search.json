@@ -4,7 +4,17 @@
     "href": "index.html",
     "title": "HSMA - Web Apps with Streamlit",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "Preface\nWelcome to this book accompanying the Streamlit sessions of module 7 of the HSMA programme.\nIn this module we introduce the Streamlit framework for web app development.\nStreamlit is a popular Python web framework that allows powerful and professional looking data apps to be created in hours instead of weeks.\nIn this book, we will introduce some of the key features of Streamlit and how to start putting them together to make more complex apps.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#stlite",
+    "href": "index.html#stlite",
+    "title": "HSMA - Web Apps with Streamlit",
+    "section": "stlite",
+    "text": "stlite\nMany examples throughout this book use the stlite framework and the stlite-quarto extension, which allows running of streamlit apps directly on the browser of the reader rather than hosting each app remotely.\nThis does mean that the app examples within each page do take a while to load, and you may not want to read this book cover-to-cover if you are on, say, a mobile network - each example will load several megabytes of data to be able to render.",
     "crumbs": [
       "Preface"
     ]
@@ -14,7 +24,7 @@
     "href": "hello_world_streamlit.html",
     "title": "1  Hello World (Wide Web)!",
     "section": "",
-    "text": "Streamlit apps are remarkably simple to initialise!\nLet’s create a web app that just has a heading.\n\nimport streamlit as st\n\nst.title(\"Hello World (Wide Web)!\")",
+    "text": "1.1 Previewing your app\nWhen you are writing streamlit apps from within your IDE - such as vscode - you will need to run some extra code to preview your app.\nFirst, you must make sure you save your app!\nLet’s save our app as main.py.\nThen we need to open a terminal.\nIn the terminal, we then run the command streamlit run main.py\nThis will spin up a temporary server to run your app from.\nYour app will then automatically open in a browser window in your default browser.\nIf we change and save our source file, like so…\nOur running app will recognise that there has been a change and give us the option to rerun to incorporate the new change without having to close and restart our temporary server.\nThis is really handy as it allows us to rapdily tweak and iterate our Streamlit apps!\nYou can also just use the refresh button in your browser if you would prefer.\nThe ‘always rerun’ option will mean that changes made to your source file will automatically trigger a rerun/refresh without you having to do it manually - it’s up to you if that’s something you’d prefer.",
     "crumbs": [
       "An Introduction to Streamlit",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hello World (Wide Web)!</span>"
