@@ -1,5 +1,16 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+Welcome to this book accompanying the Streamlit sessions of module 7 of the HSMA programme.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+In this module we introduce the Streamlit framework for web app development.
+
+Streamlit is a popular Python web framework that allows powerful and professional looking data apps to be created in hours instead of weeks.
+
+In this book, we will introduce some of the key features of Streamlit and how to start putting them together to make more complex apps.
+
+
+## stlite
+
+Many examples throughout this book use the stlite framework and the stlite-quarto extension, which allows running of streamlit apps directly on the browser of the reader rather than hosting each app remotely.
+
+This does mean that the app examples within each page do take a while to load, and you may not want to read this book cover-to-cover if you are on, say, a mobile network - each example will load several megabytes of data to be able to render.

@@ -20,3 +20,47 @@ import streamlit as st
 
 st.title("Hello World (Wide Web)!")
 ```
+
+## Previewing your app
+
+When you are writing streamlit apps from within your IDE - such as vscode - you will need to run some extra code to preview your app.
+
+First, you must make sure you save your app!
+
+Let's save our app as `main.py`.
+
+![](assets/2024-08-09-15-03-25.png)
+
+Then we need to open a terminal.
+
+![](assets/2024-08-09-14-55-13.png)
+
+![](assets/2024-08-09-14-55-53.png)
+
+In the terminal, we then run the command `streamlit run main.py`
+
+![](assets/2024-08-09-15-04-01.png)
+
+This will spin up a temporary server to run your app from.
+
+![](assets/2024-08-09-15-04-43.png)
+
+Your app will then automatically open in a browser window in your default browser.
+
+![](assets/2024-08-09-15-05-10.png)
+
+If we change and save our source file, like so...
+
+![](assets/2024-08-09-15-06-40.png)
+
+Our running app will recognise that there has been a change and give us the option to rerun to incorporate the new change without having to close and restart our temporary server.
+
+This is really handy as it allows us to rapdily tweak and iterate our Streamlit apps!
+
+![](assets/2024-08-09-15-07-34.png)
+
+You can also just use the refresh button in your browser if you would prefer.
+
+![](assets/2024-08-09-15-08-02.png)
+
+The 'always rerun' option will mean that changes made to your source file will automatically trigger a rerun/refresh without you having to do it manually - it's up to you if that's something you'd prefer.
