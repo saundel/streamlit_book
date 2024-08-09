@@ -21,6 +21,10 @@ import streamlit as st
 st.title("Hello World (Wide Web)!")
 ```
 
+This is all you need to create your very first Streamlit app!
+
+Streamlit takes care of everything else behind the scenes - you can focus primarily on the Python code for the things you want to do in your app, and Streamlit does the hard work of making it display and passing the inputs from the user to and fro in the way the web expects.
+
 ## Previewing your app
 
 When you are writing streamlit apps from within your IDE - such as vscode - you will need to run some extra code to preview your app.

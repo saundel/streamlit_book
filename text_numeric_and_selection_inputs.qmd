@@ -1,0 +1,5 @@
+---
+title: "Text, Numeric and Selection Inputs"
+filters:
+  - whitphx/stlite
+---

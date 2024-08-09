@@ -1,0 +1,168 @@
+---
+title: "File Uploads"
+filters:
+  - whitphx/stlite
+---
+
+File uploads can be a very powerful way of making your app more useful to users.
+
+Let's explore some of the things we can upload.
+
+## A simple csv file upload
+
+Let's start off by asking the user to upload any csv file of data.
+
+We'll then display some summary details about their dataframe and the first five values from each column.
+
+Right click on the following link and choose 'save as' to download a sample file you can use in the following app: [file](https://raw.githubusercontent.com/hsma-programme/h6_4b_log_reg_titanic/main/4b_log_reg_titanic/data/processed_data.csv)
+
+```{python}
+#| eval: false
+
+import streamlit as st
+import pandas as pd
+
+uploaded_file = st.file_uploader("Please upload a data file")
+
+if uploaded_file is not None:
+    uploaded_df = pd.read_csv(uploaded_file)
+
+    st.write(f"Your dataframe has {len(uploaded_df)} rows.")
+
+    st.write(f"Your dataframe has {len(uploaded_df.columns)} columns.")
+
+    st.write(f"The columns in your dataframe are {', '.join(uploaded_df.columns)}.")
+
+    for col in uploaded_df.columns:
+        st.write(f"The first 5 values in column {col} are {', '.join(uploaded_df[col].head().astype('str'))}")
+```
+
+```{stlite-python}
+import streamlit as st
+import pandas as pd
+
+uploaded_file = st.file_uploader("Please upload a data file")
+
+if uploaded_file is not None:
+    uploaded_df = pd.read_csv(uploaded_file)
+
+    st.write(f"Your dataframe has {len(uploaded_df)} rows.")
+
+    st.write(f"Your dataframe has {len(uploaded_df.columns)} columns.")
+
+    st.write(f"The columns in your dataframe are {', '.join(uploaded_df.columns)}.")
+
+    for col in uploaded_df.columns:
+        st.write(f"The first 5 values in column {col} are {', '.join(uploaded_df[col].head().astype('str'))}")
+```
+
+
+### Limiting the file types
+
+By default, we haven't restricted the file types that can be uploaded.
+
+Let's do that now!
+
+```{python}
+#| eval: false
+import streamlit as st
+import pandas as pd
+
+uploaded_file = st.file_uploader("Please upload a csv data file", type=['csv'])
+
+if uploaded_file is not None:
+    uploaded_df = pd.read_csv(uploaded_file)
+
+    st.write(uploaded_df.head())
+```
+
+```{stlite-python}
+import streamlit as st
+import pandas as pd
+
+uploaded_file = st.file_uploader("Please upload a csv data file", type=['csv'])
+
+if uploaded_file is not None:
+    uploaded_df = pd.read_csv(uploaded_file)
+
+    st.write(uploaded_df.head())
+```
+
+The app will try to prevent us from uploading the wrong type of file by only showing the correct type of file in our file explorer.
+
+![](assets/2024-08-09-15-55-05.png)
+
+If we now try to upload a file with a different extension, we'll receive a more user-friendly error message.
+
+![](assets/2024-08-09-15-54-23.png)
+
+If we passed more possible extensions to the list, we would allow more extensions to be uploaded - but we'd also have to adapt our code to deal with each of the possible types that can be uploaded!
+
+## Uploading image files
+
+We can easily upload image files too.
+
+Let's try loading an image file and displaying it for the user.
+
+```{python}
+#| eval: false
+import streamlit as st
+
+uploaded_image = st.file_uploader("Please upload an image file", type=['png','jpg','jpeg','bmp', 'bitmap'])
+
+if uploaded_image is not None:
+
+    st.image(uploaded_image)
+```
+
+```{stlite-python}
+import streamlit as st
+
+uploaded_image = st.file_uploader("Please upload an image file", type=['png','jpg','jpeg','bmp', 'bitmap'])
+
+if uploaded_image is not None:
+
+    st.image(uploaded_image)
+
+```
+
+### Manipulating uploaded image files
+
+We have to undertake a few extra steps to be able to manipulate image files people have uploaded.
+
+We'll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.
+
+Once we've adjusted the image into the format pillow expects, we can use it to
+
+Let's have a go at it here.
+
+```{stlite-python}
+import streamlit as st
+import io
+from PIL import Image
+import PIL.ImageOps
+
+uploaded_image = st.file_uploader("Please upload an image file", type=['png','jpg','jpeg','bmp', 'bitmap'])
+
+if uploaded_image is not None:
+
+    imagefile = io.BytesIO(uploaded_image.read())
+
+    im = Image.open(imagefile)
+
+    threshold = st.slider("Choose a threshold", 1, 100)
+    invert = st.checkbox("Invert Output Image?")
+
+    img_edited = im.convert("L").point(
+        lambda x: 255 if x > threshold else 0
+    )
+
+    if invert:
+        img_edited = PIL.ImageOps.invert(img_edited)
+
+    st.write("Original Image")
+    st.image(uploaded_image)
+
+    st.write("Edited Image")
+    st.image(img_edited)
+```

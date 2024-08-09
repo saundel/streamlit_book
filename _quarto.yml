@@ -10,7 +10,11 @@ book:
   - part: An Introduction to Streamlit
     chapters:
     - hello_world_streamlit.qmd
+  - part: User Inputs
+    chapters:
     - introduction_to_inputs.qmd
+    - text_numeric_and_selection_inputs.qmd
+    - file_uploads.qmd
   cover-image: resources/cover_image_robot.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true

@@ -37,7 +37,7 @@
     "section": "",
     "text": "2.1 Streamlit Running Order\nA key concept of Streamlit is that each time something changes, the app reruns from top to bottom.\nThis is a good thing for simple apps - but it can become problematic as your app becomes more complex and if you have things that take longer to rerun.\nLet’s make a new app that takes some different inputs.\nHere, despite the fact that the dataframe does not change between runs\nimport streamlit as st\nimport time\nimport pandas as pd\n\nst.write(\"Loading the name popularity lookup\")\ntime.sleep(3)\nst.write(\"Still Loading...\")\ntime.sleep(3)\n\nurl = 'https://www.dropbox.com/scl/fi/yxrc1ll9o3kpg5b1ekm5b/girl_boy_names_2022.csv?rlkey=eq3uv3ms5441gqxchnnom1h6b&st=d53l3q1q&dl=1'\nname_lookup = pd.read_csv(url)\nst.write(\"Done!\")\n\ninput_name = st.text_input(\"What is your name?\")\n\nboy_name_lookup = name_lookup[name_lookup[\"Boy Name\"] == input_name]\ngirl_name_lookup = name_lookup[name_lookup[\"Girl Name\"] == input_name]\n\nif len(boy_name_lookup) &gt; 0:\n    st.write(f\"{input_name} was in popularity position {boy_name_lookup[\"Rank\"].values[0]} for boys in 2022.\")\nelse:\n    st.write(f\"{input_name} was not in the most popular 1000 names for boys in 2022.\")\n\nif len(girl_name_lookup) &gt; 0:\n    st.write(f\"{input_name} was in popularity position {girl_name_lookup[\"Rank\"].values[0]} for girls in 2022.\")\nelse:\n    st.write(f\"{input_name} was not in the most popular 1000 names for girls in 2022.\")",
     "crumbs": [
-      "An Introduction to Streamlit",
+      "User Inputs",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basic Inputs</span>"
     ]
   },
@@ -48,8 +48,41 @@
     "section": "",
     "text": "Note\n\n\n\nHere we artifically induce a wait for the loading phase so you can more clearly see the process by which the app reruns.\nYou don’t need to do this in your own apps! They will just run as fast as the code possibly can - but that can still not be fast enough if there are lots of things that need to be recalculated.\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nThere are some more advanced features of Streamlit you can call upon when you want to minimize the number of code reruns that occur unnecessarily.\nWe’ll cover these - such as caching, partial reruns, activation buttons and session state - later in the book.\nFor now, it’s just important to be aware that a Streamlit app behaves a lot like a Python script - it’s almost like a frontend that reruns a script each time an input value is changed.\nThis design decision keeps the code as simple as possible - and it’s often not a big problem for simpler apps.\nStill, you will need to keep it in mind as your apps grow in complexity.",
     "crumbs": [
-      "An Introduction to Streamlit",
+      "User Inputs",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basic Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "file_uploads.html",
+    "href": "file_uploads.html",
+    "title": "4  File Uploads",
+    "section": "",
+    "text": "4.1 A simple csv file upload\nLet’s start off by asking the user to upload any csv file of data.\nWe’ll then display some summary details about their dataframe and the first five values from each column.\nRight click on the following link and choose ‘save as’ to download a sample file you can use in the following app: file\nimport streamlit as st\nimport pandas as pd\n\nuploaded_file = st.file_uploader(\"Please upload a data file\")\n\nif uploaded_file is not None:\n    uploaded_df = pd.read_csv(uploaded_file)\n\n    st.write(f\"Your dataframe has {len(uploaded_df)} rows.\")\n\n    st.write(f\"Your dataframe has {len(uploaded_df.columns)} columns.\")\n\n    st.write(f\"The columns in your dataframe are {', '.join(uploaded_df.columns)}.\")\n\n    for col in uploaded_df.columns:\n        st.write(f\"The first 5 values in column {col} are {', '.join(uploaded_df[col].head().astype('str'))}\")",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>File Uploads</span>"
+    ]
+  },
+  {
+    "objectID": "file_uploads.html#a-simple-csv-file-upload",
+    "href": "file_uploads.html#a-simple-csv-file-upload",
+    "title": "4  File Uploads",
+    "section": "",
+    "text": "4.1.1 Limiting the file types\nBy default, we haven’t restricted the file types that can be uploaded.\nLet’s do that now!\n\nimport streamlit as st\nimport pandas as pd\n\nuploaded_file = st.file_uploader(\"Please upload a csv data file\", type=['csv'])\n\nif uploaded_file is not None:\n    uploaded_df = pd.read_csv(uploaded_file)\n\n    st.write(uploaded_df.head())\n\n\nThe app will try to prevent us from uploading the wrong type of file by only showing the correct type of file in our file explorer.\n\nIf we now try to upload a file with a different extension, we’ll receive a more user-friendly error message.\n\nIf we passed more possible extensions to the list, we would allow more extensions to be uploaded - but we’d also have to adapt our code to deal with each of the possible types that can be uploaded!",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>File Uploads</span>"
+    ]
+  },
+  {
+    "objectID": "file_uploads.html#uploading-image-files",
+    "href": "file_uploads.html#uploading-image-files",
+    "title": "4  File Uploads",
+    "section": "4.2 Uploading image files",
+    "text": "4.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n4.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use it to\nLet’s have a go at it here.",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>File Uploads</span>"
     ]
   }
 ]

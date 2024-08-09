@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Web Apps with Streamlit - 1&nbsp; Hello World (Wide Web)!</title>
+<title>HSMA - Web Apps with Streamlit - 4&nbsp; File Uploads</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./introduction_to_inputs.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./text_numeric_and_selection_inputs.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -147,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hello_world_streamlit.html">An Introduction to Streamlit</a></li><li class="breadcrumb-item"><a href="./hello_world_streamlit.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hello World (Wide Web)!</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_to_inputs.html">User Inputs</a></li><li class="breadcrumb-item"><a href="./file_uploads.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -189,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hello_world_streamlit.html" class="sidebar-item-text sidebar-link active">
+  <a href="./hello_world_streamlit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hello World (Wide Web)!</span></span></a>
   </div>
 </li>
@@ -218,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./file_uploads.html" class="sidebar-item-text sidebar-link">
+  <a href="./file_uploads.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></span></a>
   </div>
 </li>
@@ -234,16 +233,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#previewing-your-app" id="toc-previewing-your-app" class="nav-link active" data-scroll-target="#previewing-your-app"><span class="header-section-number">1.1</span> Previewing your app</a></li>
+  <li><a href="#a-simple-csv-file-upload" id="toc-a-simple-csv-file-upload" class="nav-link active" data-scroll-target="#a-simple-csv-file-upload"><span class="header-section-number">4.1</span> A simple csv file upload</a>
+  <ul class="collapse">
+  <li><a href="#limiting-the-file-types" id="toc-limiting-the-file-types" class="nav-link" data-scroll-target="#limiting-the-file-types"><span class="header-section-number">4.1.1</span> Limiting the file types</a></li>
+  </ul></li>
+  <li><a href="#uploading-image-files" id="toc-uploading-image-files" class="nav-link" data-scroll-target="#uploading-image-files"><span class="header-section-number">4.2</span> Uploading image files</a>
+  <ul class="collapse">
+  <li><a href="#manipulating-uploaded-image-files" id="toc-manipulating-uploaded-image-files" class="nav-link" data-scroll-target="#manipulating-uploaded-image-files"><span class="header-section-number">4.2.1</span> Manipulating uploaded image files</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hello_world_streamlit.html">An Introduction to Streamlit</a></li><li class="breadcrumb-item"><a href="./hello_world_streamlit.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hello World (Wide Web)!</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_to_inputs.html">User Inputs</a></li><li class="breadcrumb-item"><a href="./file_uploads.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hello World (Wide Web)!</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></h1>
 </div>
 
 
@@ -260,43 +266,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Streamlit apps are remarkably simple to initialise!</p>
-<p>Let’s create a web app that just has a heading.</p>
-<div id="ad2d7d38" class="cell" data-execution_count="1">
+<p>File uploads can be a very powerful way of making your app more useful to users.</p>
+<p>Let’s explore some of the things we can upload.</p>
+<section id="a-simple-csv-file-upload" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="a-simple-csv-file-upload"><span class="header-section-number">4.1</span> A simple csv file upload</h2>
+<p>Let’s start off by asking the user to upload any csv file of data.</p>
+<p>We’ll then display some summary details about their dataframe and the first five values from each column.</p>
+<p>Right click on the following link and choose ‘save as’ to download a sample file you can use in the following app: <a href="https://raw.githubusercontent.com/hsma-programme/h6_4b_log_reg_titanic/main/4b_log_reg_titanic/data/processed_data.csv">file</a></p>
+<div id="1b85eb7a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"Hello World (Wide Web)!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>uploaded_file <span class="op">=</span> st.file_uploader(<span class="st">"Please upload a data file"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_file <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    uploaded_df <span class="op">=</span> pd.read_csv(uploaded_file)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="ss">f"Your dataframe has </span><span class="sc">{</span><span class="bu">len</span>(uploaded_df)<span class="sc">}</span><span class="ss"> rows."</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="ss">f"Your dataframe has </span><span class="sc">{</span><span class="bu">len</span>(uploaded_df.columns)<span class="sc">}</span><span class="ss"> columns."</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="ss">f"The columns in your dataframe are </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(uploaded_df.columns)<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> uploaded_df.columns:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        st.write(<span class="ss">f"The first 5 values in column </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> are </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(uploaded_df[col].head().astype(<span class="st">'str'</span>))<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0A%0Ast.title%28%22Hello%20World%20%28Wide%20Web%29%21%22%29
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0A%0Auploaded_file%20%3D%20st.file_uploader%28%22Please%20upload%20a%20data%20file%22%29%0A%0Aif%20uploaded_file%20is%20not%20None%3A%0A%20%20%20%20uploaded_df%20%3D%20pd.read_csv%28uploaded_file%29%0A%0A%20%20%20%20st.write%28f%22Your%20dataframe%20has%20%7Blen%28uploaded_df%29%7D%20rows.%22%29%0A%0A%20%20%20%20st.write%28f%22Your%20dataframe%20has%20%7Blen%28uploaded_df.columns%29%7D%20columns.%22%29%0A%0A%20%20%20%20st.write%28f%22The%20columns%20in%20your%20dataframe%20are%20%7B%27%2C%20%27.join%28uploaded_df.columns%29%7D.%22%29%0A%0A%20%20%20%20for%20col%20in%20uploaded_df.columns%3A%0A%20%20%20%20%20%20%20%20st.write%28f%22The%20first%205%20values%20in%20column%20%7Bcol%7D%20are%20%7B%27%2C%20%27.join%28uploaded_df%5Bcol%5D.head%28%29.astype%28%27str%27%29%29%7D%22%29
 
 " class="stlite"></iframe>
-<p>This is all you need to create your very first Streamlit app!</p>
-<p>Streamlit takes care of everything else behind the scenes - you can focus primarily on the Python code for the things you want to do in your app, and Streamlit does the hard work of making it display and passing the inputs from the user to and fro in the way the web expects.</p>
-<section id="previewing-your-app" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="previewing-your-app"><span class="header-section-number">1.1</span> Previewing your app</h2>
-<p>When you are writing streamlit apps from within your IDE - such as vscode - you will need to run some extra code to preview your app.</p>
-<p>First, you must make sure you save your app!</p>
-<p>Let’s save our app as <code>main.py</code>.</p>
-<p><img src="assets/2024-08-09-15-03-25.png" class="img-fluid"></p>
-<p>Then we need to open a terminal.</p>
-<p><img src="assets/2024-08-09-14-55-13.png" class="img-fluid"></p>
-<p><img src="assets/2024-08-09-14-55-53.png" class="img-fluid"></p>
-<p>In the terminal, we then run the command <code>streamlit run main.py</code></p>
-<p><img src="assets/2024-08-09-15-04-01.png" class="img-fluid"></p>
-<p>This will spin up a temporary server to run your app from.</p>
-<p><img src="assets/2024-08-09-15-04-43.png" class="img-fluid"></p>
-<p>Your app will then automatically open in a browser window in your default browser.</p>
-<p><img src="assets/2024-08-09-15-05-10.png" class="img-fluid"></p>
-<p>If we change and save our source file, like so…</p>
-<p><img src="assets/2024-08-09-15-06-40.png" class="img-fluid"></p>
-<p>Our running app will recognise that there has been a change and give us the option to rerun to incorporate the new change without having to close and restart our temporary server.</p>
-<p>This is really handy as it allows us to rapdily tweak and iterate our Streamlit apps!</p>
-<p><img src="assets/2024-08-09-15-07-34.png" class="img-fluid"></p>
-<p>You can also just use the refresh button in your browser if you would prefer.</p>
-<p><img src="assets/2024-08-09-15-08-02.png" class="img-fluid"></p>
-<p>The ‘always rerun’ option will mean that changes made to your source file will automatically trigger a rerun/refresh without you having to do it manually - it’s up to you if that’s something you’d prefer.</p>
+<section id="limiting-the-file-types" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="limiting-the-file-types"><span class="header-section-number">4.1.1</span> Limiting the file types</h3>
+<p>By default, we haven’t restricted the file types that can be uploaded.</p>
+<p>Let’s do that now!</p>
+<div id="502b63b9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>uploaded_file <span class="op">=</span> st.file_uploader(<span class="st">"Please upload a csv data file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'csv'</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_file <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    uploaded_df <span class="op">=</span> pd.read_csv(uploaded_file)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    st.write(uploaded_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0A%0Auploaded_file%20%3D%20st.file_uploader%28%22Please%20upload%20a%20csv%20data%20file%22%2C%20type%3D%5B%27csv%27%5D%29%0A%0Aif%20uploaded_file%20is%20not%20None%3A%0A%20%20%20%20uploaded_df%20%3D%20pd.read_csv%28uploaded_file%29%0A%0A%20%20%20%20st.write%28uploaded_df.head%28%29%29
+
+" class="stlite"></iframe>
+<p>The app will try to prevent us from uploading the wrong type of file by only showing the correct type of file in our file explorer.</p>
+<p><img src="assets/2024-08-09-15-55-05.png" class="img-fluid"></p>
+<p>If we now try to upload a file with a different extension, we’ll receive a more user-friendly error message.</p>
+<p><img src="assets/2024-08-09-15-54-23.png" class="img-fluid"></p>
+<p>If we passed more possible extensions to the list, we would allow more extensions to be uploaded - but we’d also have to adapt our code to deal with each of the possible types that can be uploaded!</p>
+</section>
+</section>
+<section id="uploading-image-files" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="uploading-image-files"><span class="header-section-number">4.2</span> Uploading image files</h2>
+<p>We can easily upload image files too.</p>
+<p>Let’s try loading an image file and displaying it for the user.</p>
+<div id="c21a0bb6" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_image <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    st.image(uploaded_image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0A%0Auploaded_image%20%3D%20st.file_uploader%28%22Please%20upload%20an%20image%20file%22%2C%20type%3D%5B%27png%27%2C%27jpg%27%2C%27jpeg%27%2C%27bmp%27%2C%20%27bitmap%27%5D%29%0A%0Aif%20uploaded_image%20is%20not%20None%3A%0A%0A%20%20%20%20st.image%28uploaded_image%29%0A
+
+" class="stlite"></iframe>
+<section id="manipulating-uploaded-image-files" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="manipulating-uploaded-image-files"><span class="header-section-number">4.2.1</span> Manipulating uploaded image files</h3>
+<p>We have to undertake a few extra steps to be able to manipulate image files people have uploaded.</p>
+<p>We’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.</p>
+<p>Once we’ve adjusted the image into the format pillow expects, we can use it to</p>
+<p>Let’s have a go at it here.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20io%0Afrom%20PIL%20import%20Image%0Aimport%20PIL.ImageOps%0A%0Auploaded_image%20%3D%20st.file_uploader%28%22Please%20upload%20an%20image%20file%22%2C%20type%3D%5B%27png%27%2C%27jpg%27%2C%27jpeg%27%2C%27bmp%27%2C%20%27bitmap%27%5D%29%0A%0Aif%20uploaded_image%20is%20not%20None%3A%0A%0A%20%20%20%20imagefile%20%3D%20io.BytesIO%28uploaded_image.read%28%29%29%0A%0A%20%20%20%20im%20%3D%20Image.open%28imagefile%29%0A%0A%20%20%20%20threshold%20%3D%20st.slider%28%22Choose%20a%20threshold%22%2C%201%2C%20100%29%0A%20%20%20%20invert%20%3D%20st.checkbox%28%22Invert%20Output%20Image%3F%22%29%0A%0A%20%20%20%20img_edited%20%3D%20im.convert%28%22L%22%29.point%28%0A%20%20%20%20%20%20%20%20lambda%20x%3A%20255%20if%20x%20%3E%20threshold%20else%200%0A%20%20%20%20%29%0A%0A%20%20%20%20if%20invert%3A%0A%20%20%20%20%20%20%20%20img_edited%20%3D%20PIL.ImageOps.invert%28img_edited%29%0A%0A%20%20%20%20st.write%28%22Original%20Image%22%29%0A%20%20%20%20st.image%28uploaded_image%29%0A%0A%20%20%20%20st.write%28%22Edited%20Image%22%29%0A%20%20%20%20st.image%28img_edited%29
+
+" class="stlite"></iframe>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1529,14 +1579,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./text_numeric_and_selection_inputs.html" class="pagination-link" aria-label="Text, Numeric and Selection Inputs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Text, Numeric and Selection Inputs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./introduction_to_inputs.html" class="pagination-link" aria-label="Basic Inputs">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basic Inputs</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
