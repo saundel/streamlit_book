@@ -4,6 +4,17 @@ filters:
   - whitphx/stlite
 ---
 
+```{r, echo = FALSE, results='asis'}
+#| label: setupwebex
+knitr::opts_chunk$set(echo = FALSE)
+
+# Uncomment to change widget colours:
+# style_widgets(
+#    # incorrect = "goldenrod", correct = "purple", highlight = "firebrick",
+#    feedback="mediumorchid"
+#    )
+```
+
 Streamlit apps are remarkably simple to initialise!
 
 Let's create a web app that just has a heading.
@@ -68,3 +79,15 @@ You can also just use the refresh button in your browser if you would prefer.
 ![](assets/2024-08-09-15-08-02.png)
 
 The 'always rerun' option will mean that changes made to your source file will automatically trigger a rerun/refresh without you having to do it manually - it's up to you if that's something you'd prefer.
+
+
+## Knowledge Check!
+
+What command do you use to run a streamlit file called `main.py` on your computer?
+`r mcq(c("run streamlit server", "run streamlit main.py", answer = "streamlit run main.py", "streamlit activate"))`
+
+What's the standard import for the streamlit library?
+`r mcq(c("import streamlit", answer = "import streamlit as st", "from streamlit import st", "import st as streamlit"))`
+
+How do you create a title in streamlit?
+`r mcq(c("st.title(Welcome to my app!)", "streamlit_title('Welcome to my app!')", answer="st.title('Welcome to my app!')", "title('Welcome to my app!')"))`

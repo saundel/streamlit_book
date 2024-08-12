@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./file_downloads.html" rel="next">
 <link href="./text_numeric_and_selection_inputs.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -223,6 +224,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Outputs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./file_downloads.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">File Downloads</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -273,7 +291,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s start off by asking the user to upload any csv file of data.</p>
 <p>We’ll then display some summary details about their dataframe and the first five values from each column.</p>
 <p>Right click on the following link and choose ‘save as’ to download a sample file you can use in the following app: <a href="https://raw.githubusercontent.com/hsma-programme/h6_4b_log_reg_titanic/main/4b_log_reg_titanic/data/processed_data.csv">file</a></p>
-<div id="1b85eb7a" class="cell" data-execution_count="1">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The key thing to notice here is that we have two steps to getting a usable csv file for our next steps:</p>
+<ul>
+<li>save the output of <code>st.file_uploader()</code> to a variable</li>
+<li>read this output using the <code>pd.read_csv()</code> method</li>
+</ul>
+</div>
+</div>
+<div id="0fe4f842" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -298,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="limiting-the-file-types"><span class="header-section-number">4.1.1</span> Limiting the file types</h3>
 <p>By default, we haven’t restricted the file types that can be uploaded.</p>
 <p>Let’s do that now!</p>
-<div id="502b63b9" class="cell" data-execution_count="2">
+<div id="6874466b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -323,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.2" class="anchored" data-anchor-id="uploading-image-files"><span class="header-section-number">4.2</span> Uploading image files</h2>
 <p>We can easily upload image files too.</p>
 <p>Let’s try loading an image file and displaying it for the user.</p>
-<div id="c21a0bb6" class="cell" data-execution_count="3">
+<div id="fae83125" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
@@ -339,11 +374,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="manipulating-uploaded-image-files"><span class="header-section-number">4.2.1</span> Manipulating uploaded image files</h3>
 <p>We have to undertake a few extra steps to be able to manipulate image files people have uploaded.</p>
 <p>We’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.</p>
-<p>Once we’ve adjusted the image into the format pillow expects, we can use it to</p>
+<p>Once we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!</p>
+</div>
+</div>
 <p>Let’s have a go at it here.</p>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20io%0Afrom%20PIL%20import%20Image%0Aimport%20PIL.ImageOps%0A%0Auploaded_image%20%3D%20st.file_uploader%28%22Please%20upload%20an%20image%20file%22%2C%20type%3D%5B%27png%27%2C%27jpg%27%2C%27jpeg%27%2C%27bmp%27%2C%20%27bitmap%27%5D%29%0A%0Aif%20uploaded_image%20is%20not%20None%3A%0A%0A%20%20%20%20imagefile%20%3D%20io.BytesIO%28uploaded_image.read%28%29%29%0A%0A%20%20%20%20im%20%3D%20Image.open%28imagefile%29%0A%0A%20%20%20%20threshold%20%3D%20st.slider%28%22Choose%20a%20threshold%22%2C%201%2C%20100%29%0A%20%20%20%20invert%20%3D%20st.checkbox%28%22Invert%20Output%20Image%3F%22%29%0A%0A%20%20%20%20img_edited%20%3D%20im.convert%28%22L%22%29.point%28%0A%20%20%20%20%20%20%20%20lambda%20x%3A%20255%20if%20x%20%3E%20threshold%20else%200%0A%20%20%20%20%29%0A%0A%20%20%20%20if%20invert%3A%0A%20%20%20%20%20%20%20%20img_edited%20%3D%20PIL.ImageOps.invert%28img_edited%29%0A%0A%20%20%20%20st.write%28%22Original%20Image%22%29%0A%20%20%20%20st.image%28uploaded_image%29%0A%0A%20%20%20%20st.write%28%22Edited%20Image%22%29%0A%20%20%20%20st.image%28img_edited%29
+<div id="e9f734ce" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageEnhance</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> PIL.ImageOps</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_image <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    imagefile <span class="op">=</span> io.BytesIO(uploaded_image.read())</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    im <span class="op">=</span> Image.<span class="bu">open</span>(imagefile)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> st.slider(<span class="st">"Choose a threshold"</span>, <span class="dv">1</span>, <span class="dv">100</span>, value<span class="op">=</span><span class="dv">80</span>, step<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    contrast_factor <span class="op">=</span> st.slider(<span class="st">"Contrast Enhancement Strength"</span>, <span class="fl">0.0</span>, <span class="fl">2.0</span>, value<span class="op">=</span><span class="fl">1.0</span>, step<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    invert <span class="op">=</span> st.checkbox(<span class="st">"Invert Output Image?"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    enhancer <span class="op">=</span> ImageEnhance.Contrast(im)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    img_edited <span class="op">=</span> enhancer.enhance(contrast_factor)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    img_edited <span class="op">=</span> img_edited.convert(<span class="st">"L"</span>).point(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> x: <span class="dv">255</span> <span class="cf">if</span> x <span class="op">&gt;</span> threshold <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> invert:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        img_edited <span class="op">=</span> PIL.ImageOps.invert(img_edited)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Original Image"</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    st.image(uploaded_image)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Edited Image"</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    st.image(img_edited)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20io%0Afrom%20PIL%20import%20Image%2C%20ImageEnhance%0Aimport%20PIL.ImageOps%0A%0Auploaded_image%20%3D%20st.file_uploader%28%22Please%20upload%20an%20image%20file%22%2C%20type%3D%5B%27png%27%2C%27jpg%27%2C%27jpeg%27%2C%27bmp%27%2C%20%27bitmap%27%5D%29%0A%0Aif%20uploaded_image%20is%20not%20None%3A%0A%0A%20%20%20%20imagefile%20%3D%20io.BytesIO%28uploaded_image.read%28%29%29%0A%0A%20%20%20%20im%20%3D%20Image.open%28imagefile%29%0A%0A%20%20%20%20threshold%20%3D%20st.slider%28%22Choose%20a%20threshold%22%2C%201%2C%20100%2C%20value%3D80%2C%20step%3D1%29%0A%20%20%20%20contrast_factor%20%3D%20st.slider%28%22Contrast%20Enhancement%20Strength%22%2C%200.0%2C%202.0%2C%20value%3D1.0%2C%20step%3D0.05%29%0A%20%20%20%20invert%20%3D%20st.checkbox%28%22Invert%20Output%20Image%3F%22%29%0A%0A%20%20%20%20enhancer%20%3D%20ImageEnhance.Contrast%28im%29%0A%20%20%20%20img_edited%20%3D%20enhancer.enhance%28contrast_factor%29%0A%0A%20%20%20%20img_edited%20%3D%20img_edited.convert%28%22L%22%29.point%28%0A%20%20%20%20%20%20%20%20lambda%20x%3A%20255%20if%20x%20%3E%20threshold%20else%200%0A%20%20%20%20%29%0A%0A%20%20%20%20if%20invert%3A%0A%20%20%20%20%20%20%20%20img_edited%20%3D%20PIL.ImageOps.invert%28img_edited%29%0A%0A%20%20%20%20st.write%28%22Original%20Image%22%29%0A%20%20%20%20st.image%28uploaded_image%29%0A%0A%20%20%20%20st.write%28%22Edited%20Image%22%29%0A%20%20%20%20st.image%28img_edited%29
 
 " class="stlite"></iframe>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Background removal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We could take this even further with the <code>rembg</code> library, which removes the image’s background.</p>
+<p>We can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.</p>
+<p><em>It doesn’t work with stlite/browser-based Python due to dependencies of the <code>rembg</code> library that are unavailable via that method.</em></p>
+<div id="393a5dac" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rembg <span class="im">import</span> remove</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_image <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    imagefile <span class="op">=</span> io.BytesIO(uploaded_image.read())</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    im <span class="op">=</span> Image.<span class="bu">open</span>(imagefile)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    img_edited <span class="op">=</span> remove(im)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Original Image"</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    st.image(uploaded_image)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Edited Image"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    st.image(img_edited)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2024-08-12 19:58:16.067 
+  Warning: to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run c:\HSMA\streamlit_book\.venv\Lib\site-packages\ipykernel_launcher.py [ARGUMENTS]</code></pre>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -352,678 +478,341 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </main> <!-- /main -->
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
-
   console.log(document.getElementsByClassName("webex-check"));
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
 
-
-
     check_answer_box_nodelist = this.parentNode.childNodes
-
     console.log(check_answer_box_nodelist)
-
     for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-
       var cl_inner = check_answer_box_nodelist[i].classList;
-
       console.log("Nodelist", i, ":", cl_inner);
-
       if (typeof cl_inner !== "undefined")
-
         {
-
           if (cl_inner.contains("feedback")) {
-
             {/* console.log(cl_inner.contains("feedback")) */}
-
             {/* console.log(check_answer_box_nodelist[i].style.display) */}
-
             check_answer_box_nodelist[i].style.display = "block"
-
           }
-
         }
 
-
-
       }
-
-
 
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
 
-
-
     check_answer_box_nodelist = this.parentNode.childNodes
-
     console.log(check_answer_box_nodelist)
-
     for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-
       var cl_inner = check_answer_box_nodelist[i].classList;
-
       console.log("Nodelist", i, ":", cl_inner);
-
       if (typeof cl_inner !== "undefined")
-
         {
-
           if (cl_inner.contains("feedback")) {
-
             {/* console.log(cl_inner.contains("feedback")) */}
-
             {/* console.log(check_answer_box_nodelist[i].style.display) */}
-
             check_answer_box_nodelist[i].style.display = "none"
-
           }
-
         }
 
-
-
       }
-
-
 
   }
 
-
-
 }
 
-
-
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
-
   {/* console.log(e) */}
-
   {/* console.log(this) */}
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
-
 
   var feedback = (this.getAttribute("feedback"))
 
-
-
   if (document.getElementById('feedbackDiv'+this.id) === null){
 
-
-
     var feedbackDiv = document.createElement("p");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
 
-
-
   } else {
-
-
 
     var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
     feedbackDiv.innerHTML = "";
 
-
-
   }
-
-
 
   // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.parentElement.classList.contains("unchecked")) {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "none"
-
   } else {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "block"
-
   }
-
-
 
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
     feedbackDiv.innerHTML = feedback;
-
   	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
       feedbackDiv.innerHTML = feedback;
-
   	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
 
-
-
   var cl = this.classList
-
   var feedback = (this[this.selectedIndex].getAttribute("feedback"))
 
-
-
   if (document.getElementById('feedbackDiv'+this.id) === null){
-
-
 
     var feedbackDiv = document.createElement("p");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
 
-
-
   } else {
-
-
 
     var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
     feedbackDiv.innerHTML = "";
 
-
-
   }
-
-
 
   feedbackDiv.innerHTML = feedback;
-
   this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
 
-
-
   // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.parentElement.classList.contains("unchecked")) {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "none"
-
   } else {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "block"
-
   }
-
-
 
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
-
   var feedback = (checked_button.getAttribute("feedback"))
-
   if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
-
-
 
   if (document.getElementById('feedbackDiv'+this.id) === null){
 
-
-
     var feedbackDiv = document.createElement("div");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
-
-
 
   } else {
 
-
-
       var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
       feedbackDiv.innerHTML = "";
-
-
 
   }
 
-
-
   const currentDiv = document.getElementById(this);
-
   feedbackDiv.innerHTML = feedback;
-
   this.insertAdjacentElement('afterend', feedbackDiv);
 
-
-
     // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.classList.contains("unchecked")) {
-
       {/* console.log(this.parentElement.parentElement.classList); */}
-
       feedbackDiv.style.display = "none"
-
     } else {
-
       {/* console.log(this.parentElement.parentElement.classList); */}
-
       feedbackDiv.style.display = "block"
-
     }
-
-
-
 
 
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
-
-
 
   update_total_correct();
-
 }
 
-
-
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
 
-
-
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
-
     console.log(check_sections[i])
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     // check_func removes the 'unchecked' class from box
-
     // and updates the button text
-
     // subsequently recheck all possible question funcs
-
     // to ensure feedback gets shown or hidden as appropriate
-
     btn.onclick = check_func;
-
-
 
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1584,6 +1373,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./file_downloads.html" class="pagination-link" aria-label="File Downloads">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">File Downloads</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

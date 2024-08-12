@@ -31,6 +31,17 @@
     ]
   },
   {
+    "objectID": "hello_world_streamlit.html#knowledge-check",
+    "href": "hello_world_streamlit.html#knowledge-check",
+    "title": "1  Hello World (Wide Web)!",
+    "section": "1.2 Knowledge Check!",
+    "text": "1.2 Knowledge Check!\nWhat command do you use to run a streamlit file called main.py on your computer? run streamlit serverrun streamlit main.pystreamlit run main.pystreamlit activate\nWhat’s the standard import for the streamlit library? import streamlitimport streamlit as stfrom streamlit import stimport st as streamlit\nHow do you create a title in streamlit? st.title(Welcome to my app!)streamlit_title(‘Welcome to my app!’)st.title(‘Welcome to my app!’)title(‘Welcome to my app!’)",
+    "crumbs": [
+      "An Introduction to Streamlit",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hello World (Wide Web)!</span>"
+    ]
+  },
+  {
     "objectID": "introduction_to_inputs.html",
     "href": "introduction_to_inputs.html",
     "title": "2  Basic Inputs",
@@ -68,7 +79,7 @@
     "href": "file_uploads.html#a-simple-csv-file-upload",
     "title": "4  File Uploads",
     "section": "",
-    "text": "4.1.1 Limiting the file types\nBy default, we haven’t restricted the file types that can be uploaded.\nLet’s do that now!\n\nimport streamlit as st\nimport pandas as pd\n\nuploaded_file = st.file_uploader(\"Please upload a csv data file\", type=['csv'])\n\nif uploaded_file is not None:\n    uploaded_df = pd.read_csv(uploaded_file)\n\n    st.write(uploaded_df.head())\n\n\nThe app will try to prevent us from uploading the wrong type of file by only showing the correct type of file in our file explorer.\n\nIf we now try to upload a file with a different extension, we’ll receive a more user-friendly error message.\n\nIf we passed more possible extensions to the list, we would allow more extensions to be uploaded - but we’d also have to adapt our code to deal with each of the possible types that can be uploaded!",
+    "text": "Note\n\n\n\nThe key thing to notice here is that we have two steps to getting a usable csv file for our next steps:\n\nsave the output of st.file_uploader() to a variable\nread this output using the pd.read_csv() method\n\n\n\n\n\n\n4.1.1 Limiting the file types\nBy default, we haven’t restricted the file types that can be uploaded.\nLet’s do that now!\n\nimport streamlit as st\nimport pandas as pd\n\nuploaded_file = st.file_uploader(\"Please upload a csv data file\", type=['csv'])\n\nif uploaded_file is not None:\n    uploaded_df = pd.read_csv(uploaded_file)\n\n    st.write(uploaded_df.head())\n\n\nThe app will try to prevent us from uploading the wrong type of file by only showing the correct type of file in our file explorer.\n\nIf we now try to upload a file with a different extension, we’ll receive a more user-friendly error message.\n\nIf we passed more possible extensions to the list, we would allow more extensions to be uploaded - but we’d also have to adapt our code to deal with each of the possible types that can be uploaded!",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>File Uploads</span>"
@@ -79,10 +90,32 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "4  File Uploads",
     "section": "4.2 Uploading image files",
-    "text": "4.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n4.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use it to\nLet’s have a go at it here.",
+    "text": "4.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n4.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-12 19:58:16.067 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>File Uploads</span>"
+    ]
+  },
+  {
+    "objectID": "file_downloads.html",
+    "href": "file_downloads.html",
+    "title": "5  File Downloads",
+    "section": "",
+    "text": "5.1 Saving tabular data\nFor now, we’ll assume the tabular data you want to save is in a pandas dataframe.\nThis will usually be the case - or it will be data you can easily transform into a pandas dataframe, like a numpy array.\nLet’s start with an app that has some data on the popularity of names.\nWhen the user enters their name, it gives them a graph and table of their name’s popularity over the duration of data held.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>File Downloads</span>"
+    ]
+  },
+  {
+    "objectID": "file_downloads.html#saving-tabular-data",
+    "href": "file_downloads.html#saving-tabular-data",
+    "title": "5  File Downloads",
+    "section": "",
+    "text": "5.1.1 Saving as csv or excel file\n\nimport streamlit as st\nimport pandas as pd\nimport plotly.express as px\n\nurl = 'https://files.catbox.moe/eor4ta.csv'\nname_lookup_df = pd.read_csv(url)\n\nname_lookup_df = name_lookup_df.melt(id_vars=[\"Name\", \"Gender\"]).dropna().rename(\n    columns={\"variable\": \"Year\", \"value\": \"Rank\"}\n    )\n\nname_lookup_df['Year'] = name_lookup_df['Year'].astype('int64')\nname_lookup_df['Rank'] = name_lookup_df['Rank'].astype('int64')\n\ninput_name = st.text_input(\"What name would you like to lookup?\", value=\"Daniel\")\n\nindividual_df = name_lookup_df[name_lookup_df['Name'] == input_name]\n\nst.dataframe(individual_df)\n\nif input_name is not None:\n\n    st.plotly_chart(\n        px.line(individual_df,\n                y=\"Rank\", x=\"Year\", color=\"Gender\",\n                range_y=[1000, 0], range_x=[1920, 2022],\n                markers=True)\n                )\n\nst.download_button(\n   \"Click here to download the dataframe as a csv file\",\n   individual_df.to_csv(index=False).encode('utf-8'),\n   f\"{input_name}_historical_popularity.csv\",\n   \"text/csv\",\n   key='download-csv'\n)\n\n\n\n\n\n\n\n\nTip\n\n\n\nWhen using plotly, users can hover over the plot and choose ‘Download plot as a png’.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>File Downloads</span>"
     ]
   }
 ]

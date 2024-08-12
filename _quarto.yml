@@ -15,6 +15,9 @@ book:
     - introduction_to_inputs.qmd
     - text_numeric_and_selection_inputs.qmd
     - file_uploads.qmd
+  - part: Outputs
+    chapters:
+    - file_downloads.qmd
   cover-image: resources/cover_image_robot.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true

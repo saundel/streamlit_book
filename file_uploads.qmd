@@ -16,6 +16,13 @@ We'll then display some summary details about their dataframe and the first five
 
 Right click on the following link and choose 'save as' to download a sample file you can use in the following app: [file](https://raw.githubusercontent.com/hsma-programme/h6_4b_log_reg_titanic/main/4b_log_reg_titanic/data/processed_data.csv)
 
+:::{.callout-note}
+The key thing to notice here is that we have two steps to getting a usable csv file for our next steps:
+
+- save the output of `st.file_uploader()` to a variable
+- read this output using the `pd.read_csv()` method
+:::
+
 ```{python}
 #| eval: false
 
@@ -132,14 +139,19 @@ We have to undertake a few extra steps to be able to manipulate image files peop
 
 We'll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.
 
-Once we've adjusted the image into the format pillow expects, we can use it to
+Once we've adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.
+
+:::{.callout-tip}
+The code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!
+:::
 
 Let's have a go at it here.
 
-```{stlite-python}
+```{python}
+#| eval: false
 import streamlit as st
 import io
-from PIL import Image
+from PIL import Image, ImageEnhance
 import PIL.ImageOps
 
 uploaded_image = st.file_uploader("Please upload an image file", type=['png','jpg','jpeg','bmp', 'bitmap'])
@@ -150,10 +162,14 @@ if uploaded_image is not None:
 
     im = Image.open(imagefile)
 
-    threshold = st.slider("Choose a threshold", 1, 100)
+    threshold = st.slider("Choose a threshold", 1, 100, value=80, step=1)
+    contrast_factor = st.slider("Contrast Enhancement Strength", 0.0, 2.0, value=1.0, step=0.05)
     invert = st.checkbox("Invert Output Image?")
 
-    img_edited = im.convert("L").point(
+    enhancer = ImageEnhance.Contrast(im)
+    img_edited = enhancer.enhance(contrast_factor)
+
+    img_edited = img_edited.convert("L").point(
         lambda x: 255 if x > threshold else 0
     )
 
@@ -166,3 +182,72 @@ if uploaded_image is not None:
     st.write("Edited Image")
     st.image(img_edited)
 ```
+
+```{stlite-python}
+import streamlit as st
+import io
+from PIL import Image, ImageEnhance
+import PIL.ImageOps
+
+uploaded_image = st.file_uploader("Please upload an image file", type=['png','jpg','jpeg','bmp', 'bitmap'])
+
+if uploaded_image is not None:
+
+    imagefile = io.BytesIO(uploaded_image.read())
+
+    im = Image.open(imagefile)
+
+    threshold = st.slider("Choose a threshold", 1, 100, value=80, step=1)
+    contrast_factor = st.slider("Contrast Enhancement Strength", 0.0, 2.0, value=1.0, step=0.05)
+    invert = st.checkbox("Invert Output Image?")
+
+    enhancer = ImageEnhance.Contrast(im)
+    img_edited = enhancer.enhance(contrast_factor)
+
+    img_edited = img_edited.convert("L").point(
+        lambda x: 255 if x > threshold else 0
+    )
+
+    if invert:
+        img_edited = PIL.ImageOps.invert(img_edited)
+
+    st.write("Original Image")
+    st.image(uploaded_image)
+
+    st.write("Edited Image")
+    st.image(img_edited)
+```
+
+
+:::{.callout-note}
+#### Background removal
+
+We could take this even further with the `rembg` library, which removes the image's background.
+
+We can't demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.
+
+*It doesn't work with stlite/browser-based Python due to dependencies of the `rembg` library that are unavailable via that method.*
+
+```{python}
+import streamlit as st
+import io
+from PIL import Image
+from rembg import remove
+
+uploaded_image = st.file_uploader("Please upload an image file", type=['png','jpg','jpeg','bmp', 'bitmap'])
+
+if uploaded_image is not None:
+
+    imagefile = io.BytesIO(uploaded_image.read())
+
+    im = Image.open(imagefile)
+
+    img_edited = remove(im)
+
+    st.write("Original Image")
+    st.image(uploaded_image)
+
+    st.write("Edited Image")
+    st.image(img_edited)
+```
+:::
