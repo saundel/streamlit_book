@@ -1,0 +1,5 @@
+---
+title: "Downloading Images and Charts"
+filters:
+  - whitphx/stlite
+---

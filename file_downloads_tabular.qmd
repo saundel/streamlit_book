@@ -1,0 +1,201 @@
+---
+title: "Downloading tabular files"
+filters:
+  - whitphx/stlite
+---
+
+Many outputs from Streamlit apps benefit from being able to be downloaded after they have been edited or calculated.
+
+For example, your users may want to be able to download the data that is behind a graph, or a summary csv of the data they have uploaded.
+
+They may also want to save the graphs or other image outputs they create via your apps, like wordclouds, to their computer.
+
+In this chapter, we're going to focus on **tabular** data, as you would display in an Excel file or pandas dataframe.
+
+## Saving pandas dataframes
+
+For now, we'll assume the tabular data you want to save is in a pandas dataframe.
+
+This will usually be the case - or it will be data you can easily transform into a pandas dataframe, like a numpy array.
+
+Let's start with an app that has some data on the popularity of names.
+
+This app currently just loads in a dataset, does some simple manipulations, then returns the names that appeared most frequently in the dataset.
+
+### Saving as csv or excel file
+
+If a dataframe is displayed using the standard `st.dataframe()` command or the `st.write()` command, a csv download option will become visible when hovering over the dataframe.
+
+```{stlite-python}
+import streamlit as st
+import pandas as pd
+import micropip
+await micropip.install("plotly")
+import plotly.express as px
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+name_lookup_df = pd.read_csv(url).melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+names_appearing_most_years = pd.DataFrame(name_lookup_df['Name'].value_counts())
+
+st.dataframe(names_appearing_most_years)
+```
+
+#### Adding download buttons
+
+However, often we may only be displaying a graph of the data rather than displaying the data as well, or we may want to provide downloads of data files slightly different to the ones we are displaying - for example, ones with more or less columns, or providing the raw data instad of the summarised data we are displaying.
+
+When this is the case, we can instead provide download buttons to allow any python dataframe in our app's running environment to be downloaded.
+
+This is also just a bit more visible than the default .csv download button in streamlit dataframes, which is easy for your end users to miss.
+
+##### CSV files
+
+CSV files are relatively simple to provide a download for.
+
+The key steps are
+
+- use the `.to_csv()` method on the dataframe without providing an output filepath
+- encode this object as `utf-8` using the `.encode()` method
+- pass the output of this code to the download button as the `data` parameter
+- (OPTIONAL) provide a default file name for the resulting csv - you may want to use an f-string to intelligently provide a filename if the data is reflecting options the user has chosen
+- (OPTIONAL) Specify the MIME type of the data as `"text/csv"` - an automatic value will be inferred from the data type, but it is better practice to more explicitly specify it like this
+
+```{python}
+#| eval: false
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+name_lookup_df = pd.read_csv(url)
+
+name_lookup_df = name_lookup_df.melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+name_lookup_df['Year'] = name_lookup_df['Year'].astype('int64')
+name_lookup_df['Rank'] = name_lookup_df['Rank'].astype('int64')
+
+input_name = st.text_input("What name would you like to lookup?", value="Daniel")
+
+individual_df = name_lookup_df[name_lookup_df['Name'] == input_name]
+
+if input_name is not None:
+
+    st.plotly_chart(
+        px.line(individual_df,
+                y="Rank", x="Year", color="Gender",
+                range_y=[1000, 0], range_x=[1920, 2022],
+                markers=True)
+                )
+
+st.download_button(
+   "Click here to download the dataframe as a csv file",
+   individual_df.to_csv(index=False).encode('utf-8'),
+   f"{input_name}_historical_popularity.csv",
+   "text/csv")
+
+```
+
+```{stlite-python}
+import streamlit as st
+import pandas as pd
+import micropip
+await micropip.install("plotly")
+import plotly.express as px
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+name_lookup_df = pd.read_csv(url)
+
+name_lookup_df = name_lookup_df.melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+name_lookup_df['Year'] = name_lookup_df['Year'].astype('int64')
+name_lookup_df['Rank'] = name_lookup_df['Rank'].astype('int64')
+
+input_name = st.text_input("What name would you like to lookup?", value="Daniel")
+
+individual_df = name_lookup_df[name_lookup_df['Name'] == input_name]
+
+if input_name is not None:
+
+    st.plotly_chart(
+        px.line(individual_df,
+                y="Rank", x="Year", color="Gender",
+                range_y=[1000, 0], range_x=[1920, 2022],
+                markers=True)
+                )
+
+st.download_button(
+   "Click here to download the dataframe as a csv file",
+   individual_df.to_csv(index=False).encode('utf-8'),
+   f"{input_name}_historical_popularity.csv",
+   "text/csv"
+)
+```
+
+:::{.callout-tip}
+When using plotly, users can hover over the plot and choose 'Download plot as a png'.
+
+![](assets/2024-08-12-19-54-14.png)
+:::
+
+##### Excel Files
+
+It is slightly more complex to set up the download of a dataframe as an Excel file.
+
+However, this does have the benefit of being something your end users will be more familiar with - and with advanced usage of the `xlsxwriter` library that we'll make use of, it allows us to add in multiple worksheets to a single file.
+
+```{stlite-python}
+import streamlit as st
+import pandas as pd
+import micropip
+await micropip.install("plotly")
+import plotly.express as px
+await micropip.install("xlsxwriter")
+import xlsxwriter
+from io import BytesIO
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+name_lookup_df = pd.read_csv(url)
+
+name_lookup_df = name_lookup_df.melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+name_lookup_df['Year'] = name_lookup_df['Year'].astype('int64')
+name_lookup_df['Rank'] = name_lookup_df['Rank'].astype('int64')
+
+input_name = st.text_input("What name would you like to lookup?", value="Daniel")
+
+individual_df = name_lookup_df[name_lookup_df['Name'] == input_name]
+
+if input_name is not None:
+
+    st.plotly_chart(
+        px.line(individual_df,
+                y="Rank", x="Year", color="Gender",
+                range_y=[1000, 0], range_x=[1920, 2022],
+                markers=True)
+                )
+
+output = BytesIO()
+
+writer = pd.ExcelWriter(output, engine='xlsxwriter')
+
+individual_df.to_excel(writer, sheet_name=f"{input_name} Data", index=False)
+name_lookup_df.to_excel(writer, sheet_name=f"Full Data", index=False)
+
+writer.close()
+
+st.download_button(
+   "Click here to download the dataframe as an Excel file",
+   data = output.getvalue(),
+   file_name=f"{input_name}_historical_popularity.xlsx",
+   mime="application/vnd.ms-excel"
+)
+```

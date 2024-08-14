@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Web Apps with Streamlit - 4&nbsp; File Uploads</title>
+<title>HSMA - Web Apps with Streamlit - 5&nbsp; Downloading tabular files</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./file_downloads_tabular.html" rel="next">
-<link href="./text_numeric_and_selection_inputs.html" rel="prev">
+<link href="./file_downloads_images_charts.html" rel="next">
+<link href="./file_uploads.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_to_inputs.html">User Inputs</a></li><li class="breadcrumb-item"><a href="./file_uploads.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./file_downloads_tabular.html">Outputs</a></li><li class="breadcrumb-item"><a href="./file_downloads_tabular.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Downloading tabular files</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -218,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./file_uploads.html" class="sidebar-item-text sidebar-link active">
+  <a href="./file_uploads.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></span></a>
   </div>
 </li>
@@ -235,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./file_downloads_tabular.html" class="sidebar-item-text sidebar-link">
+  <a href="./file_downloads_tabular.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Downloading tabular files</span></span></a>
   </div>
 </li>
@@ -257,13 +257,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-simple-csv-file-upload" id="toc-a-simple-csv-file-upload" class="nav-link active" data-scroll-target="#a-simple-csv-file-upload"><span class="header-section-number">4.1</span> A simple csv file upload</a>
+  <li><a href="#saving-pandas-dataframes" id="toc-saving-pandas-dataframes" class="nav-link active" data-scroll-target="#saving-pandas-dataframes"><span class="header-section-number">5.1</span> Saving pandas dataframes</a>
   <ul class="collapse">
-  <li><a href="#limiting-the-file-types" id="toc-limiting-the-file-types" class="nav-link" data-scroll-target="#limiting-the-file-types"><span class="header-section-number">4.1.1</span> Limiting the file types</a></li>
-  </ul></li>
-  <li><a href="#uploading-image-files" id="toc-uploading-image-files" class="nav-link" data-scroll-target="#uploading-image-files"><span class="header-section-number">4.2</span> Uploading image files</a>
-  <ul class="collapse">
-  <li><a href="#manipulating-uploaded-image-files" id="toc-manipulating-uploaded-image-files" class="nav-link" data-scroll-target="#manipulating-uploaded-image-files"><span class="header-section-number">4.2.1</span> Manipulating uploaded image files</a></li>
+  <li><a href="#saving-as-csv-or-excel-file" id="toc-saving-as-csv-or-excel-file" class="nav-link" data-scroll-target="#saving-as-csv-or-excel-file"><span class="header-section-number">5.1.1</span> Saving as csv or excel file</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -271,9 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_to_inputs.html">User Inputs</a></li><li class="breadcrumb-item"><a href="./file_uploads.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./file_downloads_tabular.html">Outputs</a></li><li class="breadcrumb-item"><a href="./file_downloads_tabular.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Downloading tabular files</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Downloading tabular files</span></h1>
 </div>
 
 
@@ -290,97 +286,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>File uploads can be a very powerful way of making your app more useful to users.</p>
-<p>Let’s explore some of the things we can upload.</p>
-<section id="a-simple-csv-file-upload" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="a-simple-csv-file-upload"><span class="header-section-number">4.1</span> A simple csv file upload</h2>
-<p>Let’s start off by asking the user to upload any csv file of data.</p>
-<p>We’ll then display some summary details about their dataframe and the first five values from each column.</p>
-<p>Right click on the following link and choose ‘save as’ to download a sample file you can use in the following app: <a href="https://raw.githubusercontent.com/hsma-programme/h6_4b_log_reg_titanic/main/4b_log_reg_titanic/data/processed_data.csv">file</a></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The key thing to notice here is that we have two steps to getting a usable csv file for our next steps:</p>
+<p>Many outputs from Streamlit apps benefit from being able to be downloaded after they have been edited or calculated.</p>
+<p>For example, your users may want to be able to download the data that is behind a graph, or a summary csv of the data they have uploaded.</p>
+<p>They may also want to save the graphs or other image outputs they create via your apps, like wordclouds, to their computer.</p>
+<p>In this chapter, we’re going to focus on <strong>tabular</strong> data, as you would display in an Excel file or pandas dataframe.</p>
+<section id="saving-pandas-dataframes" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="saving-pandas-dataframes"><span class="header-section-number">5.1</span> Saving pandas dataframes</h2>
+<p>For now, we’ll assume the tabular data you want to save is in a pandas dataframe.</p>
+<p>This will usually be the case - or it will be data you can easily transform into a pandas dataframe, like a numpy array.</p>
+<p>Let’s start with an app that has some data on the popularity of names.</p>
+<p>This app currently just loads in a dataset, does some simple manipulations, then returns the names that appeared most frequently in the dataset.</p>
+<section id="saving-as-csv-or-excel-file" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="saving-as-csv-or-excel-file"><span class="header-section-number">5.1.1</span> Saving as csv or excel file</h3>
+<p>If a dataframe is displayed using the standard <code>st.dataframe()</code> command or the <code>st.write()</code> command, a csv download option will become visible when hovering over the dataframe.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20micropip%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20plotly.express%20as%20px%0A%0Aurl%20%3D%20%27https%3A//files.catbox.moe/eor4ta.csv%27%0Aname_lookup_df%20%3D%20pd.read_csv%28url%29.melt%28id_vars%3D%5B%22Name%22%2C%20%22Gender%22%5D%29.dropna%28%29.rename%28%0A%20%20%20%20columns%3D%7B%22variable%22%3A%20%22Year%22%2C%20%22value%22%3A%20%22Rank%22%7D%0A%20%20%20%20%29%0A%0Anames_appearing_most_years%20%3D%20pd.DataFrame%28name_lookup_df%5B%27Name%27%5D.value_counts%28%29%29%0A%0Ast.dataframe%28names_appearing_most_years%29
+
+" class="stlite"></iframe>
+<section id="adding-download-buttons" class="level4" data-number="5.1.1.1">
+<h4 data-number="5.1.1.1" class="anchored" data-anchor-id="adding-download-buttons"><span class="header-section-number">5.1.1.1</span> Adding download buttons</h4>
+<p>However, often we may only be displaying a graph of the data rather than displaying the data as well, or we may want to provide downloads of data files slightly different to the ones we are displaying - for example, ones with more or less columns, or providing the raw data instad of the summarised data we are displaying.</p>
+<p>When this is the case, we can instead provide download buttons to allow any python dataframe in our app’s running environment to be downloaded.</p>
+<p>This is also just a bit more visible than the default .csv download button in streamlit dataframes, which is easy for your end users to miss.</p>
+<section id="csv-files" class="level5" data-number="5.1.1.1.1">
+<h5 data-number="5.1.1.1.1" class="anchored" data-anchor-id="csv-files"><span class="header-section-number">5.1.1.1.1</span> CSV files</h5>
+<p>CSV files are relatively simple to provide a download for.</p>
+<p>The key steps are</p>
 <ul>
-<li>save the output of <code>st.file_uploader()</code> to a variable</li>
-<li>read this output using the <code>pd.read_csv()</code> method</li>
+<li>use the <code>.to_csv()</code> method on the dataframe without providing an output filepath</li>
+<li>encode this object as <code>utf-8</code> using the <code>.encode()</code> method</li>
+<li>pass the output of this code to the download button as the <code>data</code> parameter</li>
+<li>(OPTIONAL) provide a default file name for the resulting csv - you may want to use an f-string to intelligently provide a filename if the data is reflecting options the user has chosen</li>
+<li>(OPTIONAL) Specify the MIME type of the data as <code>"text/csv"</code> - an automatic value will be inferred from the data type, but it is better practice to more explicitly specify it like this</li>
 </ul>
-</div>
-</div>
-<div id="0a4c4012" class="cell" data-execution_count="1">
+<div id="33ce9d2d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>uploaded_file <span class="op">=</span> st.file_uploader(<span class="st">"Please upload a data file"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_file <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    uploaded_df <span class="op">=</span> pd.read_csv(uploaded_file)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="ss">f"Your dataframe has </span><span class="sc">{</span><span class="bu">len</span>(uploaded_df)<span class="sc">}</span><span class="ss"> rows."</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="ss">f"Your dataframe has </span><span class="sc">{</span><span class="bu">len</span>(uploaded_df.columns)<span class="sc">}</span><span class="ss"> columns."</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="ss">f"The columns in your dataframe are </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(uploaded_df.columns)<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://files.catbox.moe/eor4ta.csv'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>name_lookup_df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>name_lookup_df <span class="op">=</span> name_lookup_df.melt(id_vars<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Gender"</span>]).dropna().rename(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="st">"variable"</span>: <span class="st">"Year"</span>, <span class="st">"value"</span>: <span class="st">"Rank"</span>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>name_lookup_df[<span class="st">'Year'</span>] <span class="op">=</span> name_lookup_df[<span class="st">'Year'</span>].astype(<span class="st">'int64'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>name_lookup_df[<span class="st">'Rank'</span>] <span class="op">=</span> name_lookup_df[<span class="st">'Rank'</span>].astype(<span class="st">'int64'</span>)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> uploaded_df.columns:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        st.write(<span class="ss">f"The first 5 values in column </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> are </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(uploaded_df[col].head().astype(<span class="st">'str'</span>))<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>input_name <span class="op">=</span> st.text_input(<span class="st">"What name would you like to lookup?"</span>, value<span class="op">=</span><span class="st">"Daniel"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>individual_df <span class="op">=</span> name_lookup_df[name_lookup_df[<span class="st">'Name'</span>] <span class="op">==</span> input_name]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> input_name <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    st.plotly_chart(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        px.line(individual_df,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span><span class="st">"Rank"</span>, x<span class="op">=</span><span class="st">"Year"</span>, color<span class="op">=</span><span class="st">"Gender"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                range_y<span class="op">=</span>[<span class="dv">1000</span>, <span class="dv">0</span>], range_x<span class="op">=</span>[<span class="dv">1920</span>, <span class="dv">2022</span>],</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                markers<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>st.download_button(</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Click here to download the dataframe as a csv file"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>   individual_df.to_csv(index<span class="op">=</span><span class="va">False</span>).encode(<span class="st">'utf-8'</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>   <span class="ss">f"</span><span class="sc">{</span>input_name<span class="sc">}</span><span class="ss">_historical_popularity.csv"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>   <span class="st">"text/csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0A%0Auploaded_file%20%3D%20st.file_uploader%28%22Please%20upload%20a%20data%20file%22%29%0A%0Aif%20uploaded_file%20is%20not%20None%3A%0A%20%20%20%20uploaded_df%20%3D%20pd.read_csv%28uploaded_file%29%0A%0A%20%20%20%20st.write%28f%22Your%20dataframe%20has%20%7Blen%28uploaded_df%29%7D%20rows.%22%29%0A%0A%20%20%20%20st.write%28f%22Your%20dataframe%20has%20%7Blen%28uploaded_df.columns%29%7D%20columns.%22%29%0A%0A%20%20%20%20st.write%28f%22The%20columns%20in%20your%20dataframe%20are%20%7B%27%2C%20%27.join%28uploaded_df.columns%29%7D.%22%29%0A%0A%20%20%20%20for%20col%20in%20uploaded_df.columns%3A%0A%20%20%20%20%20%20%20%20st.write%28f%22The%20first%205%20values%20in%20column%20%7Bcol%7D%20are%20%7B%27%2C%20%27.join%28uploaded_df%5Bcol%5D.head%28%29.astype%28%27str%27%29%29%7D%22%29
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20micropip%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20plotly.express%20as%20px%0A%0Aurl%20%3D%20%27https%3A//files.catbox.moe/eor4ta.csv%27%0Aname_lookup_df%20%3D%20pd.read_csv%28url%29%0A%0Aname_lookup_df%20%3D%20name_lookup_df.melt%28id_vars%3D%5B%22Name%22%2C%20%22Gender%22%5D%29.dropna%28%29.rename%28%0A%20%20%20%20columns%3D%7B%22variable%22%3A%20%22Year%22%2C%20%22value%22%3A%20%22Rank%22%7D%0A%20%20%20%20%29%0A%0Aname_lookup_df%5B%27Year%27%5D%20%3D%20name_lookup_df%5B%27Year%27%5D.astype%28%27int64%27%29%0Aname_lookup_df%5B%27Rank%27%5D%20%3D%20name_lookup_df%5B%27Rank%27%5D.astype%28%27int64%27%29%0A%0Ainput_name%20%3D%20st.text_input%28%22What%20name%20would%20you%20like%20to%20lookup%3F%22%2C%20value%3D%22Daniel%22%29%0A%0Aindividual_df%20%3D%20name_lookup_df%5Bname_lookup_df%5B%27Name%27%5D%20%3D%3D%20input_name%5D%0A%0Aif%20input_name%20is%20not%20None%3A%0A%0A%20%20%20%20st.plotly_chart%28%0A%20%20%20%20%20%20%20%20px.line%28individual_df%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3D%22Rank%22%2C%20x%3D%22Year%22%2C%20color%3D%22Gender%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20range_y%3D%5B1000%2C%200%5D%2C%20range_x%3D%5B1920%2C%202022%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20markers%3DTrue%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0Ast.download_button%28%0A%20%20%20%22Click%20here%20to%20download%20the%20dataframe%20as%20a%20csv%20file%22%2C%0A%20%20%20individual_df.to_csv%28index%3DFalse%29.encode%28%27utf-8%27%29%2C%0A%20%20%20f%22%7Binput_name%7D_historical_popularity.csv%22%2C%0A%20%20%20%22text/csv%22%0A%29
 
 " class="stlite"></iframe>
-<section id="limiting-the-file-types" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="limiting-the-file-types"><span class="header-section-number">4.1.1</span> Limiting the file types</h3>
-<p>By default, we haven’t restricted the file types that can be uploaded.</p>
-<p>Let’s do that now!</p>
-<div id="08f15fda" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>uploaded_file <span class="op">=</span> st.file_uploader(<span class="st">"Please upload a csv data file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'csv'</span>])</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_file <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    uploaded_df <span class="op">=</span> pd.read_csv(uploaded_file)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    st.write(uploaded_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0A%0Auploaded_file%20%3D%20st.file_uploader%28%22Please%20upload%20a%20csv%20data%20file%22%2C%20type%3D%5B%27csv%27%5D%29%0A%0Aif%20uploaded_file%20is%20not%20None%3A%0A%20%20%20%20uploaded_df%20%3D%20pd.read_csv%28uploaded_file%29%0A%0A%20%20%20%20st.write%28uploaded_df.head%28%29%29
-
-" class="stlite"></iframe>
-<p>The app will try to prevent us from uploading the wrong type of file by only showing the correct type of file in our file explorer.</p>
-<p><img src="assets/2024-08-09-15-55-05.png" class="img-fluid"></p>
-<p>If we now try to upload a file with a different extension, we’ll receive a more user-friendly error message.</p>
-<p><img src="assets/2024-08-09-15-54-23.png" class="img-fluid"></p>
-<p>If we passed more possible extensions to the list, we would allow more extensions to be uploaded - but we’d also have to adapt our code to deal with each of the possible types that can be uploaded!</p>
-</section>
-</section>
-<section id="uploading-image-files" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="uploading-image-files"><span class="header-section-number">4.2</span> Uploading image files</h2>
-<p>We can easily upload image files too.</p>
-<p>Let’s try loading an image file and displaying it for the user.</p>
-<div id="3bed2880" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_image <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    st.image(uploaded_image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0A%0Auploaded_image%20%3D%20st.file_uploader%28%22Please%20upload%20an%20image%20file%22%2C%20type%3D%5B%27png%27%2C%27jpg%27%2C%27jpeg%27%2C%27bmp%27%2C%20%27bitmap%27%5D%29%0A%0Aif%20uploaded_image%20is%20not%20None%3A%0A%0A%20%20%20%20st.image%28uploaded_image%29%0A
-
-" class="stlite"></iframe>
-<section id="manipulating-uploaded-image-files" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="manipulating-uploaded-image-files"><span class="header-section-number">4.2.1</span> Manipulating uploaded image files</h3>
-<p>We have to undertake a few extra steps to be able to manipulate image files people have uploaded.</p>
-<p>We’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.</p>
-<p>Once we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -391,93 +365,22 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!</p>
+<p>When using plotly, users can hover over the plot and choose ‘Download plot as a png’.</p>
+<p><img src="assets/2024-08-12-19-54-14.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Let’s have a go at it here.</p>
-<div id="20fd494a" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageEnhance</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> PIL.ImageOps</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_image <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    imagefile <span class="op">=</span> io.BytesIO(uploaded_image.read())</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    im <span class="op">=</span> Image.<span class="bu">open</span>(imagefile)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> st.slider(<span class="st">"Choose a threshold"</span>, <span class="dv">1</span>, <span class="dv">100</span>, value<span class="op">=</span><span class="dv">80</span>, step<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    contrast_factor <span class="op">=</span> st.slider(<span class="st">"Contrast Enhancement Strength"</span>, <span class="fl">0.0</span>, <span class="fl">2.0</span>, value<span class="op">=</span><span class="fl">1.0</span>, step<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    invert <span class="op">=</span> st.checkbox(<span class="st">"Invert Output Image?"</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    enhancer <span class="op">=</span> ImageEnhance.Contrast(im)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    img_edited <span class="op">=</span> enhancer.enhance(contrast_factor)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    img_edited <span class="op">=</span> img_edited.convert(<span class="st">"L"</span>).point(</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> x: <span class="dv">255</span> <span class="cf">if</span> x <span class="op">&gt;</span> threshold <span class="cf">else</span> <span class="dv">0</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> invert:</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        img_edited <span class="op">=</span> PIL.ImageOps.invert(img_edited)</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Original Image"</span>)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    st.image(uploaded_image)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Edited Image"</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    st.image(img_edited)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20io%0Afrom%20PIL%20import%20Image%2C%20ImageEnhance%0Aimport%20PIL.ImageOps%0A%0Auploaded_image%20%3D%20st.file_uploader%28%22Please%20upload%20an%20image%20file%22%2C%20type%3D%5B%27png%27%2C%27jpg%27%2C%27jpeg%27%2C%27bmp%27%2C%20%27bitmap%27%5D%29%0A%0Aif%20uploaded_image%20is%20not%20None%3A%0A%0A%20%20%20%20imagefile%20%3D%20io.BytesIO%28uploaded_image.read%28%29%29%0A%0A%20%20%20%20im%20%3D%20Image.open%28imagefile%29%0A%0A%20%20%20%20threshold%20%3D%20st.slider%28%22Choose%20a%20threshold%22%2C%201%2C%20100%2C%20value%3D80%2C%20step%3D1%29%0A%20%20%20%20contrast_factor%20%3D%20st.slider%28%22Contrast%20Enhancement%20Strength%22%2C%200.0%2C%202.0%2C%20value%3D1.0%2C%20step%3D0.05%29%0A%20%20%20%20invert%20%3D%20st.checkbox%28%22Invert%20Output%20Image%3F%22%29%0A%0A%20%20%20%20enhancer%20%3D%20ImageEnhance.Contrast%28im%29%0A%20%20%20%20img_edited%20%3D%20enhancer.enhance%28contrast_factor%29%0A%0A%20%20%20%20img_edited%20%3D%20img_edited.convert%28%22L%22%29.point%28%0A%20%20%20%20%20%20%20%20lambda%20x%3A%20255%20if%20x%20%3E%20threshold%20else%200%0A%20%20%20%20%29%0A%0A%20%20%20%20if%20invert%3A%0A%20%20%20%20%20%20%20%20img_edited%20%3D%20PIL.ImageOps.invert%28img_edited%29%0A%0A%20%20%20%20st.write%28%22Original%20Image%22%29%0A%20%20%20%20st.image%28uploaded_image%29%0A%0A%20%20%20%20st.write%28%22Edited%20Image%22%29%0A%20%20%20%20st.image%28img_edited%29
+</section>
+<section id="excel-files" class="level5" data-number="5.1.1.1.2">
+<h5 data-number="5.1.1.1.2" class="anchored" data-anchor-id="excel-files"><span class="header-section-number">5.1.1.1.2</span> Excel Files</h5>
+<p>It is slightly more complex to set up the download of a dataframe as an Excel file.</p>
+<p>However, this does have the benefit of being something your end users will be more familiar with - and with advanced usage of the <code>xlsxwriter</code> library that we’ll make use of, it allows us to add in multiple worksheets to a single file.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20micropip%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20plotly.express%20as%20px%0Aawait%20micropip.install%28%22xlsxwriter%22%29%0Aimport%20xlsxwriter%0Afrom%20io%20import%20BytesIO%0A%0Aurl%20%3D%20%27https%3A//files.catbox.moe/eor4ta.csv%27%0Aname_lookup_df%20%3D%20pd.read_csv%28url%29%0A%0Aname_lookup_df%20%3D%20name_lookup_df.melt%28id_vars%3D%5B%22Name%22%2C%20%22Gender%22%5D%29.dropna%28%29.rename%28%0A%20%20%20%20columns%3D%7B%22variable%22%3A%20%22Year%22%2C%20%22value%22%3A%20%22Rank%22%7D%0A%20%20%20%20%29%0A%0Aname_lookup_df%5B%27Year%27%5D%20%3D%20name_lookup_df%5B%27Year%27%5D.astype%28%27int64%27%29%0Aname_lookup_df%5B%27Rank%27%5D%20%3D%20name_lookup_df%5B%27Rank%27%5D.astype%28%27int64%27%29%0A%0Ainput_name%20%3D%20st.text_input%28%22What%20name%20would%20you%20like%20to%20lookup%3F%22%2C%20value%3D%22Daniel%22%29%0A%0Aindividual_df%20%3D%20name_lookup_df%5Bname_lookup_df%5B%27Name%27%5D%20%3D%3D%20input_name%5D%0A%0Aif%20input_name%20is%20not%20None%3A%0A%0A%20%20%20%20st.plotly_chart%28%0A%20%20%20%20%20%20%20%20px.line%28individual_df%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3D%22Rank%22%2C%20x%3D%22Year%22%2C%20color%3D%22Gender%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20range_y%3D%5B1000%2C%200%5D%2C%20range_x%3D%5B1920%2C%202022%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20markers%3DTrue%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0Aoutput%20%3D%20BytesIO%28%29%0A%0Awriter%20%3D%20pd.ExcelWriter%28output%2C%20engine%3D%27xlsxwriter%27%29%0A%0Aindividual_df.to_excel%28writer%2C%20sheet_name%3Df%22%7Binput_name%7D%20Data%22%2C%20index%3DFalse%29%0Aname_lookup_df.to_excel%28writer%2C%20sheet_name%3Df%22Full%20Data%22%2C%20index%3DFalse%29%0A%0Awriter.close%28%29%0A%0Ast.download_button%28%0A%20%20%20%22Click%20here%20to%20download%20the%20dataframe%20as%20an%20Excel%20file%22%2C%0A%20%20%20data%20%3D%20output.getvalue%28%29%2C%0A%20%20%20file_name%3Df%22%7Binput_name%7D_historical_popularity.xlsx%22%2C%0A%20%20%20mime%3D%22application/vnd.ms-excel%22%0A%29
 
 " class="stlite"></iframe>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Background removal
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We could take this even further with the <code>rembg</code> library, which removes the image’s background.</p>
-<p>We can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.</p>
-<p><em>It doesn’t work with stlite/browser-based Python due to dependencies of the <code>rembg</code> library that are unavailable via that method.</em></p>
-<div id="446b30ab" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rembg <span class="im">import</span> remove</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> uploaded_image <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    imagefile <span class="op">=</span> io.BytesIO(uploaded_image.read())</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    im <span class="op">=</span> Image.<span class="bu">open</span>(imagefile)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    img_edited <span class="op">=</span> remove(im)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Original Image"</span>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    st.image(uploaded_image)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Edited Image"</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    st.image(img_edited)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>2024-08-14 15:49:27.251 
-  Warning: to view this Streamlit app on a browser, run it with the following
-  command:
-
-    streamlit run c:\HSMA\streamlit_book\.venv\Lib\site-packages\ipykernel_launcher.py [ARGUMENTS]</code></pre>
-</div>
-</div>
-</div>
-</div>
 
 
+</section>
+</section>
 </section>
 </section>
 
@@ -1374,13 +1277,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./text_numeric_and_selection_inputs.html" class="pagination-link" aria-label="Text, Numeric and Selection Inputs">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Text, Numeric and Selection Inputs</span></span>
+      <a href="./file_uploads.html" class="pagination-link" aria-label="File Uploads">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">File Uploads</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./file_downloads_tabular.html" class="pagination-link" aria-label="Downloading tabular files">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Downloading tabular files</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./file_downloads_images_charts.html" class="pagination-link" aria-label="Downloading Images and Charts">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Downloading Images and Charts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

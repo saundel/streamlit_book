@@ -17,7 +17,8 @@ book:
     - file_uploads.qmd
   - part: Outputs
     chapters:
-    - file_downloads.qmd
+    - file_downloads_tabular.qmd
+    - file_downloads_images_charts.qmd
   cover-image: resources/cover_image_robot.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
