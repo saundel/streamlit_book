@@ -1,0 +1,5 @@
+---
+title: "Sidebar"
+filters:
+  - whitphx/stlite
+---

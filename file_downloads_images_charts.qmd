@@ -3,3 +3,297 @@ title: "Downloading Images and Charts"
 filters:
   - whitphx/stlite
 ---
+
+### Matplotlib
+
+We can provide two possible ways of downloading the output of a matplotlib plot.
+
+The first involves saving the resulting plot to a file, then serving that file to the user.
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+
+fig, ax = plt.subplots(figsize=(15,10))
+plt.scatter(x=penguins["body_mass_g"], y=penguins["bill_length_mm"])
+plt.title("Penguin Body Mass (g) versus Bill Length (mm)")
+ax.set_xlabel("Body Mass (g)")
+ax.set_ylabel("Bill Length (mm)")
+
+st.pyplot(fig)
+
+filename = 'penguins_scatter_method_1.png'
+plt.savefig(filename)
+with open(filename, "rb") as img:
+    btn = st.download_button(
+        label="Download image",
+        data=img,
+        file_name=filename,
+        mime="image/png"
+    )
+
+```
+
+The second involves saving the image to tempory memory, then serving that instead.
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+from io import BytesIO
+
+penguins = load_penguins()
+
+fig, ax = plt.subplots(figsize=(15,10))
+plt.scatter(x=penguins["body_mass_g"], y=penguins["bill_length_mm"])
+plt.title("Penguin Body Mass (g) versus Bill Length (mm)")
+ax.set_xlabel("Body Mass (g)")
+ax.set_ylabel("Bill Length (mm)")
+
+st.pyplot(fig)
+
+img = BytesIO()
+plt.savefig(img)
+
+btn = st.download_button(
+    label="Download image",
+    data=img,
+    file_name='penguins_scatter_method_2.png',
+    mime="image/png"
+)
+
+```
+
+#### Wordcloud Example
+
+The popular `wordcloud` package is actually using matplotlib for its plotting!
+
+This means that the same approach works for saving a wordcloud.
+
+Here, we are just showing the approach of saving and then serving the image - both to display it in the app and to offer it up to the end user for download.
+
+```{stlite-python}
+import streamlit as st
+import micropip
+await micropip.install("wordcloud")
+from wordcloud import WordCloud, STOPWORDS
+import string
+import matplotlib.pyplot as plt
+
+stopwords = set(STOPWORDS)
+
+def make_wordcloud(text_input):
+    tokens = text_input.split()
+    punctuation_mapping_table = str.maketrans('', '', string.punctuation)
+    tokens_stripped_of_punctuation = [token.translate(punctuation_mapping_table)
+                                  for token in tokens]
+    lower_tokens = [token.lower() for token in tokens_stripped_of_punctuation]
+
+    joined_string = (" ").join(lower_tokens)
+
+    wordcloud = WordCloud(width=1800,
+                      height=1800,
+                      background_color='white',
+                      stopwords=stopwords,
+                      min_font_size=20).generate(joined_string)
+
+    plt.figure(figsize=(30,40))
+    # Turn off axes
+    plt.axis("off")
+    # Then use imshow to plot an image (here, our wordcloud)
+    plt.imshow(wordcloud)
+    # The easiest way to do this today is to save the image and reload it
+    # This works during local testing but would also work if we deployed this
+    plt.savefig("wordcloud.png")
+
+sample_text = """
+Penguins are a group of aquatic flightless birds from the family Spheniscidae of the order Sphenisciformes.[4] They live almost exclusively in the Southern Hemisphere: only one species, the Galápagos penguin, is found north of the Equator. Highly adapted for life in the ocean water, penguins have countershaded dark and white plumage and flippers for swimming. Most penguins feed on krill, fish, squid and other forms of sea life which they catch with their bills and swallow whole while swimming. A penguin has a spiny tongue and powerful jaws to grip slippery prey.[5]
+
+They spend about half of their lives on land and the other half in the sea. The largest living species is the emperor penguin (Aptenodytes forsteri):[6] on average, adults are about 1.1 m (3 ft 7 in) tall and weigh 35 kg (77 lb). The smallest penguin species is the little blue penguin (Eudyptula minor), also known as the fairy penguin, which stands around 30–33 cm (12–13 in) tall and weighs 1.2–1.3 kg (2.6–2.9 lb).[7] Today, larger penguins generally inhabit colder regions, and smaller penguins inhabit regions with temperate or tropical climates. Some prehistoric penguin species were enormous: as tall or heavy as an adult human.[8] There was a great diversity of species in subantarctic regions, and at least one giant species in a region around 2,000 km south of the equator 35 mya, during the Late Eocene, a climate decidedly warmer than today.
+"""
+
+your_text = st.text_area(label="Enter your text here", value=sample_text)
+
+make_wordcloud(text_input=your_text)
+
+st.image("wordcloud.png")
+
+with open("wordcloud.png", "rb") as file:
+    btn = st.download_button(
+        label="Click Here to Download Your Word Cloud!",
+        data=file,
+        file_name="my_wordcloud.png",
+        mime="image/png",
+    )
+
+```
+
+### Seaborn
+
+Saving the file and then serving this is a good way to work with seaborn as well.
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+await micropip.install("seaborn")
+import streamlit as st
+from palmerpenguins import load_penguins
+import seaborn as sns
+
+penguins = load_penguins()
+
+pairplot_fig = sns.pairplot(penguins, hue="species")
+
+pairplot_fig.figure.savefig("pairplot_sns_penguins.png")
+
+with open("pairplot_sns_penguins.png", "rb") as file:
+    btn = st.download_button(
+        label="Click Here to Download Your Pair Plot!",
+        data=file,
+        file_name="pairplot_penguin_species.png",
+        mime="image/png",
+    )
+
+boxplot_fig = sns.boxplot(penguins, x="island", y="bill_length_mm")
+
+boxplot_fig.figure.savefig("boxplot_sns_penguins.png")
+
+with open("boxplot_sns_penguins.png", "rb") as file:
+    btn = st.download_button(
+        label="Click Here to Download Your Box Plot!",
+        data=file,
+        file_name="boxplot_penguin_species.png",
+        mime="image/png",
+    )
+```
+
+
+### Plotly
+
+Plotly is a bit different because the plots it produces are interactive.
+
+#### Built-in method for downloading static plots
+
+When using plotly, users can hover over the plot and choose 'Download plot as a png'.
+
+![](assets/2024-08-12-19-54-14.png)
+
+#### Downloading the interactive plots
+
+We can once again use `StringIO` to save the chart html temporarily to memory, then write that to a html file when the user clicks on a download button.
+
+The resulting file is completely self-contained and can even be used offline. The file could be emailed or placed on a shared site like sharepoint or google drive and would work - though sometimes it requires the user to download the html file to their own machine for it to display correctly rather than just previewing the underlying html data, depending on the platform.
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+await micropip.install("plotly")
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+from io import StringIO
+
+penguins = load_penguins()
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+axis_options.remove(col_1)
+
+col_2 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+color_factor = st.selectbox("Select the column to colour the chart by",
+["species", "sex", "island"])
+
+fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+st.plotly_chart(fig)
+
+buffer = StringIO()
+fig.write_image(buffer)
+
+st.download_button(
+    label='Download This Plot as an Interactive HTML file',
+    data=buffer,
+    file_name=f'{col_1}_vs_{col_2}_by_{color_factor}.png',
+    mime='text/html'
+)
+```
+
+#### Static outputs with a download button
+
+With some additional libraries, it becomes possible to output static images when using plotly, which can give you additional control over things like the filetype and filename.
+
+It requires an additional library called `kaleido` to be installed.
+
+More about the process can be found in the Plotly documentation.
+
+[LINK](https://plotly.com/python/static-image-export/)
+
+For our purposes, it is perhaps quicker and more efficient to use the StringIO buffer again, so we will use `to_image()` instead of `save_image()`.
+
+Our code would look like this.
+
+:::{.callout-warning}
+The kaleido library is not possible to use with stlite, so we cannot provide an interactive demo here.
+:::
+
+```{python}
+#| eval: false
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+from io import StringIO
+# the kaleido package must also be installed in the environment for the saving of static plots
+# to work
+penguins = load_penguins()
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+axis_options.remove(col_1)
+
+col_2 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+color_factor = st.selectbox("Select the column to colour the chart by",
+["species", "sex", "island"])
+
+fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+fig.write_image("temp.png", engine="kaleido")
+st.plotly_chart(fig)
+
+with open("temp.png", "rb") as img:
+    btn = st.download_button(
+        label='Download This Plot as an Static Image File',
+        data=fig.to_image(engine='kaleido'),
+        file_name=f'{col_1}_vs_{col_2}_by_{color_factor}.png',
+        mime='img/png'
+    )
+
+```
+
+:::{.callout-important}
+kaleido and streamlit seem to negatively interact sometimes, with the download button generating indefinitely.
+
+At present, I'm not aware of a fix for this issue!
+:::

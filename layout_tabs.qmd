@@ -1,0 +1,5 @@
+---
+title: "Tabs"
+filters:
+  - whitphx/stlite
+---

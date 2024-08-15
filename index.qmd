@@ -14,3 +14,21 @@ In this book, we will introduce some of the key features of Streamlit and how to
 Many examples throughout this book use the stlite framework and the stlite-quarto extension, which allows running of streamlit apps directly on the browser of the reader rather than hosting each app remotely.
 
 This does mean that the app examples within each page do take a while to load, and you may not want to read this book cover-to-cover if you are on, say, a mobile network - each example will load several megabytes of data to be able to render.
+
+
+## Acknowledgements
+
+### Datasets
+
+#### Name Popularity
+
+The name popularity dataset used in several examples was created by
+
+
+#### Palmer Penguins
+
+The palmer penguins dataset is loaded via the `palmerpenguins` library available [here](https://github.com/mcnakhaee/palmerpenguins). Credit goes to [Muhammad Chenariyan Nakhaee](https://github.com/mcnakhaee) for the Python port, and Allison Horst, Alison Hill, and Kristen Gorman for the [original dataset and R package](https://allisonhorst.github.io/palmerpenguins/).
+
+```
+Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. https://allisonhorst.github.io/palmerpenguins/. doi: 10.5281/zenodo.3960218.
+```

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,6 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./file_downloads_maps.html" rel="next">
 <link href="./file_downloads_tabular.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -43,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
+<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
+<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -207,6 +245,41 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Downloading Images and Charts</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./file_downloads_maps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downloading Maps</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Layout</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./layout_columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Columns</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./layout_sidebar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sidebar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./layout_tabs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tabs</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -215,7 +288,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link active" data-scroll-target="#matplotlib"><span class="header-section-number">6.0.1</span> Matplotlib</a></li>
+  <li><a href="#seaborn" id="toc-seaborn" class="nav-link" data-scroll-target="#seaborn"><span class="header-section-number">6.0.2</span> Seaborn</a></li>
+  <li><a href="#plotly" id="toc-plotly" class="nav-link" data-scroll-target="#plotly"><span class="header-section-number">6.0.3</span> Plotly</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -239,8 +320,124 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="matplotlib" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1" class="anchored" data-anchor-id="matplotlib"><span class="header-section-number">6.0.1</span> Matplotlib</h3>
+<p>We can provide two possible ways of downloading the output of a matplotlib plot.</p>
+<p>The first involves saving the resulting plot to a file, then serving that file to the user.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Afrom%20palmerpenguins%20import%20load_penguins%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%2C%20ax%20%3D%20plt.subplots%28figsize%3D%2815%2C10%29%29%0Aplt.scatter%28x%3Dpenguins%5B%22body_mass_g%22%5D%2C%20y%3Dpenguins%5B%22bill_length_mm%22%5D%29%0Aplt.title%28%22Penguin%20Body%20Mass%20%28g%29%20versus%20Bill%20Length%20%28mm%29%22%29%0Aax.set_xlabel%28%22Body%20Mass%20%28g%29%22%29%0Aax.set_ylabel%28%22Bill%20Length%20%28mm%29%22%29%0A%0Ast.pyplot%28fig%29%0A%0Afilename%20%3D%20%27penguins_scatter_method_1.png%27%0Aplt.savefig%28filename%29%0Awith%20open%28filename%2C%20%22rb%22%29%20as%20img%3A%0A%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20label%3D%22Download%20image%22%2C%0A%20%20%20%20%20%20%20%20data%3Dimg%2C%0A%20%20%20%20%20%20%20%20file_name%3Dfilename%2C%0A%20%20%20%20%20%20%20%20mime%3D%22image/png%22%0A%20%20%20%20%29%0A
+
+" class="stlite"></iframe>
+<p>The second involves saving the image to tempory memory, then serving that instead.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Afrom%20palmerpenguins%20import%20load_penguins%0Afrom%20io%20import%20BytesIO%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%2C%20ax%20%3D%20plt.subplots%28figsize%3D%2815%2C10%29%29%0Aplt.scatter%28x%3Dpenguins%5B%22body_mass_g%22%5D%2C%20y%3Dpenguins%5B%22bill_length_mm%22%5D%29%0Aplt.title%28%22Penguin%20Body%20Mass%20%28g%29%20versus%20Bill%20Length%20%28mm%29%22%29%0Aax.set_xlabel%28%22Body%20Mass%20%28g%29%22%29%0Aax.set_ylabel%28%22Bill%20Length%20%28mm%29%22%29%0A%0Ast.pyplot%28fig%29%0A%0Aimg%20%3D%20BytesIO%28%29%0Aplt.savefig%28img%29%0A%0Abtn%20%3D%20st.download_button%28%0A%20%20%20%20label%3D%22Download%20image%22%2C%0A%20%20%20%20data%3Dimg%2C%0A%20%20%20%20file_name%3D%27penguins_scatter_method_2.png%27%2C%0A%20%20%20%20mime%3D%22image/png%22%0A%29%0A
+
+" class="stlite"></iframe>
+<section id="wordcloud-example" class="level4" data-number="6.0.1.1">
+<h4 data-number="6.0.1.1" class="anchored" data-anchor-id="wordcloud-example"><span class="header-section-number">6.0.1.1</span> Wordcloud Example</h4>
+<p>The popular <code>wordcloud</code> package is actually using matplotlib for its plotting!</p>
+<p>This means that the same approach works for saving a wordcloud.</p>
+<p>Here, we are just showing the approach of saving and then serving the image - both to display it in the app and to offer it up to the end user for download.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20micropip%0Aawait%20micropip.install%28%22wordcloud%22%29%0Afrom%20wordcloud%20import%20WordCloud%2C%20STOPWORDS%0Aimport%20string%0Aimport%20matplotlib.pyplot%20as%20plt%0A%0Astopwords%20%3D%20set%28STOPWORDS%29%0A%0Adef%20make_wordcloud%28text_input%29%3A%0A%20%20%20%20tokens%20%3D%20text_input.split%28%29%0A%20%20%20%20punctuation_mapping_table%20%3D%20str.maketrans%28%27%27%2C%20%27%27%2C%20string.punctuation%29%0A%20%20%20%20tokens_stripped_of_punctuation%20%3D%20%5Btoken.translate%28punctuation_mapping_table%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20for%20token%20in%20tokens%5D%0A%20%20%20%20lower_tokens%20%3D%20%5Btoken.lower%28%29%20for%20token%20in%20tokens_stripped_of_punctuation%5D%0A%0A%20%20%20%20joined_string%20%3D%20%28%22%20%22%29.join%28lower_tokens%29%0A%0A%20%20%20%20wordcloud%20%3D%20WordCloud%28width%3D1800%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20height%3D1800%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20background_color%3D%27white%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20stopwords%3Dstopwords%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min_font_size%3D20%29.generate%28joined_string%29%0A%0A%20%20%20%20plt.figure%28figsize%3D%2830%2C40%29%29%0A%20%20%20%20%23%20Turn%20off%20axes%0A%20%20%20%20plt.axis%28%22off%22%29%0A%20%20%20%20%23%20Then%20use%20imshow%20to%20plot%20an%20image%20%28here%2C%20our%20wordcloud%29%0A%20%20%20%20plt.imshow%28wordcloud%29%0A%20%20%20%20%23%20The%20easiest%20way%20to%20do%20this%20today%20is%20to%20save%20the%20image%20and%20reload%20it%0A%20%20%20%20%23%20This%20works%20during%20local%20testing%20but%20would%20also%20work%20if%20we%20deployed%20this%0A%20%20%20%20plt.savefig%28%22wordcloud.png%22%29%0A%0Asample_text%20%3D%20%22%22%22%0APenguins%20are%20a%20group%20of%20aquatic%20flightless%20birds%20from%20the%20family%20Spheniscidae%20of%20the%20order%20Sphenisciformes.%5B4%5D%20They%20live%20almost%20exclusively%20in%20the%20Southern%20Hemisphere%3A%20only%20one%20species%2C%20the%20Gal%C3%83%C2%A1pagos%20penguin%2C%20is%20found%20north%20of%20the%20Equator.%20Highly%20adapted%20for%20life%20in%20the%20ocean%20water%2C%20penguins%20have%20countershaded%20dark%20and%20white%20plumage%20and%20flippers%20for%20swimming.%20Most%20penguins%20feed%20on%20krill%2C%20fish%2C%20squid%20and%20other%20forms%20of%20sea%20life%20which%20they%20catch%20with%20their%20bills%20and%20swallow%20whole%20while%20swimming.%20A%20penguin%20has%20a%20spiny%20tongue%20and%20powerful%20jaws%20to%20grip%20slippery%20prey.%5B5%5D%0A%0AThey%20spend%20about%20half%20of%20their%20lives%20on%20land%20and%20the%20other%20half%20in%20the%20sea.%20The%20largest%20living%20species%20is%20the%20emperor%20penguin%20%28Aptenodytes%20forsteri%29%3A%5B6%5D%20on%20average%2C%20adults%20are%20about%201.1%20m%20%283%20ft%207%20in%29%20tall%20and%20weigh%2035%20kg%20%2877%20lb%29.%20The%20smallest%20penguin%20species%20is%20the%20little%20blue%20penguin%20%28Eudyptula%20minor%29%2C%20also%20known%20as%20the%20fairy%20penguin%2C%20which%20stands%20around%2030%C3%A2%E2%82%AC%E2%80%9C33%20cm%20%2812%C3%A2%E2%82%AC%E2%80%9C13%20in%29%20tall%20and%20weighs%201.2%C3%A2%E2%82%AC%E2%80%9C1.3%20kg%20%282.6%C3%A2%E2%82%AC%E2%80%9C2.9%20lb%29.%5B7%5D%20Today%2C%20larger%20penguins%20generally%20inhabit%20colder%20regions%2C%20and%20smaller%20penguins%20inhabit%20regions%20with%20temperate%20or%20tropical%20climates.%20Some%20prehistoric%20penguin%20species%20were%20enormous%3A%20as%20tall%20or%20heavy%20as%20an%20adult%20human.%5B8%5D%20There%20was%20a%20great%20diversity%20of%20species%20in%20subantarctic%20regions%2C%20and%20at%20least%20one%20giant%20species%20in%20a%20region%20around%202%2C000%20km%20south%20of%20the%20equator%2035%20mya%2C%20during%20the%20Late%20Eocene%2C%20a%20climate%20decidedly%20warmer%20than%20today.%0A%22%22%22%0A%0Ayour_text%20%3D%20st.text_area%28label%3D%22Enter%20your%20text%20here%22%2C%20value%3Dsample_text%29%0A%0Amake_wordcloud%28text_input%3Dyour_text%29%0A%0Ast.image%28%22wordcloud.png%22%29%0A%0Awith%20open%28%22wordcloud.png%22%2C%20%22rb%22%29%20as%20file%3A%0A%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20label%3D%22Click%20Here%20to%20Download%20Your%20Word%20Cloud%21%22%2C%0A%20%20%20%20%20%20%20%20data%3Dfile%2C%0A%20%20%20%20%20%20%20%20file_name%3D%22my_wordcloud.png%22%2C%0A%20%20%20%20%20%20%20%20mime%3D%22image/png%22%2C%0A%20%20%20%20%29%0A
+
+" class="stlite"></iframe>
+</section>
+</section>
+<section id="seaborn" class="level3" data-number="6.0.2">
+<h3 data-number="6.0.2" class="anchored" data-anchor-id="seaborn"><span class="header-section-number">6.0.2</span> Seaborn</h3>
+<p>Saving the file and then serving this is a good way to work with seaborn as well.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22seaborn%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20seaborn%20as%20sns%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Apairplot_fig%20%3D%20sns.pairplot%28penguins%2C%20hue%3D%22species%22%29%0A%0Apairplot_fig.figure.savefig%28%22pairplot_sns_penguins.png%22%29%0A%0Awith%20open%28%22pairplot_sns_penguins.png%22%2C%20%22rb%22%29%20as%20file%3A%0A%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20label%3D%22Click%20Here%20to%20Download%20Your%20Pair%20Plot%21%22%2C%0A%20%20%20%20%20%20%20%20data%3Dfile%2C%0A%20%20%20%20%20%20%20%20file_name%3D%22pairplot_penguin_species.png%22%2C%0A%20%20%20%20%20%20%20%20mime%3D%22image/png%22%2C%0A%20%20%20%20%29%0A%0Aboxplot_fig%20%3D%20sns.boxplot%28penguins%2C%20x%3D%22island%22%2C%20y%3D%22bill_length_mm%22%29%0A%0Aboxplot_fig.figure.savefig%28%22boxplot_sns_penguins.png%22%29%0A%0Awith%20open%28%22boxplot_sns_penguins.png%22%2C%20%22rb%22%29%20as%20file%3A%0A%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20label%3D%22Click%20Here%20to%20Download%20Your%20Box%20Plot%21%22%2C%0A%20%20%20%20%20%20%20%20data%3Dfile%2C%0A%20%20%20%20%20%20%20%20file_name%3D%22boxplot_penguin_species.png%22%2C%0A%20%20%20%20%20%20%20%20mime%3D%22image/png%22%2C%0A%20%20%20%20%29
+
+" class="stlite"></iframe>
+</section>
+<section id="plotly" class="level3" data-number="6.0.3">
+<h3 data-number="6.0.3" class="anchored" data-anchor-id="plotly"><span class="header-section-number">6.0.3</span> Plotly</h3>
+<p>Plotly is a bit different because the plots it produces are interactive.</p>
+<section id="built-in-method-for-downloading-static-plots" class="level4" data-number="6.0.3.1">
+<h4 data-number="6.0.3.1" class="anchored" data-anchor-id="built-in-method-for-downloading-static-plots"><span class="header-section-number">6.0.3.1</span> Built-in method for downloading static plots</h4>
+<p>When using plotly, users can hover over the plot and choose ‘Download plot as a png’.</p>
+<p><img src="assets/2024-08-12-19-54-14.png" class="img-fluid"></p>
+</section>
+<section id="downloading-the-interactive-plots" class="level4" data-number="6.0.3.2">
+<h4 data-number="6.0.3.2" class="anchored" data-anchor-id="downloading-the-interactive-plots"><span class="header-section-number">6.0.3.2</span> Downloading the interactive plots</h4>
+<p>We can once again use <code>StringIO</code> to save the chart html temporarily to memory, then write that to a html file when the user clicks on a download button.</p>
+<p>The resulting file is completely self-contained and can even be used offline. The file could be emailed or placed on a shared site like sharepoint or google drive and would work - though sometimes it requires the user to download the html file to their own machine for it to display correctly rather than just previewing the underlying html data, depending on the platform.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0Afrom%20io%20import%20StringIO%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Aaxis_options%20%3D%20%5B%27bill_length_mm%27%2C%20%27bill_depth_mm%27%2C%0A%20%20%20%20%20%20%20%27flipper_length_mm%27%2C%20%27body_mass_g%27%5D%0A%0Acol_1%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Aaxis_options.remove%28col_1%29%0A%0Acol_2%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Acolor_factor%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20colour%20the%20chart%20by%22%2C%0A%5B%22species%22%2C%20%22sex%22%2C%20%22island%22%5D%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3Dcol_1%2C%20y%3Dcol_2%2C%20color%3Dcolor_factor%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20%7Bcol_1%7D%20vs%20%7Bcol_2%7D%2C%20coloured%20by%20%7Bcolor_factor%7D%22%29%0A%0Ast.plotly_chart%28fig%29%0A%0Abuffer%20%3D%20StringIO%28%29%0Afig.write_image%28buffer%29%0A%0Ast.download_button%28%0A%20%20%20%20label%3D%27Download%20This%20Plot%20as%20an%20Interactive%20HTML%20file%27%2C%0A%20%20%20%20data%3Dbuffer%2C%0A%20%20%20%20file_name%3Df%27%7Bcol_1%7D_vs_%7Bcol_2%7D_by_%7Bcolor_factor%7D.png%27%2C%0A%20%20%20%20mime%3D%27text/html%27%0A%29
+
+" class="stlite"></iframe>
+</section>
+<section id="static-outputs-with-a-download-button" class="level4" data-number="6.0.3.3">
+<h4 data-number="6.0.3.3" class="anchored" data-anchor-id="static-outputs-with-a-download-button"><span class="header-section-number">6.0.3.3</span> Static outputs with a download button</h4>
+<p>With some additional libraries, it becomes possible to output static images when using plotly, which can give you additional control over things like the filetype and filename.</p>
+<p>It requires an additional library called <code>kaleido</code> to be installed.</p>
+<p>More about the process can be found in the Plotly documentation.</p>
+<p><a href="https://plotly.com/python/static-image-export/">LINK</a></p>
+<p>For our purposes, it is perhaps quicker and more efficient to use the StringIO buffer again, so we will use <code>to_image()</code> instead of <code>save_image()</code>.</p>
+<p>Our code would look like this.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The kaleido library is not possible to use with stlite, so we cannot provide an interactive demo here.</p>
+</div>
+</div>
+<div id="523ca490" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the kaleido package must also be installed in the environment for the saving of static plots</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># to work</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>axis_options <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>col_1 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>axis_options.remove(col_1)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>col_2 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>color_factor <span class="op">=</span> st.selectbox(<span class="st">"Select the column to colour the chart by"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>[<span class="st">"species"</span>, <span class="st">"sex"</span>, <span class="st">"island"</span>])</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span>col_1, y<span class="op">=</span>col_2, color<span class="op">=</span>color_factor,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="ss">f"Penguins Dataset - </span><span class="sc">{</span>col_1<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>col_2<span class="sc">}</span><span class="ss">, coloured by </span><span class="sc">{</span>color_factor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>fig.write_image(<span class="st">"temp.png"</span>, engine<span class="op">=</span><span class="st">"kaleido"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"temp.png"</span>, <span class="st">"rb"</span>) <span class="im">as</span> img:</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    btn <span class="op">=</span> st.download_button(</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">'Download This Plot as an Static Image File'</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>fig.to_image(engine<span class="op">=</span><span class="st">'kaleido'</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        file_name<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>col_1<span class="sc">}</span><span class="ss">_vs_</span><span class="sc">{</span>col_2<span class="sc">}</span><span class="ss">_by_</span><span class="sc">{</span>color_factor<span class="sc">}</span><span class="ss">.png'</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        mime<span class="op">=</span><span class="st">'img/png'</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>kaleido and streamlit seem to negatively interact sometimes, with the download button generating indefinitely.</p>
+<p>At present, I’m not aware of a fix for this issue!</p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -1140,6 +1337,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./file_downloads_maps.html" class="pagination-link" aria-label="Downloading Maps">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downloading Maps</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

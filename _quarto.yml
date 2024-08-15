@@ -19,6 +19,12 @@ book:
     chapters:
     - file_downloads_tabular.qmd
     - file_downloads_images_charts.qmd
+    - file_downloads_maps.qmd
+  - part: Layout
+    chapters:
+    - layout_columns.qmd
+    - layout_sidebar.qmd
+    - layout_tabs.qmd
   cover-image: resources/cover_image_robot.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
