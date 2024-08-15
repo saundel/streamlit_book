@@ -14,9 +14,11 @@ book:
     chapters:
     - loading_data.qmd
     - dataframes.qmd
-    - charts.qmd
+    - static_charts.qmd
+    - interactive_charts.qmd
     - metrics.qmd
-    - maps.qmd
+    - static_maps.qmd
+    - interactive_maps.qmd
     - custom_components.qmd
     - spacy.qmd
   - part: User Inputs
@@ -28,7 +30,7 @@ book:
     chapters:
     - file_downloads_tabular.qmd
     - file_downloads_images_charts.qmd
-    - file_downloads_maps.qmd
+    - file_downloads_maps_static.qmd
     - file_downloads_maps_interactive.qmd
   - part: Layout
     chapters:

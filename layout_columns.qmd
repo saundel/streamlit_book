@@ -3,3 +3,7 @@ title: "Columns"
 filters:
   - whitphx/stlite
 ---
+
+Streamlit has a very easy to use column interface for improving the layout of your apps.
+
+```{}

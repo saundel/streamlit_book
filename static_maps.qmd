@@ -1,0 +1,54 @@
+---
+title: "Static Maps"
+filters:
+  - whitphx/stlite
+---
+
+## Static maps
+
+In the HSMA course, we have generally used the geopandas plot method - which is using matplotlib behind the scenes - to produce static maps.
+
+This means that maps are simple to display as we can just use the `st.pyplot()` function that we used for standard matplotlib charts. 
+
+```{python}
+#| eval: false
+import geopandas
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+st.title("Crime in Devon by Type")
+
+#########################################################
+# Read the geopandas file and create a matplotlib figure
+#########################################################
+
+lsoa_2011_crime_figures_df = geopandas.read_file("https://files.catbox.moe/4o0go1.gpkg")
+
+fig = lsoa_2011_crime_figures_df.plot(column="sw_5forces_street_by_lsoa_Other crime",
+                                      legend=True)
+
+st.pyplot(fig)
+```
+
+```{stlite-python}
+import micropip
+await micropip.install("geopandas")
+import geopandas
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+st.title("Crime in Devon by Type")
+
+#########################################################
+# Read the geopandas file and create a matplotlib figure
+#########################################################
+
+lsoa_2011_crime_figures_df = geopandas.read_file("https://files.catbox.moe/4o0go1.gpkg")
+
+fig = lsoa_2011_crime_figures_df.plot(column="sw_5forces_street_by_lsoa_Other crime",
+                                      legend=True)
+
+st.pyplot(fig)
+```

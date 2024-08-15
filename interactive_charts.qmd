@@ -1,0 +1,5 @@
+---
+title: "Interactive Charts"
+filters:
+  - whitphx/stlite
+---

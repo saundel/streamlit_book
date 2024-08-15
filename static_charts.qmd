@@ -1,5 +1,5 @@
 ---
-title: "Charts"
+title: "Static Charts"
 filters:
   - whitphx/stlite
 ---

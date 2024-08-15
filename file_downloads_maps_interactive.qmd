@@ -13,6 +13,53 @@ Folium maps cannot be displayed in Streamlit by default, but can be imported usi
 
 One way to provide them as downloadable objects is to save the html object temporarily, then pass this to our download button, similar to some of the other downloads we have created.
 
+```{python}
+#| eval: false
+import geopandas
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+import folium
+from streamlit_folium import st_folium
+
+gp_list_gdf_sw = geopandas.read_file("https://files.catbox.moe/atzk26.gpkg")
+
+# Filter out instances with no geometry
+gp_list_gdf_sw = gp_list_gdf_sw[~gp_list_gdf_sw['geometry'].is_empty]
+
+# Create a geometry list from the GeoDataFrame
+geo_df_list = [[point.xy[1][0], point.xy[0][0]] for point in gp_list_gdf_sw.geometry]
+
+gp_map_tooltip = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+for i, coordinates in enumerate(geo_df_list):
+
+    gp_map_tooltip = gp_map_tooltip.add_child(
+        folium.Marker(
+            location=coordinates,
+            tooltip=gp_list_gdf_sw['name'].values[i],
+            icon=folium.Icon(icon="user-md", prefix='fa', color="black")
+            )
+     )
+
+st_folium(gp_map_tooltip)
+
+gp_map_tooltip.save("gp_map_devon.html")
+
+with open("gp_map_devon.html", "rb") as map_file_html:
+    st.download_button(
+        label='Download This Map as an Interactive HTML file',
+        data=map_file_html,
+        file_name=f'Devon GP Map.html',
+        mime='text/html'
+    )
+```
+
+
 ```{stlite-python}
 import micropip
 await micropip.install("geopandas")
