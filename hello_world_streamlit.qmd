@@ -21,6 +21,7 @@ Let's create a web app that just has a heading.
 
 ```{python}
 #| eval: false
+#| echo: true
 import streamlit as st
 
 st.title("Hello World (Wide Web)!")

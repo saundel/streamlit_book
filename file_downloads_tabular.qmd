@@ -26,6 +26,22 @@ This app currently just loads in a dataset, does some simple manipulations, then
 
 If a dataframe is displayed using the standard `st.dataframe()` command or the `st.write()` command, a csv download option will become visible when hovering over the dataframe.
 
+```{python}
+#| eval: false
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+name_lookup_df = pd.read_csv(url).melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+names_appearing_most_years = pd.DataFrame(name_lookup_df['Name'].value_counts())
+
+st.dataframe(names_appearing_most_years)
+```
+
 ```{stlite-python}
 import streamlit as st
 import pandas as pd
@@ -149,6 +165,54 @@ When using plotly, users can hover over the plot and choose 'Download plot as a 
 It is slightly more complex to set up the download of a dataframe as an Excel file.
 
 However, this does have the benefit of being something your end users will be more familiar with - and with advanced usage of the `xlsxwriter` library that we'll make use of, it allows us to add in multiple worksheets to a single file.
+
+```{python}
+#| eval: false
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import xlsxwriter
+from io import BytesIO
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+name_lookup_df = pd.read_csv(url)
+
+name_lookup_df = name_lookup_df.melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+name_lookup_df['Year'] = name_lookup_df['Year'].astype('int64')
+name_lookup_df['Rank'] = name_lookup_df['Rank'].astype('int64')
+
+input_name = st.text_input("What name would you like to lookup?", value="Daniel")
+
+individual_df = name_lookup_df[name_lookup_df['Name'] == input_name]
+
+if input_name is not None:
+
+    st.plotly_chart(
+        px.line(individual_df,
+                y="Rank", x="Year", color="Gender",
+                range_y=[1000, 0], range_x=[1920, 2022],
+                markers=True)
+                )
+
+output = BytesIO()
+
+writer = pd.ExcelWriter(output, engine='xlsxwriter')
+
+individual_df.to_excel(writer, sheet_name=f"{input_name} Data", index=False)
+name_lookup_df.to_excel(writer, sheet_name=f"Full Data", index=False)
+
+writer.close()
+
+st.download_button(
+   "Click here to download the dataframe as an Excel file",
+   data = output.getvalue(),
+   file_name=f"{input_name}_historical_popularity.xlsx",
+   mime="application/vnd.ms-excel"
+)
+```
 
 ```{stlite-python}
 import streamlit as st

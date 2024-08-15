@@ -1,0 +1,5 @@
+---
+title: "A Simple Dashboard"
+filters:
+  - whitphx/stlite
+---

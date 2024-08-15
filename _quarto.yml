@@ -10,21 +10,63 @@ book:
   - part: An Introduction to Streamlit
     chapters:
     - hello_world_streamlit.qmd
+  - part: Outputs
+    chapters:
+    - loading_data.qmd
+    - dataframes.qmd
+    - charts.qmd
+    - metrics.qmd
+    - maps.qmd
+    - custom_components.qmd
+    - spacy.qmd
   - part: User Inputs
     chapters:
     - introduction_to_inputs.qmd
     - text_numeric_and_selection_inputs.qmd
     - file_uploads.qmd
-  - part: Outputs
+  - part: Downloading Outputs
     chapters:
     - file_downloads_tabular.qmd
     - file_downloads_images_charts.qmd
     - file_downloads_maps.qmd
+    - file_downloads_maps_interactive.qmd
   - part: Layout
     chapters:
     - layout_columns.qmd
     - layout_sidebar.qmd
     - layout_tabs.qmd
+    - layout_expander.qmd
+    - multipage.qmd
+  - part: Styling
+    chapters:
+    - fonts.qmd
+    - app_colours.qmd
+    - logos.qmd
+  - part: Controlling Application Flow
+    chapters:
+    - run_buttons.qmd
+    - partial_reruns.qmd
+    - custom_page_navigation.qmd
+  - part: Advanced Concepts
+    chapters:
+    - caching.qmd
+    - session_state.qmd
+    - callbacks.qmd
+    - memory_management.qmd
+    - authentication.qmd
+    - secrets.qmd
+  - part: Deployment
+    chapters:
+    - streamlit_community_cloud.qmd
+    - stlite_github_pages.qmd
+    - stlite_desktop.qmd
+    - local_server.qmd
+  - part: Example Apps
+    chapters:
+    - dashboard.qmd
+    - des_frontend_simple.qmd
+    - ml_model_prediction.qmd
+    - site_travel_times_comparison.qmd
   cover-image: resources/cover_image_robot.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true

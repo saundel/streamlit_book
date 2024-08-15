@@ -1,14 +1,169 @@
 
 ---
-title: "Downloading Maps"
+title: "Downloading Static Maps"
 filters:
   - whitphx/stlite
 ---
 
+## Maps
 
-### Maps
+While there are various other libraries available for displaying maps in Python and Streamlit, we are going to focus on the two we used in module 3 of the HSMA course
 
-#### Matplotlib
+- matplotlib (which creates static maps)
+- folium (which creates a _leaflet.js_ interactive map)
 
+For more of a reminder on how to work with geographic data and create maps, you can refer to the [HSMA geographic modelling and visualisation book](https://hsma-programme.github.io/hsma6_geographic_optimisation_and_visualisation_book/).
 
-#### Folium
+## Downloading Static Maps Made With Matplotlib
+
+Let's just start by plotting a map.
+
+```{stlite-python}
+import micropip
+await micropip.install("geopandas")
+import geopandas
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+st.title("Crime in Devon by Type")
+
+#########################################################
+# Read the geopandas file and create a matplotlib figure
+#########################################################
+
+lsoa_2011_crime_figures_df = geopandas.read_file("https://files.catbox.moe/4o0go1.gpkg")
+
+fig = lsoa_2011_crime_figures_df.plot(column="sw_5forces_street_by_lsoa_Other crime",
+                                      legend=True)
+
+st.pyplot(fig)
+
+filename = 'other_crime_devon.png'
+
+plt.savefig(filename)
+
+with open(filename, "rb") as img:
+    btn = st.download_button(
+        label="Download Map",
+        data=img,
+        file_name=filename,
+        mime="image/png"
+    )
+
+```
+
+#### A map with subplots
+
+Static maps with subplots are much the same - you are just interested in saving the `fig` object to a temporary `.png` image file before then serving that temporary file to the user.
+
+```{stlite-python}
+import micropip
+await micropip.install("geopandas")
+import geopandas
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+st.title("Crime in Devon by Type")
+
+#########################################################
+# Read the geopandas file and create a matplotlib figure
+#########################################################
+
+lsoa_2011_crime_figures_df = geopandas.read_file("https://files.catbox.moe/4o0go1.gpkg")
+
+xmin, xmax = 290000,295000
+ymin, ymax = 91000,95000
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[xmin:xmax, ymin:ymax]
+
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df_exeter.rename(columns=
+    {
+        'sw_5forces_street_by_lsoa_Anti-social behaviour': 'Anti-social behaviour',
+        'sw_5forces_street_by_lsoa_Bicycle theft': 'Bicycle theft',
+        'sw_5forces_street_by_lsoa_Burglary': 'Burglary',
+        'sw_5forces_street_by_lsoa_Criminal damage and arson': 'Criminal damage and arson',
+        'sw_5forces_street_by_lsoa_Drugs': 'Drugs',
+        'sw_5forces_street_by_lsoa_Total number crimes': 'Total number crimes'
+    }
+)
+
+cols = ['Anti-social behaviour', 'Bicycle theft', 'Burglary', 'Criminal damage and arson',
+        'Drugs', 'Total number crimes']
+
+fig, axs = plt.subplots(2, 3, figsize=(20, 15))
+
+for i, ax in enumerate(fig.axes):
+    lsoa_2011_crime_figures_df_exeter.plot(cols[i], cmap="RdYlGn_r", legend=True, ax=ax)
+
+    ax.axis('off')
+
+    ax.title.set_text(cols[i])
+
+#########################################################
+# Display the figure
+#########################################################
+
+st.pyplot(fig)
+
+#########################################################
+# Create a download button
+#########################################################
+
+filename = 'crime_devon.png'
+
+plt.savefig(filename)
+
+with open(filename, "rb") as img:
+    btn = st.download_button(
+        label="Download Map",
+        data=img,
+        file_name=filename,
+        mime="image/png"
+    )
+
+```
+
+#### Multiple Separate Maps
+
+What if we want to create several different maps instead of using the subplot feature?
+
+We could do this and then provide a download button for each.
+
+```{stlite-python}
+import micropip
+await micropip.install("geopandas")
+import geopandas
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+st.title("Crime in Devon by Type")
+
+#########################################################
+# Read the geopandas file and create a matplotlib figure
+#########################################################
+
+lsoa_2011_crime_figures_df = geopandas.read_file("https://files.catbox.moe/4o0go1.gpkg")
+
+for col in ['sw_5forces_street_by_lsoa_Anti-social behaviour',
+        'sw_5forces_street_by_lsoa_Bicycle theft',
+        'sw_5forces_street_by_lsoa_Burglary']:
+
+    fig = lsoa_2011_crime_figures_df.plot(column=col, legend=True)
+
+    st.pyplot(fig)
+
+    filename = f'{col}.png'
+
+    plt.savefig(filename)
+
+    with open(filename, "rb") as img:
+        btn = st.download_button(
+            label="Download Map",
+            data=img,
+            file_name=filename,
+            mime="image/png"
+        )
+
+```

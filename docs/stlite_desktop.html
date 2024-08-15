@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Web Apps with Streamlit - 14&nbsp; Downloading Static Maps</title>
+<title>HSMA - Web Apps with Streamlit - 34&nbsp; Making a Desktop App with Serverless Streamlit (stlite)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./file_downloads_maps_interactive.html" rel="next">
-<link href="./file_downloads_images_charts.html" rel="prev">
+<link href="./local_server.html" rel="next">
+<link href="./stlite_github_pages.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -44,9 +44,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
-<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
-<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./file_downloads_tabular.html">Downloading Outputs</a></li><li class="breadcrumb-item"><a href="./file_downloads_maps.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Downloading Static Maps</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./streamlit_community_cloud.html">Deployment</a></li><li class="breadcrumb-item"><a href="./stlite_desktop.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Making a Desktop App with Serverless Streamlit (stlite)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -266,14 +263,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./file_downloads_maps.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Downloading Static Maps</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./file_downloads_maps_interactive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Downloading Interactive Maps</span></span></a>
+  <a href="./file_downloads_maps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Downloading Maps</span></span></a>
   </div>
 </li>
       </ul>
@@ -290,31 +281,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./layout_columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Columns</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Columns</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./layout_sidebar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sidebar</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sidebar</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./layout_tabs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tabs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tabs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./layout_expander.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Expanders</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Expanders</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multipage.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Multipage Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multipage Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -331,19 +322,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fonts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app_colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
   </div>
 </li>
       </ul>
@@ -360,19 +351,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./run_buttons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./partial_reruns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Partial Reruns</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Partial Reruns</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./custom_page_navigation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Custom Page Navigation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Custom Page Navigation</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,37 +380,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./caching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Caching</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Caching</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session_state.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Persisting Data Across Pages and Runs with Session State</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Persisting Data Across Pages and Runs with Session State</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./callbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Callbacks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Callbacks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./memory_management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Memory Management</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Memory Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./authentication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">User Authentication/Login</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">User Authentication/Login</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./secrets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Secrets</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Secrets</span></span></a>
   </div>
 </li>
       </ul>
@@ -436,25 +427,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./streamlit_community_cloud.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Deploying to Streamlit Community Cloud</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Deploying to Streamlit Community Cloud</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stlite_github_pages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Deploying to Github Pages with Serverless Streamlit (stlite)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Deploying to Github Pages with Serverless Streamlit (stlite)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stlite_desktop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Making a Desktop App with Serverless Streamlit (stlite)</span></span></a>
+  <a href="./stlite_desktop.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Making a Desktop App with Serverless Streamlit (stlite)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./local_server.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Deploying to an On-premises Server</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Deploying to an On-premises Server</span></span></a>
   </div>
 </li>
       </ul>
@@ -471,25 +462,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A Simple Dashboard</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">A Simple Dashboard</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./des_frontend_simple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">An Interactive Discrete Event Simulation Tool</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">An Interactive Discrete Event Simulation Tool</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ml_model_prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">An App for Obtaining Predictions from a Machine Learning Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">An App for Obtaining Predictions from a Machine Learning Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./site_travel_times_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">An Application to Explore Travel Time Implications of Different Site Configurations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">An Application to Explore Travel Time Implications of Different Site Configurations</span></span></a>
   </div>
 </li>
       </ul>
@@ -500,21 +491,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#maps" id="toc-maps" class="nav-link active" data-scroll-target="#maps"><span class="header-section-number">14.1</span> Maps</a></li>
-  <li><a href="#downloading-static-maps-made-with-matplotlib" id="toc-downloading-static-maps-made-with-matplotlib" class="nav-link" data-scroll-target="#downloading-static-maps-made-with-matplotlib"><span class="header-section-number">14.2</span> Downloading Static Maps Made With Matplotlib</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./file_downloads_tabular.html">Downloading Outputs</a></li><li class="breadcrumb-item"><a href="./file_downloads_maps.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Downloading Static Maps</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./streamlit_community_cloud.html">Deployment</a></li><li class="breadcrumb-item"><a href="./stlite_desktop.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Making a Desktop App with Serverless Streamlit (stlite)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Downloading Static Maps</span></h1>
+<h1 class="title"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Making a Desktop App with Serverless Streamlit (stlite)</span></h1>
 </div>
 
 
@@ -531,39 +515,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="maps" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="maps"><span class="header-section-number">14.1</span> Maps</h2>
-<p>While there are various other libraries available for displaying maps in Python and Streamlit, we are going to focus on the two we used in module 3 of the HSMA course</p>
-<ul>
-<li>matplotlib (which creates static maps)</li>
-<li>folium (which creates a <em>leaflet.js</em> interactive map)</li>
-</ul>
-<p>For more of a reminder on how to work with geographic data and create maps, you can refer to the <a href="https://hsma-programme.github.io/hsma6_geographic_optimisation_and_visualisation_book/">HSMA geographic modelling and visualisation book</a>.</p>
-</section>
-<section id="downloading-static-maps-made-with-matplotlib" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="downloading-static-maps-made-with-matplotlib"><span class="header-section-number">14.2</span> Downloading Static Maps Made With Matplotlib</h2>
-<p>Let’s just start by plotting a map.</p>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22geopandas%22%29%0Aimport%20geopandas%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Aimport%20streamlit%20as%20st%0A%0Ast.title%28%22Crime%20in%20Devon%20by%20Type%22%29%0A%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20Read%20the%20geopandas%20file%20and%20create%20a%20matplotlib%20figure%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%0Alsoa_2011_crime_figures_df%20%3D%20geopandas.read_file%28%22https%3A//files.catbox.moe/4o0go1.gpkg%22%29%0A%0Afig%20%3D%20lsoa_2011_crime_figures_df.plot%28column%3D%22sw_5forces_street_by_lsoa_Other%20crime%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20legend%3DTrue%29%0A%0Ast.pyplot%28fig%29%0A%0Afilename%20%3D%20%27other_crime_devon.png%27%0A%0Aplt.savefig%28filename%29%0A%0Awith%20open%28filename%2C%20%22rb%22%29%20as%20img%3A%0A%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20label%3D%22Download%20Map%22%2C%0A%20%20%20%20%20%20%20%20data%3Dimg%2C%0A%20%20%20%20%20%20%20%20file_name%3Dfilename%2C%0A%20%20%20%20%20%20%20%20mime%3D%22image/png%22%0A%20%20%20%20%29%0A
-
-" class="stlite"></iframe>
-<section id="a-map-with-subplots" class="level4" data-number="14.2.0.1">
-<h4 data-number="14.2.0.1" class="anchored" data-anchor-id="a-map-with-subplots"><span class="header-section-number">14.2.0.1</span> A map with subplots</h4>
-<p>Static maps with subplots are much the same - you are just interested in saving the <code>fig</code> object to a temporary <code>.png</code> image file before then serving that temporary file to the user.</p>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22geopandas%22%29%0Aimport%20geopandas%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Aimport%20streamlit%20as%20st%0A%0Ast.title%28%22Crime%20in%20Devon%20by%20Type%22%29%0A%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20Read%20the%20geopandas%20file%20and%20create%20a%20matplotlib%20figure%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%0Alsoa_2011_crime_figures_df%20%3D%20geopandas.read_file%28%22https%3A//files.catbox.moe/4o0go1.gpkg%22%29%0A%0Axmin%2C%20xmax%20%3D%20290000%2C295000%0Aymin%2C%20ymax%20%3D%2091000%2C95000%0Alsoa_2011_crime_figures_df_exeter%20%3D%20lsoa_2011_crime_figures_df.cx%5Bxmin%3Axmax%2C%20ymin%3Aymax%5D%0A%0Alsoa_2011_crime_figures_df_exeter%20%3D%20lsoa_2011_crime_figures_df_exeter.rename%28columns%3D%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Anti-social%20behaviour%27%3A%20%27Anti-social%20behaviour%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Bicycle%20theft%27%3A%20%27Bicycle%20theft%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Burglary%27%3A%20%27Burglary%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Criminal%20damage%20and%20arson%27%3A%20%27Criminal%20damage%20and%20arson%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Drugs%27%3A%20%27Drugs%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Total%20number%20crimes%27%3A%20%27Total%20number%20crimes%27%0A%20%20%20%20%7D%0A%29%0A%0Acols%20%3D%20%5B%27Anti-social%20behaviour%27%2C%20%27Bicycle%20theft%27%2C%20%27Burglary%27%2C%20%27Criminal%20damage%20and%20arson%27%2C%0A%20%20%20%20%20%20%20%20%27Drugs%27%2C%20%27Total%20number%20crimes%27%5D%0A%0Afig%2C%20axs%20%3D%20plt.subplots%282%2C%203%2C%20figsize%3D%2820%2C%2015%29%29%0A%0Afor%20i%2C%20ax%20in%20enumerate%28fig.axes%29%3A%0A%20%20%20%20lsoa_2011_crime_figures_df_exeter.plot%28cols%5Bi%5D%2C%20cmap%3D%22RdYlGn_r%22%2C%20legend%3DTrue%2C%20ax%3Dax%29%0A%0A%20%20%20%20ax.axis%28%27off%27%29%0A%0A%20%20%20%20ax.title.set_text%28cols%5Bi%5D%29%0A%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20Display%20the%20figure%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%0Ast.pyplot%28fig%29%0A%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20Create%20a%20download%20button%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%0Afilename%20%3D%20%27crime_devon.png%27%0A%0Aplt.savefig%28filename%29%0A%0Awith%20open%28filename%2C%20%22rb%22%29%20as%20img%3A%0A%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20label%3D%22Download%20Map%22%2C%0A%20%20%20%20%20%20%20%20data%3Dimg%2C%0A%20%20%20%20%20%20%20%20file_name%3Dfilename%2C%0A%20%20%20%20%20%20%20%20mime%3D%22image/png%22%0A%20%20%20%20%29%0A
-
-" class="stlite"></iframe>
-</section>
-<section id="multiple-separate-maps" class="level4" data-number="14.2.0.2">
-<h4 data-number="14.2.0.2" class="anchored" data-anchor-id="multiple-separate-maps"><span class="header-section-number">14.2.0.2</span> Multiple Separate Maps</h4>
-<p>What if we want to create several different maps instead of using the subplot feature?</p>
-<p>We could do this and then provide a download button for each.</p>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22geopandas%22%29%0Aimport%20geopandas%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Aimport%20streamlit%20as%20st%0A%0Ast.title%28%22Crime%20in%20Devon%20by%20Type%22%29%0A%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20Read%20the%20geopandas%20file%20and%20create%20a%20matplotlib%20figure%0A%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%23%0A%0Alsoa_2011_crime_figures_df%20%3D%20geopandas.read_file%28%22https%3A//files.catbox.moe/4o0go1.gpkg%22%29%0A%0Afor%20col%20in%20%5B%27sw_5forces_street_by_lsoa_Anti-social%20behaviour%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Bicycle%20theft%27%2C%0A%20%20%20%20%20%20%20%20%27sw_5forces_street_by_lsoa_Burglary%27%5D%3A%0A%0A%20%20%20%20fig%20%3D%20lsoa_2011_crime_figures_df.plot%28column%3Dcol%2C%20legend%3DTrue%29%0A%0A%20%20%20%20st.pyplot%28fig%29%0A%0A%20%20%20%20filename%20%3D%20f%27%7Bcol%7D.png%27%0A%0A%20%20%20%20plt.savefig%28filename%29%0A%0A%20%20%20%20with%20open%28filename%2C%20%22rb%22%29%20as%20img%3A%0A%20%20%20%20%20%20%20%20btn%20%3D%20st.download_button%28%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Download%20Map%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3Dimg%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20file_name%3Dfilename%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mime%3D%22image/png%22%0A%20%20%20%20%20%20%20%20%29%0A
-
-" class="stlite"></iframe>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script>
@@ -1458,13 +1411,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./file_downloads_images_charts.html" class="pagination-link" aria-label="Downloading Images and Charts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Downloading Images and Charts</span></span>
+      <a href="./stlite_github_pages.html" class="pagination-link" aria-label="Deploying to Github Pages with Serverless Streamlit (stlite)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Deploying to Github Pages with Serverless Streamlit (stlite)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./file_downloads_maps_interactive.html" class="pagination-link" aria-label="Downloading Interactive Maps">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Downloading Interactive Maps</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./local_server.html" class="pagination-link" aria-label="Deploying to an On-premises Server">
+        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Deploying to an On-premises Server</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
