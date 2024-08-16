@@ -34,7 +34,7 @@ st.set_page_config(
 
 @st.cache_data
 def get_hotel_data():
-    hotel_df = pd.read_csv('hotels_subset.csv')
+    hotel_df = pd.read_csv('https://raw.githubusercontent.com/Bergam0t/streamlit_book/main/example_apps/hotel_performance_dashboard/hotels_subset.csv')
 
     min_date = datetime.strptime(hotel_df["reviews.date"].min(), '%Y-%m-%dT00:00:00Z')
     max_date = datetime.strptime(hotel_df["reviews.date"].max(), '%Y-%m-%dT00:00:00Z')
