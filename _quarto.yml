@@ -69,6 +69,9 @@ book:
     - des_frontend_simple.qmd
     - ml_model_prediction.qmd
     - site_travel_times_comparison.qmd
+  - part: Additional Resources
+    chapters:
+    - other_examples.qmd
   cover-image: resources/cover_image_robot.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
