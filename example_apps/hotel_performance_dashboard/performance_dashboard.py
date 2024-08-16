@@ -65,7 +65,6 @@ def get_topics(lda_model, num_words=10):
 
     topic_list = []
     for idx, topic in lda_model.print_topics(-1, num_words):
-        print(f"Topic {idx + 1}:")
         words = [(word.split("*")[1].replace('"', '').strip(), float(word.split("*")[0]))
                  for word in topic.split(" + ")]
         word_list = []
@@ -110,6 +109,8 @@ st.markdown(
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 html, body, st-emotion-cache [class*="css"] {
     font-family: 'Lexend', sans-serif;
@@ -119,7 +120,7 @@ html, body, st-emotion-cache [class*="css"] {
 }
 
 h1, h2, h3, h4 {
-    font-family: "Lexend", sans-serif;
+    font-family: "Audiowide", sans-serif;
 }
 
 .block-container {
