@@ -17,6 +17,7 @@ from gensim.models import LdaModel
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import nltk
+# from transformers import pipeline
 
 nltk.download('punkt')
 
@@ -232,7 +233,7 @@ with tab1:
             st.subheader("Worst 5 performers in last 6 months")
             bottom_5 = review_summaries_recent.sort_values('mean').reset_index().head(5)
             for idx, item in bottom_5.iterrows():
-                st.write(f":orange[{idx+1}  {item["name"]}: {item["mean"]:.2f}]")
+                st.write(f":orange[{idx+1}:  {item["name"]}: {item["mean"]:.2f}]")
 
         with stylable_container(key="worst_p", css_styles="""
                                 background-color: lightblue;
@@ -242,7 +243,7 @@ with tab1:
             st.subheader("Best 5 performers in last 6 months")
             top_5 = review_summaries_recent.sort_values('mean').reset_index().tail(5).sort_values('mean', ascending=False)
             for idx, item in top_5.iterrows():
-                st.write(f":green[{idx+1}  {item["name"]}: {item["mean"]:.2f}]")
+                st.write(f":green[{idx+1}:  {item["name"]}: {item["mean"]:.2f}]")
 
     with col2:
         good_reviews = hotel_df[hotel_df["reviews.rating"] >=4]
@@ -251,24 +252,61 @@ with tab1:
 
         st.write(f"{len(good_reviews)} good reviews, {len(neutral_reviews)} neutral reviews and {len(bad_reviews)} bad reviews")
 
-        st.plotly_chart(
-            px.histogram(x=hotel_df['reviews.rating'], title="Review Distribution",
-                        range_x=[1,5],
-                        nbins=5,
-                        height=300)
-        )
+        st.subheader("Review Distribution")
+        if hotel_filter is None:
+            st.plotly_chart(
+                px.histogram(
+                    hotel_df,
+                    x='reviews.rating',
+                    range_x=[1,5],
+                    nbins=5,
+                    height=300
+                    )
+            )
+        else:
+            hotel_df["What"] = hotel_filter
+            hotel_df_full["What"] = "All Hotels"
+            st.plotly_chart(
+                px.histogram(
+                    pd.concat([hotel_df, hotel_df_full]),
+                    x='reviews.rating',
+                    barmode="overlay",
+                    histnorm='probability',
+                    opacity=0.7,
+                    range_x=[1,5],
+                    color="What",
+                    nbins=5,
+                    height=300
+                    )
+            )
+
 
 
         reviews_monthly = pd.DataFrame(hotel_df.groupby('month_year')['reviews.rating'].mean().round(2)).reset_index()
 
-        st.plotly_chart(
-            px.line(x=reviews_monthly['month_year'],
-                        y=reviews_monthly["reviews.rating"],
-                        title="Average Monthly Reviews Over Time",
+        st.subheader("Average Monthly Reviews Over Time")
+        if hotel_filter is None:
+            st.plotly_chart(
+                px.line(reviews_monthly,
+                        x='month_year',
+                        y="reviews.rating",
                         range_y=[1,5],
                         markers=True,
                         height=300)
-        )
+            )
+        else:
+            reviews_monthly_all = pd.DataFrame(hotel_df_full.groupby('month_year')['reviews.rating'].mean().round(2)).reset_index()
+            reviews_monthly_all["What"] = "All Hotels"
+            reviews_monthly["What"] = hotel_filter
+            st.plotly_chart(
+                px.line(pd.concat([reviews_monthly, reviews_monthly_all]),
+                        x='month_year',
+                        y="reviews.rating",
+                        color="What",
+                        range_y=[1,5],
+                        markers=True,
+                        height=300)
+            )
 
         st_folium(hotel_map_interactive, use_container_width=True)
 
@@ -286,6 +324,13 @@ with tab2:
     stopwords = list(STOPWORDS)
     stopwords.extend(["hotel", "room", "stay", "us", "I"])
     stopwords = set(stopwords)
+
+    # @st.cache_resource
+    # def get_summarizer_model():
+    #     summarizer_model = pipeline("summarization", "mabrouk/amazon-review-summarizer-bart")
+    #     return pipeline("summarization", model=summarizer_model)
+
+    # summarizer = get_summarizer_model()
 
     if hotel_filter is not None:
         wc_cols = st.columns(3)
@@ -311,6 +356,8 @@ with tab2:
 
             col.write("Topics found by LDA model:")
             col.write(get_topics(lda_model))
+
+            # st.write(summarizer(" ".join(reviews_list), min_length = 60, max_length=250))
 
             temp_df = review_dfs[idx].rename(columns={"name": "Hotel", "reviews_stars_date": "Rating", "reviews.text":"Review"}).sort_values('reviews.date', ascending=False).reset_index()[["Hotel", "Rating", "Review"]]
             temp_df.index += 1
