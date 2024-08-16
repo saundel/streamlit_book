@@ -1,3 +1,11 @@
 /.quarto/
 /.venv/
 main.py
+test/archive.zip
+test/McDonald_s_Reviews.csv
+test/mcdonalds.ipynb
+test/performance_dashboard.py
+test/testoutput.png
+test/archive/7282_1.csv
+test/archive/Datafiniti_Hotel_Reviews_Jun19.csv
+test/archive/Datafiniti_Hotel_Reviews.csv
