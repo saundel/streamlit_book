@@ -63,7 +63,9 @@ st.pyplot(fig)
 
 Many streamlit components have a parameter called `use_container_width`.
 
-When set in something like `st.pyplot`, it ensures the output is rescaled to use the maximum available width of the screen.
+When set to `True` in something like `st.pyplot`, it ensures the output is rescaled to use the maximum available width of the screen.
+
+The parameter is set to `False` by default, which will result in outputs often not optimally using the available space.
 
 :::{.callout-tip}
 This can become particularly valuable when we start to explore layout options like columns later in the book.

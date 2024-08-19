@@ -1,5 +1,16 @@
 ---
-title: "Metrics, Dials and Other Dashboard Accoutrements"
+title: "Metrics and Dials"
 filters:
   - whitphx/stlite
 ---
+
+If using Streamlit to create a dashboard, there will often be a requirement to create various elements displaying key performance indicators and performance trends prominently.
+
+## Metrics
+
+Coming Soon!
+
+
+## Dials
+
+Coming Soon!

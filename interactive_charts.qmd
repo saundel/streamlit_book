@@ -3,3 +3,173 @@ title: "Interactive Charts"
 filters:
   - whitphx/stlite
 ---
+
+Streamlit provides support for several interactive chart libraries, including
+
+- Plotly
+- Bokeh
+- Altair
+- Vega-lite
+
+It also provides its own simplified interactive chart types like `st.bar_chart`, which are wrappers around Altair.
+
+:::{.callout-tip}
+While all of these are valid options to use in your own dashboards, we will be focussing on plotly - specifically the 'plotly express' module, which makes it very quick and easy to create relatively complex interactive charts.
+
+Arguably plotly express is simpler to use than the built-in streamlit plot types!
+:::
+
+:::{.callout-tip}
+Each of these plot types require a different streamlit command to display them.
+
+The details and specific arguments that are available for each can be found in the Streamlit documentation [here](https://docs.streamlit.io/develop/api-reference/charts).
+:::
+
+```{python}
+#| eval: False
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+
+penguins = load_penguins()
+
+fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",
+title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")
+
+st.plotly_chart(fig)
+```
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+await micropip.install("plotly")
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+
+penguins = load_penguins()
+
+fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",
+title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")
+
+st.plotly_chart(fig)
+```
+
+## Making use of the available space
+
+Many streamlit components have a parameter called `use_container_width`.
+
+When set to `True` in something like `st.pyplot`, it ensures the output is rescaled to use the maximum available width of the screen.
+
+The parameter is set to `False` by default, which will result in outputs often not optimally using the available space.
+
+:::{.callout-tip}
+This can become particularly valuable when we start to explore layout options like columns later in the book.
+:::
+
+```{python}
+#| eval: False
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+
+penguins = load_penguins()
+
+fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",
+title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")
+
+st.subheader("use_container_width=False")
+
+st.plotly_chart(fig)
+
+st.subheader("use_container_width=True")
+
+st.plotly_chart(fig, use_container_width = True)
+```
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+await micropip.install("plotly")
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+
+penguins = load_penguins()
+
+fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",
+title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")
+
+st.subheader("use_container_width=False")
+
+st.plotly_chart(fig)
+
+st.subheader("use_container_width=True")
+
+st.plotly_chart(fig, use_container_width = True)
+```
+
+
+## Reacting to user inputs
+
+While we haven't gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.
+
+```{python}
+#| eval: False
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+from io import StringIO
+
+penguins = load_penguins()
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+axis_options.remove(col_1)
+
+col_2 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+color_factor = st.selectbox("Select the column to colour the chart by",
+["species", "sex", "island"])
+
+fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+st.plotly_chart(fig)
+```
+
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+await micropip.install("plotly")
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+from io import StringIO
+
+penguins = load_penguins()
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+axis_options.remove(col_1)
+
+col_2 = st.selectbox("Select the column to use for the x axis", axis_options)
+
+color_factor = st.selectbox("Select the column to colour the chart by",
+["species", "sex", "island"])
+
+fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+st.plotly_chart(fig)
+```

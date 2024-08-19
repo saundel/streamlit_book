@@ -612,7 +612,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is sometimes referred to as the object-oriented way of writing matplotlib code.</p>
 <p>We can then modify this object using any of the standard matplotlib commands we have become familiar with.</p>
 <p>The final step to ensure the plot is actually displayed is to pass the <code>fig</code> variable to <code>st.pyplot</code>.</p>
-<div id="d733ae5b" class="cell" data-execution_count="1">
+<div id="4caa5713" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -633,7 +633,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 " class="stlite"></iframe>
 <section id="making-use-of-the-available-space" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="making-use-of-the-available-space"><span class="header-section-number">4.1</span> Making use of the available space</h2>
-<div id="f4626a24" class="cell" data-execution_count="2">
+<p>Many streamlit components have a parameter called <code>use_container_width</code>.</p>
+<p>When set to <code>True</code> in something like <code>st.pyplot</code>, it ensures the output is rescaled to use the maximum available width of the screen.</p>
+<p>The parameter is set to <code>False</code> by default, which will result in outputs often not optimally using the available space.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This can become particularly valuable when we start to explore layout options like columns later in the book.</p>
+</div>
+</div>
+<div id="c8d85315" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
