@@ -17,15 +17,18 @@ from gensim.models import LdaModel
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import nltk
-# from transformers import pipeline
-
-nltk.download('punkt')
+from transformers.pipelines import pipeline
 
 st.set_page_config(
     page_title="L'hotel HSMA",
     page_icon="💻",
     layout="wide")
 
+@st.cache_resource
+def get_nltk_resource():
+    return nltk.download('punkt')
+
+dld = get_nltk_resource()
 
 ##################################
 # Data wrangling                 #
@@ -325,12 +328,13 @@ with tab2:
     stopwords.extend(["hotel", "room", "stay", "us", "I"])
     stopwords = set(stopwords)
 
-    # @st.cache_resource
-    # def get_summarizer_model():
-    #     summarizer_model = pipeline("summarization", "mabrouk/amazon-review-summarizer-bart")
-    #     return pipeline("summarization", model=summarizer_model)
+    @st.cache_resource
+    def get_summarizer_model():
+        return pipeline("summarization", "mabrouk/amazon-review-summarizer-bart")
+        # return pipeline("summarization", "facebook/bart-large-cnn")
+        # summarizer = pipelines("summarization", model=summarizer_model)
 
-    # summarizer = get_summarizer_model()
+    summarizer = get_summarizer_model()
 
     if hotel_filter is not None:
         wc_cols = st.columns(3)
@@ -345,9 +349,11 @@ with tab2:
             )
 
             reviews_list = review_dfs[idx]["reviews.text"].tolist()
+
             def preprocess(text):
                 tokens = word_tokenize(text.lower())
                 return [token for token in tokens if token.isalnum() and token not in stopwords]
+
             processed_docs = [preprocess(doc) for doc in reviews_list]
             dictionary = corpora.Dictionary(processed_docs)
             corpus = [dictionary.doc2bow(doc) for doc in processed_docs]
@@ -357,8 +363,13 @@ with tab2:
             col.write("Topics found by LDA model:")
             col.write(get_topics(lda_model))
 
-            # st.write(summarizer(" ".join(reviews_list), min_length = 60, max_length=250))
+            col.subheader("Review Summary")
+            # col.write(" ".join(reviews_list))
+            col.write(summarizer(" ".join(reviews_list), min_length = 120, #max_length=250,
+                                 max_new_tokens=160, no_repeat_ngram_size=2,
+                                 do_sample=False, truncation=True)[0]["summary_text"])
 
+            col.subheader("Reviews")
             temp_df = review_dfs[idx].rename(columns={"name": "Hotel", "reviews_stars_date": "Rating", "reviews.text":"Review"}).sort_values('reviews.date', ascending=False).reset_index()[["Hotel", "Rating", "Review"]]
             temp_df.index += 1
             col.table(temp_df)
