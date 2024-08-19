@@ -332,7 +332,7 @@ with tab2:
     def get_summarizer_model():
         return pipeline("summarization", "mabrouk/amazon-review-summarizer-bart")
         # return pipeline("summarization", "facebook/bart-large-cnn")
-        # summarizer = pipelines("summarization", model=summarizer_model)
+        # return pipeline("summarization", "google/pegasus-xsum")
 
     summarizer = get_summarizer_model()
 
@@ -365,9 +365,22 @@ with tab2:
 
             col.subheader("Review Summary")
             # col.write(" ".join(reviews_list))
-            col.write(summarizer(" ".join(reviews_list), min_length = 120, #max_length=250,
-                                 max_new_tokens=160, no_repeat_ngram_size=2,
+            col.write(summarizer("<review>".join(reviews_list), min_length = 80, #max_length=250,
+                                 max_new_tokens=120, no_repeat_ngram_size=2,
                                  do_sample=False, truncation=True)[0]["summary_text"])
+
+            # aspects = ["cleanliness", "service", "location", "amenities", "value for money"]
+
+            # def generate_aspect_summary(reviews, aspect):
+            #     prompt = f"Summarize the {aspect} of the hotel based on these reviews: {reviews}"
+            #     summary = summarizer(prompt, max_length=60, min_length=20, do_sample=False)[0]['summary_text']
+            #     return f"{aspect.capitalize()}: {summary}"
+
+            # aspect_summaries = [generate_aspect_summary("<review>".join(reviews_list), aspect) for aspect in aspects]
+
+            # final_summary = "\n\n".join(aspect_summaries)
+
+            # col.write(final_summary)
 
             col.subheader("Reviews")
             temp_df = review_dfs[idx].rename(columns={"name": "Hotel", "reviews_stars_date": "Rating", "reviews.text":"Review"}).sort_values('reviews.date', ascending=False).reset_index()[["Hotel", "Rating", "Review"]]
