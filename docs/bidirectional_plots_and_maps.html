@@ -641,10 +641,37 @@ Tip
 <iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0A%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20numpy%20as%20np%0Aimport%20plotly.express%20as%20px%0Afrom%20palmerpenguins%20import%20load_penguins%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Ast.header%28%22Penguin%20Dataset%20Explorer%22%29%0A%0Aselected_rows%20%3D%20st.dataframe%28penguins%2C%20on_select%3D%22rerun%22%29%0A%0Arow_indices%20%3D%20selected_rows%5B%22selection%22%5D%5B%22rows%22%5D%0A%0Aprint%28f%22You%27ve%20selected%20%7Blen%28row_indices%29%7D%20penguins%22%29%0A%0Afiltered_df%20%3D%20penguins.iloc%5Brow_indices%5D%0A%0Ast.write%28f%22Mean%20Weight%3A%20%7Bnp.mean%28filtered_df%5B%27body_mass_g%27%5D%29%7D%29%0A%0Ast.plotly_chart%28px.pie%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pd.DataFrame%28filtered_df%5B%27sex%27%5D%29.value_counts%28dropna%3DFalse%29.reset_index%28%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20values%3D%27count%27%2C%20names%3D%27sex%27%2C%20title%3D%22Sex%20of%20Selected%20Penguins%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0Ast.subheader%28%22Your%20Filtered%20Dataframe%22%29%0A%0Ast.dataframe%28filtered_df%29%0A
 
 " class="stlite"></iframe>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>selection_mode</code> parameter can be passed to <code>st.dataframe</code> to allow selection of single or multiple rows, single or multiple columns, or some combination of the two.</p>
+<p>Note that enabling column selection disables column sorting.</p>
+</div>
+</div>
 </section>
 <section id="graphs" class="level2" data-number="15.2">
 <h2 data-number="15.2" class="anchored" data-anchor-id="graphs"><span class="header-section-number">15.2</span> Graphs</h2>
-<p>Plotly plots provide some ways for users to interact with the points in the dataset.</p>
+<p>Streamlit also supports monitoring <code>st.plotly_chart</code>, <code>st.altair_chart</code>, and <code>st.vega_lite_chart</code> for point selections and using this as an input for further actions.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this book we focus on the use of plotly; take a look at the Streamlit documentation to see how this could work with the Altair and Vega Lite plotting libraries instead.</p>
+</div>
+</div>
 <p>When hovering over the plot, users are given options such as ‘box select’ (to choose a box-shaped subset of points) or lasso select (to select an irregular set of points.)</p>
 <p><img src="assets/2024-08-19-14-41-40.png" class="img-fluid"></p>
 <p>Let’s start by creating a scatterplot of the penguins dataset.</p>
@@ -680,7 +707,7 @@ Warning
 <h3 data-number="15.3.1" class="anchored" data-anchor-id="filtering-with-the-bidirectional-folium-component"><span class="header-section-number">15.3.1</span> Filtering with the bidirectional Folium Component</h3>
 <p>When using this component, data is constantly being returned as the map is updated.</p>
 <p>Let’s take a look at what is being returned as the map is updated.</p>
-<div id="8ba8d4b5" class="cell" data-execution_count="1">
+<div id="d36ecc42" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -723,7 +750,7 @@ Warning
 <section id="using-the-returned-data" class="level4" data-number="15.3.1.1">
 <h4 data-number="15.3.1.1" class="anchored" data-anchor-id="using-the-returned-data"><span class="header-section-number">15.3.1.1</span> Using the returned data</h4>
 <p>Let’s get the bounds of the map to filter a dataframe to just contain the points within the area the user has zoomed to.</p>
-<div id="50d9351f" class="cell" data-execution_count="2">
+<div id="c0a26da2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>

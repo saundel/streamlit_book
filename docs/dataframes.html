@@ -44,6 +44,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
+<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
+<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -538,7 +541,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#st.table" id="toc-st.table" class="nav-link active" data-scroll-target="#st.table"><span class="header-section-number">3.1</span> st.table()</a></li>
+  <li><a href="#st.dataframe" id="toc-st.dataframe" class="nav-link" data-scroll-target="#st.dataframe"><span class="header-section-number">3.2</span> st.dataframe()</a>
+  <ul class="collapse">
+  <li><a href="#the-column-api" id="toc-the-column-api" class="nav-link" data-scroll-target="#the-column-api"><span class="header-section-number">3.2.1</span> The column API</a></li>
+  <li><a href="#pandas-stylers" id="toc-pandas-stylers" class="nav-link" data-scroll-target="#pandas-stylers"><span class="header-section-number">3.2.2</span> Pandas stylers</a></li>
+  </ul></li>
+  <li><a href="#other-kinds-of-tabular-data" id="toc-other-kinds-of-tabular-data" class="nav-link" data-scroll-target="#other-kinds-of-tabular-data"><span class="header-section-number">3.3</span> Other kinds of tabular data</a></li>
+  <li><a href="#additional-arguments" id="toc-additional-arguments" class="nav-link" data-scroll-target="#additional-arguments"><span class="header-section-number">3.4</span> Additional arguments</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -562,8 +578,100 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Pandas dataframes are very common in data-focussed applications.</p>
+<p>We can import pandas dataframes directly into our app and display them.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Later chapters cover a range of additional dataframe topics, such as</p>
+<ul>
+<li>uploading datasets to display</li>
+<li>selecting subsets of data</li>
+<li>editable dataframes</li>
+<li>saving dataframes to csv or Excel files</li>
+</ul>
+</div>
+</div>
+<p>In this example, we use <code>pd.read_csv</code> to read a dataframe from a URL.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can also use a relative path to point towards a csv that is stored locally - you will just need to ensure the csv is also supplied when <em>deploying</em> your final app.</p>
+<p>This is covered more in a later chapter.</p>
+</div>
+</div>
+<p>We then use one of the available dataframe-displaying functions from streamlit.</p>
+<section id="st.table" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="st.table"><span class="header-section-number">3.1</span> st.table()</h2>
+<p>Let’s start with <code>st.table</code>.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20pandas%20as%20pd%0Aimport%20streamlit%20as%20st%0A%0Ast.title%28%22Most%20common%20names%20per%20year%22%29%0A%0Aurl%20%3D%20%27https%3A//files.catbox.moe/eor4ta.csv%27%0A%0Aname_lookup_df%20%3D%20pd.read_csv%28url%29.melt%28id_vars%3D%5B%22Name%22%2C%20%22Gender%22%5D%29.dropna%28%29.rename%28%0A%20%20%20%20columns%3D%7B%22variable%22%3A%20%22Year%22%2C%20%22value%22%3A%20%22Rank%22%7D%0A%20%20%20%20%29%0A%0Aname_lookup_df%20%3D%20name_lookup_df%5Bname_lookup_df%5B%22Rank%22%5D%20%3D%3D%201%5D.pivot%28values%3D%22Name%22%2C%20index%3D%22Year%22%2C%20columns%3D%22Gender%22%29%0A%0Ast.table%28name_lookup_df%29
+
+" class="stlite"></iframe>
+<p><code>st.table</code> gives a basic, non-interactive table.</p>
+<p>This can be useful when we don’t want users to be able to do things like sort the dataframe columns.</p>
+</section>
+<section id="st.dataframe" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="st.dataframe"><span class="header-section-number">3.2</span> st.dataframe()</h2>
+<p><code>st.dataframe</code> gives more interactivity.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20pandas%20as%20pd%0Aimport%20streamlit%20as%20st%0A%0Ast.title%28%22Most%20common%20names%20per%20year%22%29%0A%0Aurl%20%3D%20%27https%3A//files.catbox.moe/eor4ta.csv%27%0A%0Aname_lookup_df%20%3D%20pd.read_csv%28url%29.melt%28id_vars%3D%5B%22Name%22%2C%20%22Gender%22%5D%29.dropna%28%29.rename%28%0A%20%20%20%20columns%3D%7B%22variable%22%3A%20%22Year%22%2C%20%22value%22%3A%20%22Rank%22%7D%0A%20%20%20%20%29%0A%0Ast.dataframe%28name_lookup_df%29
+
+" class="stlite"></iframe>
+<p>A simple search functionality is available when hovering over it, as well as the option to make the table take up the full screen.</p>
+<p><img src="assets/2024-08-19-15-56-02.png" class="img-fluid"></p>
+<section id="the-column-api" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="the-column-api"><span class="header-section-number">3.2.1</span> The column API</h3>
+<p>The column configuration API is a powerful way to enhance the display of data tables in Streamlit.</p>
+<p>This allows you to change the displayed column name without having to rename it via Pandas commands, but it also gives more control over how columns display.</p>
+<p>For example, you can set a numeric column to include a prefix or suffix, or to add a comma to break up long numbers.</p>
+<p>You can set links to be clickable, images to preview, and add things like sparklines and progress bars.</p>
+<p>Let’s build up a simple dataset manually so we can explore the use of some of these values.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0A%0Ast.title%28%22Column%20Configuration%20API%20Demonstration%22%29%0A%0Adata_df%20%3D%20pd.DataFrame%28%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22project%22%3A%20%5B%22Project%201%22%2C%20%22Project%202%22%2C%20%22Project%203%22%2C%20%22Project%204%22%5D%2C%0A%20%20%20%20%20%20%20%20%22project_mascot%22%3A%20%5B%22https%3A//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/1920px-Felis_catus-cat_on_snow.jpg%22%2C%20%22https%3A//upload.wikimedia.org/wikipedia/commons/2/25/Siam_lilacpoint.jpg%22%2C%0A%20%20%20%20%20%20%20%20%22https%3A//upload.wikimedia.org/wikipedia/commons/thumb/6/68/Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg/800px-Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg%22%2C%20%22https%3A//upload.wikimedia.org/wikipedia/commons/thumb/5/53/Sheba1.JPG/800px-Sheba1.JPG%22%5D%2C%0A%20%20%20%20%20%20%20%20%22progress%22%3A%20%5B70%2C%2040%2C%2010%2C%20100%5D%2C%0A%20%20%20%20%20%20%20%20%22logged_minutes%22%3A%20%5B1040%2C%20700%2C%2090%2C%20830%5D%2C%0A%20%20%20%20%20%20%20%20%22client_link%22%3A%20%5B%22https%3A//www.morgensternsnyc.com/%22%2C%20%22https%3A//www.thelittleicecreamshop.com/%22%2C%20%20%22https%3A//www.fredericksicecream.co.uk/%22%2C%20%22https%3A//www.solleys.co.uk/%22%5D%0A%0A%20%20%20%20%7D%0A%29.set_index%28%22project%22%29%0A%0A%0Ast.dataframe%28%0A%20%20%20%20data_df%2C%0A%20%20%20%20column_config%3D%7B%0A%20%20%20%20%20%20%20%20%22progress%22%3A%20st.column_config.ProgressColumn%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Project%20Progress%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20help%3D%22The%20%25%20of%20project%20tasks%20completed%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3D%22%25f%25%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20min_value%3D0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max_value%3D100%2C%0A%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%22project_mascot%22%3A%20st.column_config.ImageColumn%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Mascot%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20help%3D%22The%20cat%20mascot%20of%20this%20project%22%0A%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%20%22client_link%22%3A%20st.column_config.LinkColumn%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Client%20Website%20Link%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20help%3D%22Link%20to%20the%20website%20of%20the%20client%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20display_text%3D%22Open%20link%22%0A%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%20%22logged_minutes%22%3A%20st.column_config.NumberColumn%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Minutes%20Logged%20on%20Project%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20help%3D%22Minutes%20Logged%20for%20Client%20Billing%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%7D%0A%29%0A
+
+" class="stlite"></iframe>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For editable dataframes (covered in a later chapter), checkboxes, select dropdowns, date/time pickers and more can be integrated into the table.</p>
+</div>
+</div>
+<p>The full documentation can be found <a href="https://docs.streamlit.io/develop/api-reference/data/st.column_config">here</a> and is well worth a read to understand the full range of powerful options available to you via the column configuration API.</p>
+</section>
+<section id="pandas-stylers" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="pandas-stylers"><span class="header-section-number">3.2.2</span> Pandas stylers</h3>
+<p>Pandas has a ‘styler’ API</p>
+</section>
+</section>
+<section id="other-kinds-of-tabular-data" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="other-kinds-of-tabular-data"><span class="header-section-number">3.3</span> Other kinds of tabular data</h2>
+<p>st.dataframe works with Pandas, PyArrow, Snowpark, pySpark, Numpy arrays, lists, sets and dictionaries.</p>
+</section>
+<section id="additional-arguments" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="additional-arguments"><span class="header-section-number">3.4</span> Additional arguments</h2>
+<p>You can find out more about the available options in <a href="https://docs.streamlit.io/develop/api-reference/data/st.dataframe">the documentation</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>

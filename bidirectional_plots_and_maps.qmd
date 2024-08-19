@@ -86,9 +86,19 @@ st.dataframe(filtered_df)
 
 ```
 
+:::{.callout-note}
+The `selection_mode` parameter can be passed to `st.dataframe` to allow selection of single or multiple rows, single or multiple columns, or some combination of the two.
+
+Note that enabling column selection disables column sorting.
+:::
+
 ## Graphs
 
-Plotly plots provide some ways for users to interact with the points in the dataset.
+Streamlit also supports monitoring `st.plotly_chart`, `st.altair_chart`, and `st.vega_lite_chart` for point selections and using this as an input for further actions.
+
+:::{.callout-note}
+In this book we focus on the use of plotly; take a look at the Streamlit documentation to see how this could work with the Altair and Vega Lite plotting libraries instead.
+:::
 
 When hovering over the plot, users are given options such as 'box select' (to choose a box-shaped subset of points) or lasso select (to select an irregular set of points.)
 

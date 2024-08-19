@@ -52,6 +52,50 @@
     ]
   },
   {
+    "objectID": "dataframes.html",
+    "href": "dataframes.html",
+    "title": "3  Dataframes",
+    "section": "",
+    "text": "3.1 st.table()\nLet’s start with st.table.\nst.table gives a basic, non-interactive table.\nThis can be useful when we don’t want users to be able to do things like sort the dataframe columns.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dataframes</span>"
+    ]
+  },
+  {
+    "objectID": "dataframes.html#st.dataframe",
+    "href": "dataframes.html#st.dataframe",
+    "title": "3  Dataframes",
+    "section": "3.2 st.dataframe()",
+    "text": "3.2 st.dataframe()\nst.dataframe gives more interactivity.\n\nA simple search functionality is available when hovering over it, as well as the option to make the table take up the full screen.\n\n\n3.2.1 The column API\nThe column configuration API is a powerful way to enhance the display of data tables in Streamlit.\nThis allows you to change the displayed column name without having to rename it via Pandas commands, but it also gives more control over how columns display.\nFor example, you can set a numeric column to include a prefix or suffix, or to add a comma to break up long numbers.\nYou can set links to be clickable, images to preview, and add things like sparklines and progress bars.\nLet’s build up a simple dataset manually so we can explore the use of some of these values.\n\n\n\n\n\n\n\nNote\n\n\n\nFor editable dataframes (covered in a later chapter), checkboxes, select dropdowns, date/time pickers and more can be integrated into the table.\n\n\nThe full documentation can be found here and is well worth a read to understand the full range of powerful options available to you via the column configuration API.\n\n\n3.2.2 Pandas stylers\nPandas has a ‘styler’ API",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dataframes</span>"
+    ]
+  },
+  {
+    "objectID": "dataframes.html#other-kinds-of-tabular-data",
+    "href": "dataframes.html#other-kinds-of-tabular-data",
+    "title": "3  Dataframes",
+    "section": "3.3 Other kinds of tabular data",
+    "text": "3.3 Other kinds of tabular data\nst.dataframe works with Pandas, PyArrow, Snowpark, pySpark, Numpy arrays, lists, sets and dictionaries.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dataframes</span>"
+    ]
+  },
+  {
+    "objectID": "dataframes.html#additional-arguments",
+    "href": "dataframes.html#additional-arguments",
+    "title": "3  Dataframes",
+    "section": "3.4 Additional arguments",
+    "text": "3.4 Additional arguments\nYou can find out more about the available options in the documentation.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dataframes</span>"
+    ]
+  },
+  {
     "objectID": "static_maps.html",
     "href": "static_maps.html",
     "title": "7  Static Maps",
@@ -210,7 +254,7 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "13  File Uploads",
     "section": "13.2 Uploading image files",
-    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-19 15:21:19.969 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
+    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-19 16:21:49.136 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>File Uploads</span>"
@@ -232,7 +276,7 @@
     "href": "bidirectional_plots_and_maps.html#dataframes",
     "title": "15  Bidirectional Inputs - Dataframes, Charts and Maps",
     "section": "",
-    "text": "Tip\n\n\n\nNote that selecting a subset of cells like this is not sufficient.\n\nYou must select the full rows using the dataset column at the far left, to the left of the index column if displayed.",
+    "text": "Tip\n\n\n\nNote that selecting a subset of cells like this is not sufficient.\n\nYou must select the full rows using the dataset column at the far left, to the left of the index column if displayed.\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe selection_mode parameter can be passed to st.dataframe to allow selection of single or multiple rows, single or multiple columns, or some combination of the two.\nNote that enabling column selection disables column sorting.",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Bidirectional Inputs - Dataframes, Charts and Maps</span>"
@@ -243,7 +287,7 @@
     "href": "bidirectional_plots_and_maps.html#graphs",
     "title": "15  Bidirectional Inputs - Dataframes, Charts and Maps",
     "section": "15.2 Graphs",
-    "text": "15.2 Graphs\nPlotly plots provide some ways for users to interact with the points in the dataset.\nWhen hovering over the plot, users are given options such as ‘box select’ (to choose a box-shaped subset of points) or lasso select (to select an irregular set of points.)\n\nLet’s start by creating a scatterplot of the penguins dataset.\nNotice that we have now saved the output of st.plotly_chart to a variable, and also added the parameter on_select=\"rerun\".\n\nNow let’s see how we could use this to update some outputs.\n\n\n\n\n\n\n\nWarning\n\n\n\nHere, we’ve just chosen a very simple example where there is no colour applied to the points in the graph.\nIf the color parameter is passed to px.scatter then the resulting point indices are related to the rows for that colour only - e.g. if we coloured by the species, then a point_index parameter of 139 wouldn’t relate back to an index of 139 in the original dataset - it would be point 139 for that particular species.\nAlways explore and test the outputs of your filtering carefully to ensure it’s returning what you think it’s returning!\nAs of the time of writing (August 2024), this feature is quite new and there are not many examples of more advanced usage of it.",
+    "text": "15.2 Graphs\nStreamlit also supports monitoring st.plotly_chart, st.altair_chart, and st.vega_lite_chart for point selections and using this as an input for further actions.\n\n\n\n\n\n\nNote\n\n\n\nIn this book we focus on the use of plotly; take a look at the Streamlit documentation to see how this could work with the Altair and Vega Lite plotting libraries instead.\n\n\nWhen hovering over the plot, users are given options such as ‘box select’ (to choose a box-shaped subset of points) or lasso select (to select an irregular set of points.)\n\nLet’s start by creating a scatterplot of the penguins dataset.\nNotice that we have now saved the output of st.plotly_chart to a variable, and also added the parameter on_select=\"rerun\".\n\nNow let’s see how we could use this to update some outputs.\n\n\n\n\n\n\n\nWarning\n\n\n\nHere, we’ve just chosen a very simple example where there is no colour applied to the points in the graph.\nIf the color parameter is passed to px.scatter then the resulting point indices are related to the rows for that colour only - e.g. if we coloured by the species, then a point_index parameter of 139 wouldn’t relate back to an index of 139 in the original dataset - it would be point 139 for that particular species.\nAlways explore and test the outputs of your filtering carefully to ensure it’s returning what you think it’s returning!\nAs of the time of writing (August 2024), this feature is quite new and there are not many examples of more advanced usage of it.",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Bidirectional Inputs - Dataframes, Charts and Maps</span>"

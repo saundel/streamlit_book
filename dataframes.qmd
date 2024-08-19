@@ -3,3 +3,155 @@ title: "Dataframes"
 filters:
   - whitphx/stlite
 ---
+
+Pandas dataframes are very common in data-focussed applications.
+
+We can import pandas dataframes directly into our app and display them.
+
+:::{.callout-tip}
+Later chapters cover a range of additional dataframe topics, such as
+
+- uploading datasets to display
+- selecting subsets of data
+- editable dataframes
+- saving dataframes to csv or Excel files
+:::
+
+In this example, we use `pd.read_csv` to read a dataframe from a URL.
+
+:::{.callout-tip}
+You can also use a relative path to point towards a csv that is stored locally - you will just need to ensure the csv is also supplied when *deploying* your final app.
+
+This is covered more in a later chapter.
+:::
+
+We then use one of the available dataframe-displaying functions from streamlit.
+
+## st.table()
+
+Let's start with `st.table`.
+
+```{stlite-python}
+import pandas as pd
+import streamlit as st
+
+st.title("Most common names per year")
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+
+name_lookup_df = pd.read_csv(url).melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+name_lookup_df = name_lookup_df[name_lookup_df["Rank"] == 1].pivot(values="Name", index="Year", columns="Gender")
+
+st.table(name_lookup_df)
+```
+
+`st.table` gives a basic, non-interactive table.
+
+This can be useful when we don't want users to be able to do things like sort the dataframe columns.
+
+## st.dataframe()
+
+`st.dataframe` gives more interactivity.
+
+```{stlite-python}
+import pandas as pd
+import streamlit as st
+
+st.title("Most common names per year")
+
+url = 'https://files.catbox.moe/eor4ta.csv'
+
+name_lookup_df = pd.read_csv(url).melt(id_vars=["Name", "Gender"]).dropna().rename(
+    columns={"variable": "Year", "value": "Rank"}
+    )
+
+st.dataframe(name_lookup_df)
+```
+
+A simple search functionality is available when hovering over it, as well as the option to make the table take up the full screen.
+
+![](assets/2024-08-19-15-56-02.png)
+
+### The column API
+
+The column configuration API is a powerful way to enhance the display of data tables in Streamlit.
+
+This allows you to change the displayed column name without having to rename it via Pandas commands, but it also gives more control over how columns display.
+
+For example, you can set a numeric column to include a prefix or suffix, or to add a comma to break up long numbers.
+
+You can set links to be clickable, images to preview, and add things like sparklines and progress bars.
+
+Let's build up a simple dataset manually so we can explore the use of some of these values.
+
+```{stlite-python}
+
+import streamlit as st
+import pandas as pd
+
+st.title("Column Configuration API Demonstration")
+
+data_df = pd.DataFrame(
+    {
+        "project": ["Project 1", "Project 2", "Project 3", "Project 4"],
+        "project_mascot": ["https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/1920px-Felis_catus-cat_on_snow.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/25/Siam_lilacpoint.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg/800px-Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Sheba1.JPG/800px-Sheba1.JPG"],
+        "progress": [70, 40, 10, 100],
+        "logged_minutes": [1040, 700, 90, 830],
+        "client_link": ["https://www.morgensternsnyc.com/", "https://www.thelittleicecreamshop.com/",  "https://www.fredericksicecream.co.uk/", "https://www.solleys.co.uk/"]
+
+    }
+).set_index("project")
+
+
+st.dataframe(
+    data_df,
+    column_config={
+        "progress": st.column_config.ProgressColumn(
+            "Project Progress",
+            help="The % of project tasks completed",
+            format="%f%",
+            min_value=0,
+            max_value=100,
+        ),
+        "project_mascot": st.column_config.ImageColumn(
+            "Mascot",
+            help="The cat mascot of this project"
+        ),
+         "client_link": st.column_config.LinkColumn(
+            "Client Website Link",
+            help="Link to the website of the client",
+            display_text="Open link"
+        ),
+         "logged_minutes": st.column_config.NumberColumn(
+            "Minutes Logged on Project",
+            help="Minutes Logged for Client Billing"
+                    )
+    }
+)
+
+```
+
+:::{.callout-note}
+
+For editable dataframes (covered in a later chapter), checkboxes, select dropdowns, date/time pickers and more can be integrated into the table.
+
+:::
+
+The full documentation can be found [here](https://docs.streamlit.io/develop/api-reference/data/st.column_config) and is well worth a read to understand the full range of powerful options available to you via the column configuration API.
+
+### Pandas stylers
+
+Pandas has a 'styler' API
+
+
+## Other kinds of tabular data
+
+st.dataframe works with Pandas, PyArrow, Snowpark, pySpark, Numpy arrays, lists, sets and dictionaries.
+
+## Additional arguments
+
+You can find out more about the available options in [the documentation](https://docs.streamlit.io/develop/api-reference/data/st.dataframe).
