@@ -3,3 +3,199 @@ title: "Tabs"
 filters:
   - whitphx/stlite
 ---
+
+## Tabs in Streamlit
+
+Tabs are an extremely useful way to organise your page into something that is easier to navigate.
+
+Tabs look like this in a Streamlit app.
+
+```{python}
+#| eval: False
+import streamlit as st
+
+tab1, tab2, tab3 = st.tabs(["This is Tab 1", "This is the Second Tab", "Tab 3 is Here!"])
+
+with tab1:
+  st.header("I'm Tab 1")
+  st.write("Here's the 'Back to the Future' poster. Images, videos, data tables and more can be displayed within tabs.")
+  st.image("https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg")
+
+with tab2:
+  st.header("I'm Tab 2")
+  st.write("We can use inputs within tabs too.")
+  name = st.text_input("What's your name?", value=None)
+  if name is not None:
+    st.write(f"Nice to meet you, {name}!")
+  else:
+    st.write("I can't greet you until you enter your name!")
+
+with tab3:
+    if name is not None:
+      st.write(f"Hello again, {name}!")
+      st.write("Isn't it cool that variables persist across different tabs? This can be really handy!")
+      st.video("https://youtu.be/dQw4w9WgXcQ?feature=shared")
+    else:
+      st.write("I can't greet you until you enter your name! Go back to tab 2 and do that.")
+
+```
+
+```{stlite-python}
+import streamlit as st
+
+tab1, tab2, tab3 = st.tabs(["This is Tab 1", "This is the Second Tab", "Tab 3 is Here!"])
+
+with tab1:
+  st.header("I'm Tab 1")
+  st.write("Here's the 'Back to the Future' poster. Images, videos, data tables and more can be displayed within tabs.")
+  st.image("https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg")
+
+with tab2:
+  st.header("I'm Tab 2")
+  st.write("We can use inputs within tabs too.")
+  name = st.text_input("What's your name?", value=None)
+  if name is not None:
+    st.write(f"Nice to meet you, {name}!")
+  else:
+    st.write("I can't greet you until you enter your name!")
+
+with tab3:
+    if name is not None:
+      st.write(f"Hello again, {name}!")
+      st.write("Isn't it cool that variables persist across different tabs? This can be really handy!")
+      st.video("https://youtu.be/dQw4w9WgXcQ?feature=shared")
+    else:
+      st.write("I can't greet you until you enter your name! Go back to tab 2 and do that.")
+
+```
+
+## The two main syntax options for streamlit tabs
+
+There are two main ways to put content inside of tabs.
+
+1) Using a 'with' statement and indenting the code that should sit within the tab.
+
+```{python}
+#| eval: False
+
+import streamlit as st
+tab_a, tab_b = st.tabs(["A Tab", "Another Tab"])
+
+with tab_a:
+    st.text("This is some content within tab 1")
+
+with tab_b:
+    st.text("This is some content within tab 2")
+```
+
+2) Replacing the `st` in sections like `st.text()` with the variable name for the given tab.
+
+```{python}
+#| eval: False
+
+import streamlit as st
+
+tab_a, tab_b = st.tabs(["A Tab", "Another Tab"])
+
+tab_a.text("This is some content within tab 1")
+
+tab_b.text("This is some content within tab 2")
+```
+
+The outputs of both of these bits of code are identical!
+
+It's up to you to choose which you prefer.
+
+## Automatically generating variable numbers of tabs
+
+In some instances, you may wish to reactively create a different number of tabs.
+
+In this example, notice what happens to the random numbers as you change the number of tabs being generated.
+
+### Using the 'tab.' syntax
+
+```{stlite-python}
+import streamlit as st
+import random
+
+number_of_tabs_to_create = st.number_input("Enter the number of tabs you want to create", 2, 5, 3)
+
+tab_list =  st.tabs([f"Tab {i+1}" for i in range(number_of_tabs_to_create)])
+
+for idx, tab in enumerate(tab_list):
+  tab.header(f"This is tab {idx+1}")
+  tab.write(f"Your random number for this tab is {random.randint(0, 10)}")
+
+```
+
+### Using the 'with' syntax
+
+It's also possible to do this using the 'with' syntax.
+
+In this example, in every separate tab, we pull back a random wikipedia page.
+
+(However, due to the way this works behind the scenes, we don't get a new page on changing the number of tabs even though the app is rerunning each time)
+
+```{stlite-python}
+import streamlit as st
+import streamlit.components.v1 as components
+
+number_of_tabs_to_create = st.number_input("Enter the number of tabs you want to create", 2, 5, 3)
+
+tab_list =  st.tabs([f"Tab {i+1}" for i in range(number_of_tabs_to_create)])
+
+for idx, tab in enumerate(tab_list):
+  with tab:
+    st.header(f"This is tab {idx+1}")
+    components.iframe("https://commons.wikimedia.org/wiki/Special:Random/File", height=500)
+
+```
+
+
+## Custom Styling of Tabs
+
+Here is an example of how to change the tab formatting.
+
+:::{.callout-warning}
+This is not a supported part of Streamlit - the ways in which streamlit internally names these tabs may change over time, causing this code to no longer work.
+:::
+
+```{stlite-python}
+# Credit to user 'Dallas on https://discuss.streamlit.io/t/customizing-the-appearance-of-tabs/48913
+
+import streamlit as st
+
+custom_css = """
+<style>
+	.stTabs [data-baseweb="tab-list"] {
+		gap: 2px;
+    }
+
+	.stTabs [data-baseweb="tab"] {
+		height: 50px;
+        white-space: pre-wrap;
+		background-color: #32a852;
+		border-radius: 4px 4px 0px 0px;
+		gap: 1px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+    }
+
+	.stTabs [aria-selected="true"] {
+  		background-color: #912a90;
+	}
+
+</style>
+"""
+
+st.markdown(custom_css, unsafe_allow_html=True)
+
+tab_a, tab_b = st.tabs(["A Tab", "Another Tab"])
+
+with tab_a:
+    st.text("This is some content within tab 1")
+
+with tab_b:
+    st.text("This is some content within tab 2")
+
+```

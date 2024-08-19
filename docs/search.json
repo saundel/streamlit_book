@@ -133,7 +133,7 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "13  File Uploads",
     "section": "13.2 Uploading image files",
-    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-15 15:47:03.644 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
+    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-19 12:36:23.013 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>File Uploads</span>"
@@ -225,6 +225,50 @@
     "crumbs": [
       "Layout",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Columns</span>"
+    ]
+  },
+  {
+    "objectID": "layout_tabs.html",
+    "href": "layout_tabs.html",
+    "title": "20  Tabs",
+    "section": "",
+    "text": "20.1 Tabs in Streamlit\nTabs are an extremely useful way to organise your page into something that is easier to navigate.\nTabs look like this in a Streamlit app.\nimport streamlit as st\n\ntab1, tab2, tab3 = st.tabs([\"This is Tab 1\", \"This is the Second Tab\", \"Tab 3 is Here!\"])\n\nwith tab1:\n  st.header(\"I'm Tab 1\")\n  st.write(\"Here's the 'Back to the Future' poster. Images, videos, data tables and more can be displayed within tabs.\")\n  st.image(\"https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg\")\n\nwith tab2:\n  st.header(\"I'm Tab 2\")\n  st.write(\"We can use inputs within tabs too.\")\n  name = st.text_input(\"What's your name?\", value=None)\n  if name is not None:\n    st.write(f\"Nice to meet you, {name}!\")\n  else:\n    st.write(\"I can't greet you until you enter your name!\")\n\nwith tab3:\n    if name is not None:\n      st.write(f\"Hello again, {name}!\")\n      st.write(\"Isn't it cool that variables persist across different tabs? This can be really handy!\")\n      st.video(\"https://youtu.be/dQw4w9WgXcQ?feature=shared\")\n    else:\n      st.write(\"I can't greet you until you enter your name! Go back to tab 2 and do that.\")",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Tabs</span>"
+    ]
+  },
+  {
+    "objectID": "layout_tabs.html#the-two-main-syntax-options-for-streamlit-tabs",
+    "href": "layout_tabs.html#the-two-main-syntax-options-for-streamlit-tabs",
+    "title": "20  Tabs",
+    "section": "20.2 The two main syntax options for streamlit tabs",
+    "text": "20.2 The two main syntax options for streamlit tabs\nThere are two main ways to put content inside of tabs.\n\nUsing a ‘with’ statement and indenting the code that should sit within the tab.\n\n\nimport streamlit as st\ntab_a, tab_b = st.tabs([\"A Tab\", \"Another Tab\"])\n\nwith tab_a:\n    st.text(\"This is some content within tab 1\")\n\nwith tab_b:\n    st.text(\"This is some content within tab 2\")\n\n\nReplacing the st in sections like st.text() with the variable name for the given tab.\n\n\nimport streamlit as st\n\ntab_a, tab_b = st.tabs([\"A Tab\", \"Another Tab\"])\n\ntab_a.text(\"This is some content within tab 1\")\n\ntab_b.text(\"This is some content within tab 2\")\n\nThe outputs of both of these bits of code are identical!\nIt’s up to you to choose which you prefer.",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Tabs</span>"
+    ]
+  },
+  {
+    "objectID": "layout_tabs.html#automatically-generating-variable-numbers-of-tabs",
+    "href": "layout_tabs.html#automatically-generating-variable-numbers-of-tabs",
+    "title": "20  Tabs",
+    "section": "20.3 Automatically generating variable numbers of tabs",
+    "text": "20.3 Automatically generating variable numbers of tabs\nIn some instances, you may wish to reactively create a different number of tabs.\nIn this example, notice what happens to the random numbers as you change the number of tabs being generated.\n\n20.3.1 Using the ‘tab.’ syntax\n\n\n\n20.3.2 Using the ‘with’ syntax\nIt’s also possible to do this using the ‘with’ syntax.\nIn this example, in every separate tab, we pull back a random wikipedia page.\n(However, due to the way this works behind the scenes, we don’t get a new page on changing the number of tabs even though the app is rerunning each time)",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Tabs</span>"
+    ]
+  },
+  {
+    "objectID": "layout_tabs.html#custom-styling-of-tabs",
+    "href": "layout_tabs.html#custom-styling-of-tabs",
+    "title": "20  Tabs",
+    "section": "20.4 Custom Styling of Tabs",
+    "text": "20.4 Custom Styling of Tabs\nHere is an example of how to change the tab formatting.\n\n\n\n\n\n\nWarning\n\n\n\nThis is not a supported part of Streamlit - the ways in which streamlit internally names these tabs may change over time, causing this code to no longer work.",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Tabs</span>"
     ]
   }
 ]
