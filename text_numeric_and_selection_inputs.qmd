@@ -1,5 +1,5 @@
 ---
-title: "Basics of Text, Numeric and Selection Inputs"
+title: "An Overview of Available Input Types"
 filters:
   - whitphx/stlite
 ---
@@ -204,6 +204,16 @@ toggle_value = st.toggle("Tick or untick me!")
 
 st.write(f"The value of the toggle is {toggle_value}")
 
+```
+
+## Additional Input Types Not Covered Here
+
+You can always refer to the excellent Streamlit documentation to see what other input widgets are available.
+
+New official ones are sometimes added, and there are additional ones made by the community that become available over time.
+
+```{=html}
+<iframe width="780" height="500" src="https://docs.streamlit.io/develop/api-reference/widgets" title="Webpage example"></iframe>
 ```
 
 ## Next steps with inputs

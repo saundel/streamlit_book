@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Web Apps with Streamlit - 37&nbsp; Deploying to Streamlit Community Cloud</title>
+<title>HSMA - Web Apps with Streamlit - 15&nbsp; Bidirectional Inputs - Dataframes, Charts and Maps</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./stlite_github_pages.html" rel="next">
-<link href="./secrets.html" rel="prev">
+<link href="./file_downloads_tabular.html" rel="next">
+<link href="./editable_dataframes.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -44,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
+<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
+<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./streamlit_community_cloud.html">Deployment</a></li><li class="breadcrumb-item"><a href="./streamlit_community_cloud.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Deploying to Streamlit Community Cloud</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_to_inputs.html">User Inputs</a></li><li class="breadcrumb-item"><a href="./bidirectional_plots_and_maps.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bidirectional Inputs - Dataframes, Charts and Maps</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -258,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bidirectional_plots_and_maps.html" class="sidebar-item-text sidebar-link">
+  <a href="./bidirectional_plots_and_maps.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bidirectional Inputs - Dataframes, Charts and Maps</span></span></a>
   </div>
 </li>
@@ -456,7 +493,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./streamlit_community_cloud.html" class="sidebar-item-text sidebar-link active">
+  <a href="./streamlit_community_cloud.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Deploying to Streamlit Community Cloud</span></span></a>
   </div>
 </li>
@@ -538,14 +575,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dataframes" id="toc-dataframes" class="nav-link active" data-scroll-target="#dataframes"><span class="header-section-number">15.1</span> Dataframes</a></li>
+  <li><a href="#graphs" id="toc-graphs" class="nav-link" data-scroll-target="#graphs"><span class="header-section-number">15.2</span> Graphs</a></li>
+  <li><a href="#sec-maps" id="toc-sec-maps" class="nav-link" data-scroll-target="#sec-maps"><span class="header-section-number">15.3</span> Maps</a>
+  <ul class="collapse">
+  <li><a href="#filtering-with-the-bidirectional-folium-component" id="toc-filtering-with-the-bidirectional-folium-component" class="nav-link" data-scroll-target="#filtering-with-the-bidirectional-folium-component"><span class="header-section-number">15.3.1</span> Filtering with the bidirectional Folium Component</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./streamlit_community_cloud.html">Deployment</a></li><li class="breadcrumb-item"><a href="./streamlit_community_cloud.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Deploying to Streamlit Community Cloud</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_to_inputs.html">User Inputs</a></li><li class="breadcrumb-item"><a href="./bidirectional_plots_and_maps.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bidirectional Inputs - Dataframes, Charts and Maps</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Deploying to Streamlit Community Cloud</span></h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bidirectional Inputs - Dataframes, Charts and Maps</span></h1>
 </div>
 
 
@@ -562,8 +610,171 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>In more recent versions of Streamlit, it has become possible to feed certain interactions with graphs - like selecting a series of points on a scatterplot - or with maps - like zooming to focus in on a subset of markers - back into the app.</p>
+<p>This can allow you to do things like provide a dataframe below a map that responsively filters to only show the data relating to the points currently visible on a map.</p>
+<section id="dataframes" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="dataframes"><span class="header-section-number">15.1</span> Dataframes</h2>
+<p>In the case of dataframes, maybe we want to allow users to easily select a subset of rows to be plotted on a graph or map, or use this subset of rows to calculate some summary statistics.</p>
+<p>Let’s load in the penguins dataset.</p>
+<p>Notice that we have now saved the output of <code>st.dataframe</code> to a variable, and also added the parameter <code>on_select="rerun"</code>.</p>
+<p>Before we start filtering by what is returned, let’s first just see what actually is returned and explore how this updates.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0A%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Afrom%20palmerpenguins%20import%20load_penguins%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Ast.header%28%22Penguin%20Dataset%20Explorer%22%29%0A%0Aselected_rows%20%3D%20st.dataframe%28penguins%2C%20on_select%3D%22rerun%22%29%0A%0Ast.write%28selected_rows%29
+
+" class="stlite"></iframe>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that selecting a subset of cells like this is not sufficient.</p>
+<p><img src="assets/2024-08-19-15-10-02.png" class="img-fluid"></p>
+<p>You must select the full rows using the dataset column at the far left, to the left of the index column if displayed.</p>
+<p><img src="assets/2024-08-19-15-11-10.png" class="img-fluid"></p>
+</div>
+</div>
+<p>We can then use the selected row indices to restrict the rows we use for subsequent calculations.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0A%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20numpy%20as%20np%0Aimport%20plotly.express%20as%20px%0Afrom%20palmerpenguins%20import%20load_penguins%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Ast.header%28%22Penguin%20Dataset%20Explorer%22%29%0A%0Aselected_rows%20%3D%20st.dataframe%28penguins%2C%20on_select%3D%22rerun%22%29%0A%0Arow_indices%20%3D%20selected_rows%5B%22selection%22%5D%5B%22rows%22%5D%0A%0Aprint%28f%22You%27ve%20selected%20%7Blen%28row_indices%29%7D%20penguins%22%29%0A%0Afiltered_df%20%3D%20penguins.iloc%5Brow_indices%5D%0A%0Ast.write%28f%22Mean%20Weight%3A%20%7Bnp.mean%28filtered_df%5B%27body_mass_g%27%5D%29%7D%29%0A%0Ast.plotly_chart%28px.pie%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pd.DataFrame%28filtered_df%5B%27sex%27%5D%29.value_counts%28dropna%3DFalse%29.reset_index%28%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20values%3D%27count%27%2C%20names%3D%27sex%27%2C%20title%3D%22Sex%20of%20Selected%20Penguins%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0Ast.subheader%28%22Your%20Filtered%20Dataframe%22%29%0A%0Ast.dataframe%28filtered_df%29%0A
+
+" class="stlite"></iframe>
+</section>
+<section id="graphs" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="graphs"><span class="header-section-number">15.2</span> Graphs</h2>
+<p>Plotly plots provide some ways for users to interact with the points in the dataset.</p>
+<p>When hovering over the plot, users are given options such as ‘box select’ (to choose a box-shaped subset of points) or lasso select (to select an irregular set of points.)</p>
+<p><img src="assets/2024-08-19-14-41-40.png" class="img-fluid"></p>
+<p>Let’s start by creating a scatterplot of the penguins dataset.</p>
+<p>Notice that we have now saved the output of <code>st.plotly_chart</code> to a variable, and also added the parameter <code>on_select="rerun"</code>.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0A%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20plotly.express%20as%20px%0Afrom%20palmerpenguins%20import%20load_penguins%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3D%22body_mass_g%22%2C%20y%3D%22bill_length_mm%22%2C%20color%3D%22species%22%29%0A%0Aselected_data%20%3D%20st.plotly_chart%28fig%2C%20on_select%3D%22rerun%22%29%0A%0Ast.write%28selected_data%29%0A
+
+" class="stlite"></iframe>
+<p>Now let’s see how we could use this to update some outputs.</p>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0A%0Aimport%20streamlit%20as%20st%0Aimport%20pandas%20as%20pd%0Aimport%20plotly.express%20as%20px%0Afrom%20palmerpenguins%20import%20load_penguins%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3D%22body_mass_g%22%2C%20y%3D%22bill_length_mm%22%29%0A%0Aselected_data%20%3D%20st.plotly_chart%28fig%2C%20on_select%3D%22rerun%22%29%0A%0Aselected_point_indices%20%3D%20%5Bpoint.value%20for%20point%20in%20selected_data%5B%22selection%22%5D%5B%22point_indices%22%5D%5D%0A%0Ast.dataframe%28%0A%20%20%20%20penguins.iloc%5Bselected_point_indices%2C%20%3A%5D%0A%29%0A
+
+" class="stlite"></iframe>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Here, we’ve just chosen a very simple example where there is no colour applied to the points in the graph.</p>
+<p>If the <code>color</code> parameter is passed to <code>px.scatter</code> then the resulting point indices are related to the rows for that colour only - e.g.&nbsp;if we coloured by the species, then a <code>point_index</code> parameter of <code>139</code> wouldn’t relate back to an index of <code>139</code> in the original dataset - it would be point <code>139</code> for that particular species.</p>
+<p>Always explore and test the outputs of your filtering carefully to ensure it’s returning what you think it’s returning!</p>
+<p>As of the time of writing (August 2024), this feature is quite new and there are not many examples of more advanced usage of it.</p>
+</div>
+</div>
+</section>
+<section id="sec-maps" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="sec-maps"><span class="header-section-number">15.3</span> Maps</h2>
+<p>For maps, we need to use the external <code>streamlit_folium</code> library, which must be installed via <code>pip</code> before use - it doesn’t come bundled with Streamlit itself.</p>
+<section id="filtering-with-the-bidirectional-folium-component" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="filtering-with-the-bidirectional-folium-component"><span class="header-section-number">15.3.1</span> Filtering with the bidirectional Folium Component</h3>
+<p>When using this component, data is constantly being returned as the map is updated.</p>
+<p>Let’s take a look at what is being returned as the map is updated.</p>
+<div id="8ba8d4b5" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> streamlit_folium <span class="im">import</span> st_folium</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>gp_list_gdf_sw <span class="op">=</span> geopandas.read_file(<span class="st">"https://files.catbox.moe/atzk26.gpkg"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out instances with no geometry</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>gp_list_gdf_sw <span class="op">=</span> gp_list_gdf_sw[<span class="op">~</span>gp_list_gdf_sw[<span class="st">'geometry'</span>].is_empty]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a geometry list from the GeoDataFrame</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>geo_df_list <span class="op">=</span> [[point.xy[<span class="dv">1</span>][<span class="dv">0</span>], point.xy[<span class="dv">0</span>][<span class="dv">0</span>]] <span class="cf">for</span> point <span class="kw">in</span> gp_list_gdf_sw.geometry]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>gp_map_tooltip <span class="op">=</span> folium.Map(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    location<span class="op">=</span>[<span class="fl">50.7</span>, <span class="op">-</span><span class="fl">4.2</span>],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    zoom_start<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span><span class="st">'openstreetmap'</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, coordinates <span class="kw">in</span> <span class="bu">enumerate</span>(geo_df_list):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    gp_map_tooltip <span class="op">=</span> gp_map_tooltip.add_child(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        folium.Marker(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            location<span class="op">=</span>coordinates,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            tooltip<span class="op">=</span>gp_list_gdf_sw[<span class="st">'name'</span>].values[i],</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            icon<span class="op">=</span>folium.Icon(icon<span class="op">=</span><span class="st">"user-md"</span>, prefix<span class="op">=</span><span class="st">'fa'</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>returned_map_data <span class="op">=</span> st_folium(gp_map_tooltip)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>st.write(returned_map_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22geopandas%22%29%0Aawait%20micropip.install%28%22streamlit-folium%22%29%0Aimport%20geopandas%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Aimport%20streamlit%20as%20st%0Aimport%20folium%0Afrom%20streamlit_folium%20import%20st_folium%0A%0Agp_list_gdf_sw%20%3D%20geopandas.read_file%28%22https%3A//files.catbox.moe/atzk26.gpkg%22%29%0A%0A%23%20Filter%20out%20instances%20with%20no%20geometry%0Agp_list_gdf_sw%20%3D%20gp_list_gdf_sw%5B~gp_list_gdf_sw%5B%27geometry%27%5D.is_empty%5D%0A%0A%23%20Create%20a%20geometry%20list%20from%20the%20GeoDataFrame%0Ageo_df_list%20%3D%20%5B%5Bpoint.xy%5B1%5D%5B0%5D%2C%20point.xy%5B0%5D%5B0%5D%5D%20for%20point%20in%20gp_list_gdf_sw.geometry%5D%0A%0Agp_map_tooltip%20%3D%20folium.Map%28%0A%20%20%20%20location%3D%5B50.7%2C%20-4.2%5D%2C%0A%20%20%20%20zoom_start%3D8%2C%0A%20%20%20%20tiles%3D%27openstreetmap%27%2C%0A%20%20%20%20%29%0A%0Afor%20i%2C%20coordinates%20in%20enumerate%28geo_df_list%29%3A%0A%0A%20%20%20%20gp_map_tooltip%20%3D%20gp_map_tooltip.add_child%28%0A%20%20%20%20%20%20%20%20folium.Marker%28%0A%20%20%20%20%20%20%20%20%20%20%20%20location%3Dcoordinates%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20tooltip%3Dgp_list_gdf_sw%5B%27name%27%5D.values%5Bi%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20icon%3Dfolium.Icon%28icon%3D%22user-md%22%2C%20prefix%3D%27fa%27%2C%20color%3D%22black%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%29%0A%0Areturned_map_data%20%3D%20st_folium%28gp_map_tooltip%29%0A%0Ast.write%28returned_map_data%29%0A
+
+" class="stlite"></iframe>
+<section id="using-the-returned-data" class="level4" data-number="15.3.1.1">
+<h4 data-number="15.3.1.1" class="anchored" data-anchor-id="using-the-returned-data"><span class="header-section-number">15.3.1.1</span> Using the returned data</h4>
+<p>Let’s get the bounds of the map to filter a dataframe to just contain the points within the area the user has zoomed to.</p>
+<div id="50d9351f" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> streamlit_folium <span class="im">import</span> st_folium</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>gp_list_gdf_sw <span class="op">=</span> geopandas.read_file(<span class="st">"https://files.catbox.moe/atzk26.gpkg"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out instances with no geometry</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>gp_list_gdf_sw <span class="op">=</span> gp_list_gdf_sw[<span class="op">~</span>gp_list_gdf_sw[<span class="st">'geometry'</span>].is_empty]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a geometry list from the GeoDataFrame</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>geo_df_list <span class="op">=</span> [[point.xy[<span class="dv">1</span>][<span class="dv">0</span>], point.xy[<span class="dv">0</span>][<span class="dv">0</span>]] <span class="cf">for</span> point <span class="kw">in</span> gp_list_gdf_sw.geometry]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>gp_map_tooltip <span class="op">=</span> folium.Map(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    location<span class="op">=</span>[<span class="fl">50.7</span>, <span class="op">-</span><span class="fl">4.2</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    zoom_start<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span><span class="st">'openstreetmap'</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, coordinates <span class="kw">in</span> <span class="bu">enumerate</span>(geo_df_list):</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    gp_map_tooltip <span class="op">=</span> gp_map_tooltip.add_child(</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        folium.Marker(</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            location<span class="op">=</span>coordinates,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            tooltip<span class="op">=</span>gp_list_gdf_sw[<span class="st">'name'</span>].values[i],</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            icon<span class="op">=</span>folium.Icon(icon<span class="op">=</span><span class="st">"user-md"</span>, prefix<span class="op">=</span><span class="st">'fa'</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>returned_map_data <span class="op">=</span> st_folium(gp_map_tooltip)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>xmin <span class="op">=</span> returned_map_data[<span class="st">'bounds'</span>][<span class="st">'_southWest'</span>][<span class="st">'lng'</span>]</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> returned_map_data[<span class="st">'bounds'</span>][<span class="st">'_northEast'</span>][<span class="st">'lng'</span>]</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>ymin <span class="op">=</span> returned_map_data[<span class="st">'bounds'</span>][<span class="st">'_southWest'</span>][<span class="st">'lat'</span>]</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>ymax <span class="op">=</span>  returned_map_data[<span class="st">'bounds'</span>][<span class="st">'_northEast'</span>][<span class="st">'lat'</span>]</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>gp_list_gdf_filtered <span class="op">=</span> gp_list_gdf_sw.cx[xmin:xmax, ymin:ymax]</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>st.write(<span class="ss">f"Returning data for </span><span class="sc">{</span><span class="bu">len</span>(gp_list_gdf_filtered)<span class="sc">}</span><span class="ss"> practices"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>st.dataframe(gp_list_gdf_filtered[[<span class="st">'name'</span>, <span class="st">'address_1'</span>, <span class="st">'postcode'</span>, <span class="st">'Total List Size'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22geopandas%22%29%0Aawait%20micropip.install%28%22streamlit-folium%22%29%0Aimport%20geopandas%0Aimport%20pandas%20as%20pd%0Aimport%20matplotlib.pyplot%20as%20plt%0Aimport%20streamlit%20as%20st%0Aimport%20folium%0Afrom%20streamlit_folium%20import%20st_folium%0A%0Agp_list_gdf_sw%20%3D%20geopandas.read_file%28%22https%3A//files.catbox.moe/atzk26.gpkg%22%29%0A%0A%23%20Filter%20out%20instances%20with%20no%20geometry%0Agp_list_gdf_sw%20%3D%20gp_list_gdf_sw%5B~gp_list_gdf_sw%5B%27geometry%27%5D.is_empty%5D%0A%0A%23%20Create%20a%20geometry%20list%20from%20the%20GeoDataFrame%0Ageo_df_list%20%3D%20%5B%5Bpoint.xy%5B1%5D%5B0%5D%2C%20point.xy%5B0%5D%5B0%5D%5D%20for%20point%20in%20gp_list_gdf_sw.geometry%5D%0A%0Agp_map_tooltip%20%3D%20folium.Map%28%0A%20%20%20%20location%3D%5B50.7%2C%20-4.2%5D%2C%0A%20%20%20%20zoom_start%3D8%2C%0A%20%20%20%20tiles%3D%27openstreetmap%27%2C%0A%20%20%20%20%29%0A%0Afor%20i%2C%20coordinates%20in%20enumerate%28geo_df_list%29%3A%0A%0A%20%20%20%20gp_map_tooltip%20%3D%20gp_map_tooltip.add_child%28%0A%20%20%20%20%20%20%20%20folium.Marker%28%0A%20%20%20%20%20%20%20%20%20%20%20%20location%3Dcoordinates%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20tooltip%3Dgp_list_gdf_sw%5B%27name%27%5D.values%5Bi%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20icon%3Dfolium.Icon%28icon%3D%22user-md%22%2C%20prefix%3D%27fa%27%2C%20color%3D%22black%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%29%0A%0Areturned_map_data%20%3D%20st_folium%28gp_map_tooltip%29%0A%0Axmin%20%3D%20returned_map_data%5B%27bounds%27%5D%5B%27_southWest%27%5D%5B%27lng%27%5D%0Axmax%20%3D%20returned_map_data%5B%27bounds%27%5D%5B%27_northEast%27%5D%5B%27lng%27%5D%0Aymin%20%3D%20returned_map_data%5B%27bounds%27%5D%5B%27_southWest%27%5D%5B%27lat%27%5D%0Aymax%20%3D%20%20returned_map_data%5B%27bounds%27%5D%5B%27_northEast%27%5D%5B%27lat%27%5D%0Agp_list_gdf_filtered%20%3D%20gp_list_gdf_sw.cx%5Bxmin%3Axmax%2C%20ymin%3Aymax%5D%0A%0Ast.write%28f%22Returning%20data%20for%20%7Blen%28gp_list_gdf_filtered%29%7D%20practices%22%29%0A%0Ast.dataframe%28gp_list_gdf_filtered%5B%5B%27name%27%2C%20%27address_1%27%2C%20%27postcode%27%2C%20%27Total%20List%20Size%27%5D%5D%29%0A
+
+" class="stlite"></iframe>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -1458,13 +1669,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./secrets.html" class="pagination-link" aria-label="Secrets">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Secrets</span></span>
+      <a href="./editable_dataframes.html" class="pagination-link" aria-label="Editable Dataframes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Editable Dataframes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./stlite_github_pages.html" class="pagination-link" aria-label="Deploying to Github Pages with Serverless Streamlit (stlite)">
-        <span class="nav-page-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Deploying to Github Pages with Serverless Streamlit (stlite)</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./file_downloads_tabular.html" class="pagination-link" aria-label="Downloading tabular files">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Downloading tabular files</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -26,6 +26,8 @@ book:
     - introduction_to_inputs.qmd
     - text_numeric_and_selection_inputs.qmd
     - file_uploads.qmd
+    - editable_dataframes.qmd
+    - bidirectional_plots_and_maps.qmd
   - part: Downloading Outputs
     chapters:
     - file_downloads_tabular.qmd
