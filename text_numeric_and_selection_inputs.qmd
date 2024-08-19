@@ -1,5 +1,211 @@
 ---
-title: "Text, Numeric and Selection Inputs"
+title: "Basics of Text, Numeric and Selection Inputs"
 filters:
   - whitphx/stlite
 ---
+
+There are a large number of different input types available in Streamlit.
+
+In streamlit, if we save the output of one of the built-in input widgets to a variable, this variable will be the value the user has selected, and will be used anywhere you subsequently reference this value in the app.
+
+Let's start by having a text input to greet the user.
+
+Try changing the value in the input box each time, pressing enter when you have finished typing. Notice how the sentence underneath the text box updates.
+
+```{python}
+import streamlit as st
+
+name = st.text_input("Enter your name")
+
+st.write(f"Hello {name}! Welcome to Streamlit.")
+
+```
+
+```{stlite-python}
+import streamlit as st
+
+name = st.text_input("Enter your name")
+
+st.write(f"Hello {name}! Welcome to Streamlit.")
+
+```
+
+## Using inputs in calculations
+
+In addition to text, we often want to be able to get numeric inputs from users.
+
+Number boxes and sliders are two good ways to do this.
+
+The benefit of this is that the resulting output can be guaranteed to be a number - unlike using a text input, where the user could choose to enter a non-numeric value which may break later steps of your app.
+
+Let's take a look at how we can use these two kinds of inputs.
+
+```{python}
+#| eval: False
+import streamlit as st
+
+st.subheader("Numeric Input")
+
+chosen_number = st.number_input("Pick a Number")
+
+st.write(f"The number you have chosen is {chosen_number}")
+
+chosen_number_multiplied_by_5 = chosen_number * 5
+
+st.write(f"Your number multiplied by 5 is {chosen_number_multiplied_by_5}")
+
+st.write(f"Your number plus 7 is {chosen_number + 7}")
+
+st.subheader("Numeric Slider")
+
+chosen_number_slider = st.slider("Pick a Number on the slider")
+
+st.write(f"The number you have chosen is {chosen_number_slider}")
+
+chosen_number_slider_multiplied_by_8 = chosen_number * 8
+
+st.write(f"Your number multiplied by 8 is {chosen_number_slider_multiplied_by_8}")
+
+st.write(f"Your number plus 3 is {chosen_number_slider + 3}")
+```
+
+
+```{stlite-python}
+
+import streamlit as st
+
+st.subheader("Numeric Input")
+
+chosen_number = st.number_input("Pick a Number")
+
+st.write(f"The number you have chosen is {chosen_number}")
+
+chosen_number_multiplied_by_5 = chosen_number * 5
+
+st.write(f"Your number multiplied by 5 is {chosen_number_multiplied_by_5}")
+
+st.write(f"Your number plus 7 is {chosen_number + 7}")
+
+st.subheader("Numeric Slider")
+
+chosen_number_slider = st.number_input("Pick a Number on the slider")
+
+st.write(f"The number you have chosen is {chosen_number_slider}")
+
+chosen_number_slider_multiplied_by_8 = chosen_number * 8
+
+st.write(f"Your number multiplied by 8 is {chosen_number_slider_multiplied_by_8}")
+
+st.write(f"Your number plus 3 is {chosen_number_slider + 3}")
+```
+
+## Other numeric and date inputs
+
+## Other useful input types
+
+Let's have a very quick look at some of the other inputs available to us within Streamlit.
+
+The desired type of the output will be **inferred** from the default value you pass into the slider.
+
+```{stlite-python}
+
+import streamlit as st
+
+from datetime import datetime, time
+
+st.subheader("Range Slider")
+
+lower_value, upper_value = st.slider("Pick a lower and upper limit",  (35, 80))
+
+st.subheader("Time Slider")
+
+chosen_time = st.slider(
+    "Select a time:", time(11, 30)
+)
+
+st.subheader("Date Slider")
+
+start_time = st.slider(
+    "Select a date?",
+    value=datetime(2022, 1, 1),
+    format="DD/MM/YYYY",
+)
+
+st.subheader("Date Range Slider")
+start_time = st.slider(
+    "Select a date?",
+    value=(datetime(2022, 1, 1), datetime(2023, 6, 1)),
+
+    format="DD/MM/YYYY",
+)
+
+st.subheader("Time Range Slider")
+chosen_time = st.slider(
+    "Select a time:", value=(time(11, 30), time(12, 45))
+)
+
+st.subheader("Datetime Sliders")
+
+start_time = st.slider(
+    "Select a date and time",
+    value=datetime(2022, 1, 1, 12, 0),
+    format="DD/MM/YYYY @ hh:mm",
+)
+
+st.header("Date and time input elements")
+
+selected_date = st.date_input("Choose a date on the calendar picker")
+
+selected_time = st.time_input("Select a time")
+
+st.header("Text Inputs")
+
+longer_text_input = st.text_area("Use this input to enter a larger piece of text")
+
+shorter_text_input = st.text_input("We saw this before - this is an input for a short bit of text")
+
+```
+
+
+## Selection inputs
+
+Selection inputs are a very useful class of inputs. They allow you to give users a distinct number of options to choose from.
+
+```{stlite-python}
+import streamlit as st
+
+options = ["Green", "Blue", "Red", "Yellow", "Purple"]
+
+st.radio("Which of these colours is your favourite?", options)
+
+st.selectbox("Which of these colours is your favourite?", options)
+
+st.multiselect("Which of these colours are your favourite? You can pick more than one!", options)
+
+st.select_slider("Which of these colours is your favourite?", options)
+
+```
+
+## Other useful inputs
+
+The final inputs we'll take a quick look at are checkbox and toggle inputs.
+
+These are useful as they return boolean values - `True` or `False`.
+
+```{stlite-python}
+
+import streamlit as st
+
+checkbox_value = st.checkbox("Tick or untick me!")
+
+st.write(f"The value of the checkbox is {checkbox_value}")
+
+toggle_value = st.toggle("Tick or untick me!")
+
+st.write(f"The value of the toggle is {toggle_value}")
+
+```
+
+## Next steps with inputs
+
+In the rest of this section, we'll look at some of the parameters for inputs that will allow you to refine what your users will be allowed to enter, improving the usability of your app (and reducing the number of edge cases you need to account for in your programming!).

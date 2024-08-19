@@ -107,6 +107,72 @@
     ]
   },
   {
+    "objectID": "text_numeric_and_selection_inputs.html",
+    "href": "text_numeric_and_selection_inputs.html",
+    "title": "12  Basics of Text, Numeric and Selection Inputs",
+    "section": "",
+    "text": "12.1 Using inputs in calculations\nIn addition to text, we often want to be able to get numeric inputs from users.\nNumber boxes and sliders are two good ways to do this.\nThe benefit of this is that the resulting output can be guaranteed to be a number - unlike using a text input, where the user could choose to enter a non-numeric value which may break later steps of your app.\nLet’s take a look at how we can use these two kinds of inputs.\nimport streamlit as st\n\nst.subheader(\"Numeric Input\")\n\nchosen_number = st.number_input(\"Pick a Number\")\n\nst.write(f\"The number you have chosen is {chosen_number}\")\n\nchosen_number_multiplied_by_5 = chosen_number * 5\n\nst.write(f\"Your number multiplied by 5 is {chosen_number_multiplied_by_5}\")\n\nst.write(f\"Your number plus 7 is {chosen_number + 7}\")\n\nst.subheader(\"Numeric Slider\")\n\nchosen_number_slider = st.slider(\"Pick a Number on the slider\")\n\nst.write(f\"The number you have chosen is {chosen_number_slider}\")\n\nchosen_number_slider_multiplied_by_8 = chosen_number * 8\n\nst.write(f\"Your number multiplied by 8 is {chosen_number_slider_multiplied_by_8}\")\n\nst.write(f\"Your number plus 3 is {chosen_number_slider + 3}\")",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Basics of Text, Numeric and Selection Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "text_numeric_and_selection_inputs.html#other-numeric-and-date-inputs",
+    "href": "text_numeric_and_selection_inputs.html#other-numeric-and-date-inputs",
+    "title": "12  Basics of Text, Numeric and Selection Inputs",
+    "section": "12.2 Other numeric and date inputs",
+    "text": "12.2 Other numeric and date inputs",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Basics of Text, Numeric and Selection Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "text_numeric_and_selection_inputs.html#other-useful-input-types",
+    "href": "text_numeric_and_selection_inputs.html#other-useful-input-types",
+    "title": "12  Basics of Text, Numeric and Selection Inputs",
+    "section": "12.3 Other useful input types",
+    "text": "12.3 Other useful input types\nLet’s have a very quick look at some of the other inputs available to us within Streamlit.\nThe desired type of the output will be inferred from the default value you pass into the slider.",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Basics of Text, Numeric and Selection Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "text_numeric_and_selection_inputs.html#selection-inputs",
+    "href": "text_numeric_and_selection_inputs.html#selection-inputs",
+    "title": "12  Basics of Text, Numeric and Selection Inputs",
+    "section": "12.4 Selection inputs",
+    "text": "12.4 Selection inputs\nSelection inputs are a very useful class of inputs. They allow you to give users a distinct number of options to choose from.",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Basics of Text, Numeric and Selection Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "text_numeric_and_selection_inputs.html#other-useful-inputs",
+    "href": "text_numeric_and_selection_inputs.html#other-useful-inputs",
+    "title": "12  Basics of Text, Numeric and Selection Inputs",
+    "section": "12.5 Other useful inputs",
+    "text": "12.5 Other useful inputs\nThe final inputs we’ll take a quick look at are checkbox and toggle inputs.\nThese are useful as they return boolean values - True or False.",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Basics of Text, Numeric and Selection Inputs</span>"
+    ]
+  },
+  {
+    "objectID": "text_numeric_and_selection_inputs.html#next-steps-with-inputs",
+    "href": "text_numeric_and_selection_inputs.html#next-steps-with-inputs",
+    "title": "12  Basics of Text, Numeric and Selection Inputs",
+    "section": "12.6 Next steps with inputs",
+    "text": "12.6 Next steps with inputs\nIn the rest of this section, we’ll look at some of the parameters for inputs that will allow you to refine what your users will be allowed to enter, improving the usability of your app (and reducing the number of edge cases you need to account for in your programming!).",
+    "crumbs": [
+      "User Inputs",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Basics of Text, Numeric and Selection Inputs</span>"
+    ]
+  },
+  {
     "objectID": "file_uploads.html",
     "href": "file_uploads.html",
     "title": "13  File Uploads",
@@ -133,7 +199,7 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "13  File Uploads",
     "section": "13.2 Uploading image files",
-    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-19 12:36:23.013 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
+    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-19 14:00:41.990 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>File Uploads</span>"

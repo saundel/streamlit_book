@@ -46,7 +46,7 @@ book:
     - logos.qmd
   - part: Controlling Application Flow
     chapters:
-    - run_buttons.qmd
+    - forms_and_run_buttons.qmd
     - partial_reruns.qmd
     - custom_page_navigation.qmd
   - part: Advanced Concepts
