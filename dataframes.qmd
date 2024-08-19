@@ -20,9 +20,12 @@ Later chapters cover a range of additional dataframe topics, such as
 In this example, we use `pd.read_csv` to read a dataframe from a URL.
 
 :::{.callout-tip}
-You can also use a relative path to point towards a csv that is stored locally - you will just need to ensure the csv is also supplied when *deploying* your final app.
+As mentioned in the previous chapter, you can also use a relative path to point towards a csv that is stored locally.
 
+If doing this, you will just need to ensure the csv is also supplied when *deploying* your final app.
 This is covered more in a later chapter.
+
+Loading a file from a public web-based data option is an easy way to ensure you don't run into issues with actually finding the files.
 :::
 
 We then use one of the available dataframe-displaying functions from streamlit.

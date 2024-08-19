@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -44,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
+<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
+<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -562,6 +599,74 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Streamlit apps are just like standard Python scripts in a lot of ways.</p>
+<p>This means that most of the standard methods we are used to for loading in data files will work!</p>
+<p>As people working with data, much of what we want to load in is likely to be is data in a tabular format, like an Excel file or Google Sheet.</p>
+<p>Let’s start by loading in and displaying a simple csv dataset.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>st.write()</code> is a handy command.</p>
+<p>When you pass a variable to it, it will automatically work out a good way to display it.</p>
+<p>Other functions that we talk about in later chapters give you more control over exactly how data or files are displayed - but <code>st.write()</code> can often be a useful starting point.</p>
+</div>
+</div>
+<div id="e8305957" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"Loading in a data file from a publically-accessible csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://files.catbox.moe/eor4ta.csv'</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dataframe <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>st.write(dataframe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=%0Aimport%20pandas%20as%20pd%0Aimport%20streamlit%20as%20st%0A%0Ast.title%28%22Loading%20in%20a%20data%20file%20from%20a%20publically-accessible%20csv%22%29%0A%0Aurl%20%3D%20%27https%3A//files.catbox.moe/eor4ta.csv%27%0Adataframe%20%3D%20pd.read_csv%28url%29%0A%0Ast.write%28dataframe%29%0A
+
+" class="stlite"></iframe>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In later chapters, we will learn more about loading in data, including</p>
+<ul>
+<li>allowing users to upload their own data</li>
+<li>‘caching’ data to prevent it being reloaded unnecessarily</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The focus of this book is on giving you the tools to create simple Streamlit apps. For this, we will mainly focus on using csv files that are stored on the web or locally, or are uploaded by users. In other cases, we will look at data that is generated by simply running the app, as in the case of discrete event simulation apps where the act of running it produces the data for the graphs and tables that we want to analyse!</p>
+<p>However, in real-world usage, there may be some instances where connecting to a database may be required to allow automated access to data without requiring it to be passed to the app, rather than relying on intermediate exports to formats like csv from the database.</p>
+<p>Connecting directly to a production database is certainly possible and can be done safely and securely - but beyond the scope of this book.</p>
+<p><strong>If this is your first time working with streamlit, it is highly recommended to work through the book first to learn the core concepts of streamlit apps. Building a proof of concept version of your app with a .csv export or dummy dataset can be done before worrying about the task of connecting to a data source - and often a good proof of concept will provide the motivation within your organisation to unblock the things that may make connecting to data sources difficult!</strong></p>
+<p>Streamlit does provide tools and guidance around connecting to data sources for apps that are going into production; to learn more about connecting to other data sources, like SQL databases, you can take a look at <a href="https://docs.streamlit.io/develop/concepts/connections/connecting-to-data">this page from the streamlit documentation</a>.</p>
+<p><a href="https://docs.streamlit.io/develop/tutorials/databases">This page</a> gives an overview of how to connect to a range of different SQL database types, public and private google sheets, and more.</p>
+</div>
+</div>
 
 
 
