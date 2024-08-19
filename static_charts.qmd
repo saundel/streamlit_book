@@ -3,3 +3,120 @@ title: "Static Charts"
 filters:
   - whitphx/stlite
 ---
+
+When we want to display static charts, we will often be using the `matplotlib` library.
+
+We can use the `st.pyplot()` component to display these charts.
+
+Below, we create a very simple scatterplot of a dataset.
+
+We have created the `fig` and `ax` objects by beginning by creating a single subplot with the `plt.subplots` function.
+
+This is sometimes referred to as the object-oriented way of writing matplotlib code.
+
+We can then modify this object using any of the standard matplotlib commands we have become familiar with.
+
+The final step to ensure the plot is actually displayed is to pass the `fig` variable to `st.pyplot`.
+
+```{python}
+#| eval: false
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+
+fig, ax = plt.subplots(figsize=(15,10))
+plt.scatter(x=penguins["body_mass_g"], y=penguins["bill_length_mm"])
+plt.title("Penguin Body Mass (g) versus Bill Length (mm)")
+ax.set_xlabel("Body Mass (g)")
+ax.set_ylabel("Bill Length (mm)")
+
+st.pyplot(fig)
+
+```
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+
+fig, ax = plt.subplots(figsize=(15,10))
+plt.scatter(x=penguins["body_mass_g"], y=penguins["bill_length_mm"])
+plt.title("Penguin Body Mass (g) versus Bill Length (mm)")
+ax.set_xlabel("Body Mass (g)")
+ax.set_ylabel("Bill Length (mm)")
+
+st.pyplot(fig)
+
+```
+
+
+## Making use of the available space
+
+Many streamlit components have a parameter called `use_container_width`.
+
+When set in something like `st.pyplot`, it ensures the output is rescaled to use the maximum available width of the screen.
+
+:::{.callout-tip}
+This can become particularly valuable when we start to explore layout options like columns later in the book.
+:::
+
+```{python}
+#| eval: false
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+
+fig, ax = plt.subplots(figsize=(15,10))
+plt.scatter(x=penguins["body_mass_g"], y=penguins["bill_length_mm"])
+plt.title("Penguin Body Mass (g) versus Bill Length (mm)")
+ax.set_xlabel("Body Mass (g)")
+ax.set_ylabel("Bill Length (mm)")
+
+st.subheader("use_container_width=False")
+
+st.pyplot(fig)
+
+st.subheader("use_container_width=True")
+
+st.pyplot(fig, use_container_width=True)
+
+```
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+
+fig, ax = plt.subplots(figsize=(15,10))
+plt.scatter(x=penguins["body_mass_g"], y=penguins["bill_length_mm"])
+plt.title("Penguin Body Mass (g) versus Bill Length (mm)")
+ax.set_xlabel("Body Mass (g)")
+ax.set_ylabel("Bill Length (mm)")
+
+st.subheader("use_container_width=False")
+
+st.pyplot(fig)
+
+st.subheader("use_container_width=True")
+
+st.pyplot(fig, use_container_width=True)
+
+```

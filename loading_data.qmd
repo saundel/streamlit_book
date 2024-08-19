@@ -52,6 +52,7 @@ st.write(dataframe)
 :::{.callout-note}
 In later chapters, we will learn more about loading in data, including
 
+- loading in other data types, like images and videos
 - allowing users to upload their own data
 - 'caching' data to prevent it being reloaded unnecessarily
 :::
