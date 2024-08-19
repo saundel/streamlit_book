@@ -343,49 +343,50 @@ with tab2:
 
         for idx, col in enumerate(wc_cols):
             col.text(f"{len(review_dfs[idx])} {what[idx]}")
+            if len(review_dfs[idx]) > 0:
 
-            col.pyplot(
-                make_wordcloud(text_input=" ".join(review_dfs[idx]['reviews.text'].astype('str').tolist()))
-            )
+                col.pyplot(
+                    make_wordcloud(text_input=" ".join(review_dfs[idx]['reviews.text'].astype('str').tolist()))
+                )
 
-            reviews_list = review_dfs[idx]["reviews.text"].tolist()
+                reviews_list = review_dfs[idx]["reviews.text"].tolist()
 
-            def preprocess(text):
-                tokens = word_tokenize(text.lower())
-                return [token for token in tokens if token.isalnum() and token not in stopwords]
+                def preprocess(text):
+                    tokens = word_tokenize(text.lower())
+                    return [token for token in tokens if token.isalnum() and token not in stopwords]
 
-            processed_docs = [preprocess(doc) for doc in reviews_list]
-            dictionary = corpora.Dictionary(processed_docs)
-            corpus = [dictionary.doc2bow(doc) for doc in processed_docs]
-            num_topics = 2
-            lda_model = LdaModel(corpus=corpus, id2word=dictionary, num_topics=num_topics, random_state=42)
+                processed_docs = [preprocess(doc) for doc in reviews_list]
+                dictionary = corpora.Dictionary(processed_docs)
+                corpus = [dictionary.doc2bow(doc) for doc in processed_docs]
+                num_topics = 2
+                lda_model = LdaModel(corpus=corpus, id2word=dictionary, num_topics=num_topics, random_state=42)
 
-            col.write("Topics found by LDA model:")
-            col.write(get_topics(lda_model))
+                col.write("Topics found by LDA model:")
+                col.write(get_topics(lda_model))
 
-            col.subheader("Review Summary")
-            # col.write(" ".join(reviews_list))
-            col.write(summarizer("<review>".join(reviews_list), min_length = 80, #max_length=250,
-                                 max_new_tokens=120, no_repeat_ngram_size=2,
-                                 do_sample=False, truncation=True)[0]["summary_text"])
+                col.subheader("Review Summary")
+                # col.write(" ".join(reviews_list))
+                col.write(summarizer("<review>".join(reviews_list), min_length = 80, #max_length=250,
+                                    max_new_tokens=120, no_repeat_ngram_size=2,
+                                    do_sample=False, truncation=True)[0]["summary_text"])
 
-            # aspects = ["cleanliness", "service", "location", "amenities", "value for money"]
+                # aspects = ["cleanliness", "service", "location", "amenities", "value for money"]
 
-            # def generate_aspect_summary(reviews, aspect):
-            #     prompt = f"Summarize the {aspect} of the hotel based on these reviews: {reviews}"
-            #     summary = summarizer(prompt, max_length=60, min_length=20, do_sample=False)[0]['summary_text']
-            #     return f"{aspect.capitalize()}: {summary}"
+                # def generate_aspect_summary(reviews, aspect):
+                #     prompt = f"Summarize the {aspect} of the hotel based on these reviews: {reviews}"
+                #     summary = summarizer(prompt, max_length=60, min_length=20, do_sample=False)[0]['summary_text']
+                #     return f"{aspect.capitalize()}: {summary}"
 
-            # aspect_summaries = [generate_aspect_summary("<review>".join(reviews_list), aspect) for aspect in aspects]
+                # aspect_summaries = [generate_aspect_summary("<review>".join(reviews_list), aspect) for aspect in aspects]
 
-            # final_summary = "\n\n".join(aspect_summaries)
+                # final_summary = "\n\n".join(aspect_summaries)
 
-            # col.write(final_summary)
+                # col.write(final_summary)
 
-            col.subheader("Reviews")
-            temp_df = review_dfs[idx].rename(columns={"name": "Hotel", "reviews_stars_date": "Rating", "reviews.text":"Review"}).sort_values('reviews.date', ascending=False).reset_index()[["Hotel", "Rating", "Review"]]
-            temp_df.index += 1
-            col.table(temp_df)
+                col.subheader("Reviews")
+                temp_df = review_dfs[idx].rename(columns={"name": "Hotel", "reviews_stars_date": "Rating", "reviews.text":"Review"}).sort_values('reviews.date', ascending=False).reset_index()[["Hotel", "Rating", "Review"]]
+                temp_df.index += 1
+                col.table(temp_df)
     else:
         st.write("Please select a single hotel to generate wordclouds")
 
