@@ -3,3 +3,38 @@ title: "Sidebar"
 filters:
   - whitphx/stlite
 ---
+
+## Collapsible Sidebars
+
+The Streamlit sidebar gives us a distinct area on the left-hand side of the screen to use.
+
+```{python}
+#| eval: false
+
+import streamlit as st
+
+with st.sidebar: # <1>
+  st.header("I'm A sidebar")
+  st.write("We can use inputs our sidebar too.")
+  name = st.text_input("What's your name?", value=None)
+
+if name is not None:
+  st.write(f"Nice to meet you, {name}!")
+else:
+  st.write("I can't greet you until you enter your name!")
+```
+
+
+```{stlite-python}
+import streamlit as st
+
+with st.sidebar:
+  st.header("I'm A sidebar")
+  st.write("We can use inputs our sidebar too.")
+  name = st.text_input("What's your name?", value=None)
+
+if name is not None:
+  st.write(f"Nice to meet you, {name}!")
+else:
+  st.write("I can't greet you until you enter your name!")
+```

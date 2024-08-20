@@ -4,6 +4,220 @@ filters:
   - whitphx/stlite
 ---
 
+## Creating Columns in Streamlit
+
 Streamlit has a very easy to use column interface for improving the layout of your apps.
 
-```{}
+Columns look like this in a Streamlit app.
+
+```{python}
+#| eval: False
+import streamlit as st
+
+col1, col2, col3 = st.columns(3) # <1>
+
+with col1: # <2>
+  st.header("I'm Column 1") # <3>
+  st.write("Here's the 'Back to the Future' poster. Images, videos, data tables and more can be displayed within columns.")
+  st.image("https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg")
+
+with col2: # <4>
+  st.header("I'm Column 2")
+  st.write("We can use inputs within columns too.")
+  name = st.text_input("What's your name?", value=None)
+  if name is not None:
+    st.write(f"Nice to meet you, {name}!")
+  else:
+    st.write("I can't greet you until you enter your name!")
+
+with col3:
+    if name is not None:
+      st.write(f"Hello again, {name}!")
+      st.write("Isn't it cool that variables persist across different columns? This can be really handy!")
+      st.video("https://youtu.be/dQw4w9WgXcQ?feature=shared")
+    else:
+      st.write("I can't greet you until you enter your name! Go back to column 2 and do that.")
+
+```
+
+1. First, we pass the number of columns we want to create to the `st.columns()` function. We can then unpack the output of this to a number of variables separated by commas. For example, `st.columns(2)` produces two variables, while `st.columns(4)` would produce 4.
+
+2. We can then use the `with` statement and refer to the first column of interest. Columns work from left to right; in this case, that means the variable `col1` will be the leftmost column, and as we didn't specify the width of the columns, they will automatically take up a third of the screen in this case. With 2 columns each would take up half, and with 4 each would take up a quarter.
+
+3. Note that everything we want to appear within the column, we indent.
+
+4. We can then move on to specifying what we want to appear in the next column, using the same structure of `with`, the variable relating to the column of interested, and an indented block of code.
+
+```{stlite-python}
+import streamlit as st
+
+col1,col2,col3 = st.columns(3) # <1>
+
+with col1: # <2>
+  st.header("I'm Column 1") # <3>
+  st.write("Here's the 'Back to the Future' poster. Images, videos, data tables and more can be displayed within columns.")
+  st.image("https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg")
+
+with col2: # <4>
+  st.header("I'm Column 2")
+  st.write("We can use inputs within columns too.")
+  name = st.text_input("What's your name?", value=None)
+  if name is not None:
+    st.write(f"Nice to meet you, {name}!")
+  else:
+    st.write("I can't greet you until you enter your name!")
+
+with col3:
+    if name is not None:
+      st.write(f"Hello again, {name}!")
+      st.write("Isn't it cool that variables persist across different columns? This can be really handy!")
+      st.video("https://youtu.be/dQw4w9WgXcQ?feature=shared")
+    else:
+      st.write("I can't greet you until you enter your name! Go back to column 2 and do that.")
+
+```
+
+
+## The two main syntax options for Streamlit columns
+
+There are two main ways to put content inside of columns.
+
+1) Using a 'with' statement and indenting the code that should sit within the column, as we did above.
+
+```{python}
+#| eval: False
+
+import streamlit as st
+col_a, col_b = st.columns(2)
+
+with col_a:
+    st.text("This is some content within column 1")
+
+with col_b:
+    st.text("This is some content within column 2")
+```
+
+2) Replacing the `st` in sections like `st.text()` with the variable name for the given column.
+
+```{python}
+#| eval: False
+
+import streamlit as st
+
+col_a, col_b = st.columns(2)
+
+col_a.text("This is some content within column 1")
+
+col_b.text("This is some content within column 2")
+```
+
+The outputs of both of these bits of code are identical!
+
+
+## Adjusting Column Width
+
+Column width can be controlled by
+
+
+## Advanced Column Layouts
+
+The great thing about columns is that we can have multiple sets of columns, allowing you to build up fairly complex grid-like layouts.
+
+Here, we have an example of a top section with three equal-width columns, a central section that uses the full width of the screen, and a final section with two unequal-width columns.
+
+It also demonstrates how you can mix and match the use of the `with` syntax and the `col.command` syntax within a single Streamlit app.
+
+```{python}
+#| eval: false
+import streamlit as st
+import micropip
+await micropip.install("plotly")
+await micropip.install("streamlit-extras")
+import plotly.express as px
+import pandas as pd
+from streamlit_extras.metric_cards import style_metric_cards
+
+st.set_page_config(layout="wide")
+
+st.title("Activity Dashboard")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric(label="Total Number of Patients Seen this Week", value=52)
+
+col2.metric(label="Number of Patients Seen this Week - South", value=30, delta=-5)
+
+col2.metric(label="Number of Patients Seen this Week - North", value=12, delta=-7)
+
+col3.metric(label="Number of Patients Seen this Year", value=1302)
+
+style_metric_cards(background_color="#6434eb", border_color= "#eb9234", border_size_px=3)
+
+patients_seen_df = pd.DataFrame(
+  {
+    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],
+    'Patients Seen': [24, 12, 43, 23, 32, 25]
+  }
+)
+
+st.plotly_chart(
+  px.line(patients_seen_df, x='Week', y='Patients Seen', title="Total Patients Seen per Week"),
+  use_container_width=True
+  )
+
+col4, col5 = st.columns([0.3, 0.7])
+
+with col4:
+    st.write("Here's some text in this extra column. It's not a very wide column!")
+
+with col5:
+    st.video("https://youtu.be/dQw4w9WgXcQ?feature=shared")
+
+```
+
+```{stlite-python}
+import streamlit as st
+import micropip
+await micropip.install("plotly")
+await micropip.install("streamlit-extras")
+import plotly.express as px
+import pandas as pd
+from streamlit_extras.metric_cards import style_metric_cards
+
+st.set_page_config(layout="wide")
+
+st.title("Activity Dashboard")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric(label="Total Number of Patients Seen this Week", value=52)
+
+col2.metric(label="Number of Patients Seen this Week - South", value=30, delta=-5)
+
+col2.metric(label="Number of Patients Seen this Week - North", value=12, delta=-7)
+
+col3.metric(label="Number of Patients Seen this Year", value=1302)
+
+style_metric_cards(background_color="#6434eb", border_color= "#eb9234", border_size_px=3)
+
+patients_seen_df = pd.DataFrame(
+  {
+    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],
+    'Patients Seen': [24, 12, 43, 23, 32, 25]
+  }
+)
+
+st.plotly_chart(
+  px.line(patients_seen_df, x='Week', y='Patients Seen', title="Total Patients Seen per Week"),
+  use_container_width=True
+  )
+
+col4, col5 = st.columns([0.3, 0.7])
+
+with col4:
+    st.write("Here's some text in this extra column. It's not a very wide column!")
+
+with col5:
+    st.video("https://youtu.be/dQw4w9WgXcQ?feature=shared")
+
+```

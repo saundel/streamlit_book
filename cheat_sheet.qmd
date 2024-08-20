@@ -1,0 +1,9 @@
+---
+title: "Quarto Cheat Sheet"
+---
+
+The fantastic Quarto Cheat Sheet is well worth bookmarking!
+
+```{=html}
+<iframe width="780" height="500" src="https://cheat-sheet.streamlit.app/" title="Quarto Components"></iframe>
+```
