@@ -42,9 +42,9 @@ book:
     - multipage.qmd
   - part: Styling
     chapters:
-    - fonts.qmd
     - app_colours.qmd
     - logos.qmd
+    - fonts.qmd
   - part: Controlling Application Flow
     chapters:
     - forms_and_run_buttons.qmd

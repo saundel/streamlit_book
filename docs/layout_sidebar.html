@@ -382,20 +382,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fonts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./app_colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fonts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
   </div>
 </li>
       </ul>
@@ -620,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="collapsible-sidebars" class="level2" data-number="20.1">
 <h2 data-number="20.1" class="anchored" data-anchor-id="collapsible-sidebars"><span class="header-section-number">20.1</span> Collapsible Sidebars</h2>
 <p>The Streamlit sidebar gives us a distinct area on the left-hand side of the screen to use.</p>
-<div id="dcc4fa2a" class="cell" data-execution_count="1">
+<div id="8bef91a4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> st.sidebar:</span>
@@ -672,7 +672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Use the <code>with</code> notation, as above.</li>
 </ol>
-<div id="09e764cf" class="cell" data-execution_count="2">
+<div id="fa3df360" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> st.sidebar:</span>
@@ -696,7 +696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The code below is completely equivalent to the code above.</p>
-<div id="6cea4f5b" class="cell" data-execution_count="3">
+<div id="f94ff205" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>st.sidebar.header(<span class="st">"I'm a sidebar"</span>)</span>
@@ -741,7 +741,7 @@ Tip
 <p>You can run other general python commands between the import and setting the page config - but you cannot, for example, use <code>st.header()</code> before calling <code>st.set_page_config()</code>.</p>
 </div>
 </div>
-<div id="fa275828" class="cell" data-execution_count="4">
+<div id="51d5a55d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>st.set_page_config(initial_sidebar_state<span class="op">=</span><span class="st">'collapsed'</span>)</span>
@@ -773,7 +773,7 @@ Tip
 <section id="making-the-sidebar-expander-more-obvious" class="level3" data-number="20.5.2">
 <h3 data-number="20.5.2" class="anchored" data-anchor-id="making-the-sidebar-expander-more-obvious"><span class="header-section-number">20.5.2</span> Making the sidebar expander more obvious</h3>
 <p>With custom CSS, we can make the sidebar expander button more obvious.</p>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0A%0Ast.markdown%28%0A%20%20%22%22%22%0A%3Cstyle%3E%0A%20%20%20%20/%2A%20Expander%20%2A/%0A%20%20%20%20div%5Bdata-testid%3DstExpander%5D%20%3E%20details%20%3E%20summary%20%3E%20span%20%3E%20div%20%3E%20p%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20font-size%3A%2030px%3B%0A%20%20%20%20%7D%0A%3C/style%3E%0A%20%20%22%22%22%2C%0A%20%20allow_unsafe_html%3DTrue%0A%29%0A%0Awith%20st.sidebar%3A%0A%20%20st.header%28%22I%27m%20a%20sidebar%22%29%0A%0Ast.title%28%22Sidebar%20Demo%21%22%29%0A%0Ast.write%28%22The%20button%20to%20expand%20or%20close%20the%20sidebar%20is%20bigger%20in%20this%20example%22%29
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0A%0Ast.markdown%28%0A%20%20%22%22%22%0A%3Cstyle%3E%0A%20%20%20%20/%2A%20Expander%20%2A/%0A%20%20%20%20div%5Bdata-testid%3DstExpander%5D%20%3E%20details%20%3E%20summary%20%3E%20span%20%3E%20div%20%3E%20p%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20font-size%3A%2030px%3B%0A%20%20%20%20%7D%0A%3C/style%3E%0A%20%20%22%22%22%2C%0A%20%20unsafe_allow_html%3DTrue%0A%29%0A%0Awith%20st.sidebar%3A%0A%20%20st.header%28%22I%27m%20a%20sidebar%22%29%0A%0Ast.title%28%22Sidebar%20Demo%21%22%29%0A%0Ast.write%28%22The%20button%20to%20expand%20or%20close%20the%20sidebar%20is%20bigger%20in%20this%20example%22%29
 
 " class="stlite"></iframe>
 </section>
@@ -794,7 +794,7 @@ Warning
 <p>As the streamlit library evolves, the names of various elements on the page may change, meaning that these may not remain consistent over time.</p>
 </div>
 </div>
-<div id="6dfb0aea" class="cell" data-execution_count="5">
+<div id="c39f9de7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Credit to Amy H in the PenCHORD team for this!</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/kailo-beewell/kailo_beewell_dashboard_package/blob/be249c515d5cfd7d168abf14f03927322b72322b/kailo_beewell_dashboard/css/style.css#L2</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -815,7 +815,7 @@ Warning
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/style&gt;</span></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="st">  """</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  allow_unsafe_html<span class="op">=</span><span class="va">True</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  unsafe_allow_html<span class="op">=</span><span class="va">True</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 

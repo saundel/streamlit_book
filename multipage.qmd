@@ -2,4 +2,82 @@
 title: "Multipage Apps"
 filters:
   - whitphx/stlite
+  - include-code-files
+
 ---
+
+
+As your apps become more complex, you are likely to find yourself wanting to split the app across multiple pages.
+
+:::{.callout-tip}
+As Streamlit has evolved, this has become a native part of the framework.
+
+In the early days of Streamlit, people came up with various creative workarounds, so you are likely to still encounter these when searching for information relating to multi-page apps in Streamlit on the web.
+
+Information prior to 2022 is likely to be from before Streamlit supported this natively, so is not likely to be as relevant.
+:::
+
+
+## Method 2: 'pages' subfolder
+
+One other common way to deal with multipage apps is to have a `.py` file that is designed to be your main homepage, with all other pages being stored within a 'pages' subfolder.
+
+:::{.callout-warning}
+The subfolder **has** to be called *pages* to be picked up! You cannot rename it to something else.
+:::
+
+
+Let's look at an example multipage app with 5 pages.
+
+```{=html}
+<iframe width="1100" height="800" src="https://penguin-trends-multipage-example-method-2.streamlit.app?embed=True" title="Quarto Components"></iframe>
+```
+
+The structure of our app in our filesystem looks like this.
+
+
+
+In Windows explorer, this is how the files and folders appear.
+
+![](assets/2024-08-20-16-04-46.png)
+
+**The 'pages' folder**
+
+![](assets/2024-08-20-16-05-41.png)
+
+:::{.callout-note collapse="true"}
+### Click here for the code for the homepage
+
+```{.python include="snippets/simple_multipage_app_2/Homepage.py" code-line-numbers="true"}
+```
+:::
+
+
+:::{.callout-note collapse="true"}
+### Click here for the code for the second page
+
+```{.python include="snippets/simple_multipage_app_2/pages/1_🐧_Penguin_Information.py" code-line-numbers="true"}
+```
+:::
+
+:::{.callout-note collapse="true"}
+### Click here for the code for the third page
+
+```{.python include="snippets/simple_multipage_app_2/pages/2_📈_Penguin_Trends.py" code-line-numbers="true"}
+```
+:::
+
+:::{.callout-note collapse="true"}
+### Click here for the code for the fourth page
+
+```{.python include="snippets/simple_multipage_app_2/pages/3_Interactive_Data_Explorer.py" code-line-numbers="true"}
+```
+:::
+
+
+:::{.callout-note collapse="true"}
+### Click here for the code for the fifth page
+
+```{.python include="snippets/simple_multipage_app_2/pages/4_Sidebar_Theming.py" code-line-numbers="true"}
+```
+:::

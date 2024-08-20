@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -44,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
+<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
+<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -345,20 +382,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fonts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./app_colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fonts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
   </div>
 </li>
       </ul>
@@ -538,7 +575,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#nesting-expanders-in-other-layout-elements" id="toc-nesting-expanders-in-other-layout-elements" class="nav-link active" data-scroll-target="#nesting-expanders-in-other-layout-elements"><span class="header-section-number">22.1</span> Nesting expanders in other layout elements</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -562,8 +605,153 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The expander allows additional information to be hidden away until the user clicks in the relevant spot.</p>
+<p>This can be a handy way to keep an app clear and easy-to-use while allowing users the flexibility to dive deeper into the data or find out additional information about the processes.</p>
+<div id="2e8a4c65" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">"sex"</span>,</span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="ss">f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex"</span>)</span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-12" class="code-annotation-target"><a href="#annotated-cell-1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> st.expander(<span class="st">"Click here to view the underlying data"</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-13" class="code-annotation-target"><a href="#annotated-cell-1-13" aria-hidden="true" tabindex="-1"></a>    st.dataframe(penguins[[<span class="st">'sex'</span>, <span class="st">'species'</span>, <span class="st">'island'</span>, <span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>]])</span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-15" class="code-annotation-target"><a href="#annotated-cell-1-15" aria-hidden="true" tabindex="-1"></a>st.write(<span class="st">"This is some text that appears after the expander."</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="12" data-code-annotation="1">We create an expander object, passing in the text that we want to appear to the user when the expander is collapsed.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="13" data-code-annotation="2">We indent anything we want to appear within that particular expander.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="15" data-code-annotation="3">Returning to the previous level of indentation will allow you to continue adding things to your page after the expander.</span>
+</dd>
+</dl>
+</div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3D%27bill_length_mm%27%2C%20y%3D%27bill_depth_mm%27%2C%20color%3D%22sex%22%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20Bill%20Length%20%28mm%29%20vs%20Bill%20Depth%20%28mm%29%2C%20coloured%20by%20Sex%22%29%0A%0Ast.plotly_chart%28fig%29%0A%0Awith%20st.expander%28%22Click%20here%20to%20view%20the%20underlying%20data%22%29%3A%0A%20%20%20%20st.dataframe%28penguins%5B%5B%27sex%27%2C%20%27species%27%2C%20%27island%27%2C%20%27bill_length_mm%27%2C%20%27bill_depth_mm%27%5D%5D%29%0A%0Ast.write%28%22This%20is%20some%20text%20that%20appears%20after%20the%20expander.%22%29%20%23%20%3C3%3E
+
+" class="stlite"></iframe>
+<p>As with many other layout elements, you can write expanders in a different way to achieve the same result.</p>
+<div id="22627d2e" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">"sex"</span>,</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="ss">f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex"</span>)</span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-12" class="code-annotation-target"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>extra_data_expander <span class="op">=</span> st.expander(<span class="st">"Click here to view the underlying data"</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-13" class="code-annotation-target"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a>extra_data_expander.dataframe(penguins[[<span class="st">'sex'</span>, <span class="st">'species'</span>, <span class="st">'island'</span>, <span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>]])</span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-15" class="code-annotation-target"><a href="#annotated-cell-2-15" aria-hidden="true" tabindex="-1"></a>st.write(<span class="st">"This is some text that appears after the expander."</span>)</span>
+<span id="annotated-cell-2-16"><a href="#annotated-cell-2-16" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-17" class="code-annotation-target"><a href="#annotated-cell-2-17" aria-hidden="true" tabindex="-1"></a>extra_data_expander.write(<span class="st">"This is some additional text I'm later adding in to the expander"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="12" data-code-annotation="1">Here, instead of using the ‘with’ notation, we have saved the output of our <code>st.expander</code> to a variable.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="13" data-code-annotation="2">Then, instead of using <code>st.dataframe</code>, we replace <code>st.</code> with the name of the variable we just created</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="15" data-code-annotation="3">When we want to return to adding something to the main body of the app, we revert to using <code>st.</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="17" data-code-annotation="4">One benefit of using this notation instead of the ‘with’ notation is that we can later add additional things into the expander, even if we have done other actions first.</span>
+</dd>
+</dl>
+</div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3D%27bill_length_mm%27%2C%20y%3D%27bill_depth_mm%27%2C%20color%3D%22sex%22%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20Bill%20Length%20%28mm%29%20vs%20Bill%20Depth%20%28mm%29%2C%20coloured%20by%20Sex%22%29%0A%0Ast.plotly_chart%28fig%29%0A%0Aextra_data_expander%20%3D%20st.expander%28%22Click%20here%20to%20view%20the%20underlying%20data%22%29%0Aextra_data_expander.dataframe%28penguins%5B%5B%27sex%27%2C%20%27species%27%2C%20%27island%27%2C%20%27bill_length_mm%27%2C%20%27bill_depth_mm%27%5D%5D%29%0A%0Ast.write%28%22This%20is%20some%20text%20that%20appears%20after%20the%20expander.%22%29%20%23%20%3C3%3E%0A%0Aextra_data_expander.write%28%22This%20is%20some%20additional%20text%20I%27m%20later%20adding%20in%20to%20the%20expander%22%29%20%23%20%3C4%3E%0A
+
+" class="stlite"></iframe>
+<section id="nesting-expanders-in-other-layout-elements" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="nesting-expanders-in-other-layout-elements"><span class="header-section-number">22.1</span> Nesting expanders in other layout elements</h2>
+<p>Expanders can sit within other layout elements.</p>
+<div id="1c1f2f73" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tab1, tab2 <span class="op">=</span> st.tabs([<span class="st">"Penguin Graphs"</span>, <span class="st">"Penguin Facts"</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tab1:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    col1, col2 <span class="op">=</span> st.columns(<span class="dv">2</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> col1:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">"sex"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        st.plotly_chart(fig)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> st.expander(<span class="st">"Click here to see the code for the graph"</span>):</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            st.code(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>              <span class="st">"""</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">              fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">                    title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="st">              """</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> col2:</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'flipper_length_mm'</span>, y<span class="op">=</span><span class="st">'body_mass_g'</span>, color<span class="op">=</span><span class="st">"species"</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                    title<span class="op">=</span><span class="ss">f"Penguins Dataset - Flipper Length (mm) vs Body Weight(g), coloured by Species"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        st.plotly_chart(fig)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> st.expander(<span class="st">"Click here to see the code for the graph"</span>):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            st.code(</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>              <span class="st">"""</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="st">              fig = px.scatter(penguins, x='flipper_length_mm', y='body_mass_g', color="species",</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="st">                    title=f"Penguins Dataset - Flipper Length (mm) vs Body Weight(g), coloured by Species")</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="st">              """</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> st.expander(<span class="st">"Click here to see the underlying data"</span>):</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        st.dataframe(penguins)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tab2:</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    st.header(<span class="st">"Penguin Facts"</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">"Gentoo Penguins"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    st.write(</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>      <span class="st">"""</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="st">      The gentoo penguin (JEN-too) (Pygoscelis papua) is a penguin species (or possibly a species complex) in the genus Pygoscelis, most closely related to the Adélie penguin (P. adeliae) and the chinstrap penguin (P. antarcticus). The earliest scientific description was made in 1781 by Johann Reinhold Forster with a type locality in the Falkland Islands. The species calls in a variety of ways, but the most frequently heard is a loud trumpeting, which the bird emits with its head thrown back.</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="st">      """</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    expander_video <span class="op">=</span> st.expander(<span class="st">"Click here to watch a penguin video"</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    expander_video.video(<span class="st">"https://www.youtube.com/watch?v=nFAK8Vj62WM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0A%0Atab1%2C%20tab2%20%3D%20st.tabs%28%5B%22Penguin%20Graphs%22%2C%20%22Penguin%20Facts%22%5D%29%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Awith%20tab1%3A%0A%0A%20%20%20%20col1%2C%20col2%20%3D%20st.columns%282%29%0A%0A%20%20%20%20with%20col1%3A%0A%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter%28penguins%2C%20x%3D%27bill_length_mm%27%2C%20y%3D%27bill_depth_mm%27%2C%20color%3D%22sex%22%2C%0A%20%20%20%20%20%20%20%20title%3Df%22Penguins%20Dataset%20-%20Bill%20Length%20%28mm%29%20vs%20Bill%20Depth%20%28mm%29%2C%20coloured%20by%20Sex%22%29%0A%0A%20%20%20%20%20%20%20%20st.plotly_chart%28fig%29%0A%0A%20%20%20%20%20%20%20%20with%20st.expander%28%22Click%20here%20to%20see%20the%20code%20for%20the%20graph%22%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20st.code%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter%28penguins%2C%20x%3D%27bill_length_mm%27%2C%20y%3D%27bill_depth_mm%27%2C%20color%3D%22sex%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3Df%22Penguins%20Dataset%20-%20Bill%20Length%20%28mm%29%20vs%20Bill%20Depth%20%28mm%29%2C%20coloured%20by%20Sex%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0A%20%20%20%20with%20col2%3A%0A%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter%28penguins%2C%20x%3D%27flipper_length_mm%27%2C%20y%3D%27body_mass_g%27%2C%20color%3D%22species%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3Df%22Penguins%20Dataset%20-%20Flipper%20Length%20%28mm%29%20vs%20Body%20Weight%28g%29%2C%20coloured%20by%20Species%22%29%0A%0A%20%20%20%20%20%20%20%20st.plotly_chart%28fig%29%0A%0A%20%20%20%20%20%20%20%20with%20st.expander%28%22Click%20here%20to%20see%20the%20code%20for%20the%20graph%22%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20st.code%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter%28penguins%2C%20x%3D%27flipper_length_mm%27%2C%20y%3D%27body_mass_g%27%2C%20color%3D%22species%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3Df%22Penguins%20Dataset%20-%20Flipper%20Length%20%28mm%29%20vs%20Body%20Weight%28g%29%2C%20coloured%20by%20Species%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0A%20%20%20%20with%20st.expander%28%22Click%20here%20to%20see%20the%20underlying%20data%22%29%3A%0A%20%20%20%20%20%20%20%20st.dataframe%28penguins%29%0A%0Awith%20tab2%3A%0A%20%20%20%20st.header%28%22Penguin%20Facts%22%29%0A%20%20%20%20st.subheader%28%22Gentoo%20Penguins%22%29%0A%0A%20%20%20%20st.write%28%0A%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20The%20gentoo%20penguin%20%28JEN-too%29%20%28Pygoscelis%20papua%29%20is%20a%20penguin%20species%20%28or%20possibly%20a%20species%20complex%29%20in%20the%20genus%20Pygoscelis%2C%20most%20closely%20related%20to%20the%20Ad%C3%83%C2%A9lie%20penguin%20%28P.%20adeliae%29%20and%20the%20chinstrap%20penguin%20%28P.%20antarcticus%29.%20The%20earliest%20scientific%20description%20was%20made%20in%201781%20by%20Johann%20Reinhold%20Forster%20with%20a%20type%20locality%20in%20the%20Falkland%20Islands.%20The%20species%20calls%20in%20a%20variety%20of%20ways%2C%20but%20the%20most%20frequently%20heard%20is%20a%20loud%20trumpeting%2C%20which%20the%20bird%20emits%20with%20its%20head%20thrown%20back.%0A%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%0A%20%20%20%20expander_video%20%3D%20st.expander%28%22Click%20here%20to%20watch%20a%20penguin%20video%22%29%0A%20%20%20%20expander_video.video%28%22https%3A//www.youtube.com/watch%3Fv%3DnFAK8Vj62WM%22%29
+
+" class="stlite"></iframe>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>

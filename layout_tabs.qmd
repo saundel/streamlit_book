@@ -114,6 +114,21 @@ In this example, notice what happens to the random numbers as you change the num
 
 ### Using the 'tab.' syntax
 
+```{python}
+#| eval: false
+import streamlit as st
+import random
+
+number_of_tabs_to_create = st.number_input("Enter the number of tabs you want to create", 2, 5, 3)
+
+tab_list =  st.tabs([f"Tab {i+1}" for i in range(number_of_tabs_to_create)])
+
+for idx, tab in enumerate(tab_list):
+  tab.header(f"This is tab {idx+1}")
+  tab.write(f"Your random number for this tab is {random.randint(0, 10)}")
+
+```
+
 ```{stlite-python}
 import streamlit as st
 import random
@@ -135,6 +150,22 @@ It's also possible to do this using the 'with' syntax.
 In this example, in every separate tab, we pull back a random wikipedia page.
 
 (However, due to the way this works behind the scenes, we don't get a new page on changing the number of tabs even though the app is rerunning each time)
+
+```{python}
+#| eval: false
+import streamlit as st
+import streamlit.components.v1 as components
+
+number_of_tabs_to_create = st.number_input("Enter the number of tabs you want to create", 2, 5, 3)
+
+tab_list =  st.tabs([f"Tab {i+1}" for i in range(number_of_tabs_to_create)])
+
+for idx, tab in enumerate(tab_list):
+  with tab:
+    st.header(f"This is tab {idx+1}")
+    components.iframe("https://commons.wikimedia.org/wiki/Special:Random/File", height=500)
+
+```
 
 ```{stlite-python}
 import streamlit as st
@@ -159,6 +190,48 @@ Here is an example of how to change the tab formatting.
 :::{.callout-warning}
 This is not a supported part of Streamlit - the ways in which streamlit internally names these tabs may change over time, causing this code to no longer work.
 :::
+
+```{python}
+#| eval: false
+#|
+# Credit to user 'Dallas on https://discuss.streamlit.io/t/customizing-the-appearance-of-tabs/48913
+
+import streamlit as st
+
+custom_css = """
+<style>
+	.stTabs [data-baseweb="tab-list"] {
+		gap: 2px;
+    }
+
+	.stTabs [data-baseweb="tab"] {
+		height: 50px;
+        white-space: pre-wrap;
+		background-color: #32a852;
+		border-radius: 4px 4px 0px 0px;
+		gap: 1px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+    }
+
+	.stTabs [aria-selected="true"] {
+  		background-color: #912a90;
+	}
+
+</style>
+"""
+
+st.markdown(custom_css, unsafe_allow_html=True)
+
+tab_a, tab_b = st.tabs(["A Tab", "Another Tab"])
+
+with tab_a:
+    st.text("This is some content within tab 1")
+
+with tab_b:
+    st.text("This is some content within tab 2")
+
+```
 
 ```{stlite-python}
 # Credit to user 'Dallas on https://discuss.streamlit.io/t/customizing-the-appearance-of-tabs/48913

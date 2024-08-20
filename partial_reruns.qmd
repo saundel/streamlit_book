@@ -87,8 +87,6 @@ with app_column_2:
     st.plotly_chart(fig)
 ```
 
-
-
 ## The Partial Rerun Decorator
 
 Now let's rewrite this using the fragment code.
@@ -106,16 +104,16 @@ app_column_1, app_column_2 = st.columns(2)
 axis_options = ['bill_length_mm', 'bill_depth_mm',
        'flipper_length_mm', 'body_mass_g']
 
-@st.fragment()
-def penguin_barchart():
+@st.fragment() # <1>
+def penguin_barchart(): # <2>
     time.sleep(3)
     species = st.selectbox("Select a penguin species to filter by", ["Adelie", "Gentoo", "Chinstrap"])
     filtered_df_species = penguins[penguins['species'] == species]
     st.plotly_chart(px.bar(filtered_df_species['sex'].value_counts(), y='count'))
 
 
-@st.fragment()
-def penguin_scatterplot():
+@st.fragment() # <3>
+def penguin_scatterplot(): # <3>
     time.sleep(3)
     col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
     axis_options.remove(col_1)
@@ -131,11 +129,17 @@ def penguin_scatterplot():
 
 
 with app_column_1:
-   penguin_barchart()
+   penguin_barchart() # <4>
 
 with app_column_2:
-   penguin_scatterplot()
+   penguin_scatterplot() # <5>
 ```
+
+1. We use the `@st.fragment()` decorator on its own line
+2. Instead of just creating the inputs and outputs straight in the app, we need to wrap them in a function. This function doesn't need to return anything, and we can call it whatever we like. Note that there is no blank line between the  `@st.fragment()` decorator and the function definition. Here, we've counted the select dropdown for species, the pandas dataframe filter action, and the creation of the barplot figure as being a single thing we want to rerun when any element within those three changes in a way that would trigger a rerun usually.
+3. We then repeat this for our next function.
+4. Using the `with` notation with the first column we created, we then call our first function.
+5. We then repeat this for the second column and second function.
 
 :::{.callout-note}
 As the fragments feature is so new as of writing this book, it has not yet been integrated into the library we use for displaying the example apps.

@@ -382,20 +382,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fonts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./app_colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">App Colours</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Logos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fonts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fonts</span></span></a>
   </div>
 </li>
       </ul>
@@ -616,7 +616,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="21.1" class="anchored" data-anchor-id="tabs-in-streamlit"><span class="header-section-number">21.1</span> Tabs in Streamlit</h2>
 <p>Tabs are an extremely useful way to organise your page into something that is easier to navigate.</p>
 <p>Tabs look like this in a Streamlit app.</p>
-<div id="d20d79e4" class="cell" data-execution_count="1">
+<div id="3b376eba" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tab1, tab2, tab3 <span class="op">=</span> st.tabs([<span class="st">"This is Tab 1"</span>, <span class="st">"This is the Second Tab"</span>, <span class="st">"Tab 3 is Here!"</span>])</span>
@@ -653,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Using a ‘with’ statement and indenting the code that should sit within the tab.</li>
 </ol>
-<div id="f16cda57" class="cell" data-execution_count="2">
+<div id="031578b6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -666,7 +666,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="2" type="1">
 <li>Replacing the <code>st</code> in sections like <code>st.text()</code> with the variable name for the given tab.</li>
 </ol>
-<div id="3b4fb9d7" class="cell" data-execution_count="3">
+<div id="54870e5b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
@@ -684,6 +684,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this example, notice what happens to the random numbers as you change the number of tabs being generated.</p>
 <section id="using-the-tab.-syntax" class="level3" data-number="21.3.1">
 <h3 data-number="21.3.1" class="anchored" data-anchor-id="using-the-tab.-syntax"><span class="header-section-number">21.3.1</span> Using the ‘tab.’ syntax</h3>
+<div id="dd2a954a" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>number_of_tabs_to_create <span class="op">=</span> st.number_input(<span class="st">"Enter the number of tabs you want to create"</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tab_list <span class="op">=</span>  st.tabs([<span class="ss">f"Tab </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(number_of_tabs_to_create)])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, tab <span class="kw">in</span> <span class="bu">enumerate</span>(tab_list):</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  tab.header(<span class="ss">f"This is tab </span><span class="sc">{</span>idx<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  tab.write(<span class="ss">f"Your random number for this tab is </span><span class="sc">{</span>random<span class="sc">.</span>randint(<span class="dv">0</span>, <span class="dv">10</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20random%0A%0Anumber_of_tabs_to_create%20%3D%20st.number_input%28%22Enter%20the%20number%20of%20tabs%20you%20want%20to%20create%22%2C%202%2C%205%2C%203%29%0A%0Atab_list%20%3D%20%20st.tabs%28%5Bf%22Tab%20%7Bi%2B1%7D%22%20for%20i%20in%20range%28number_of_tabs_to_create%29%5D%29%0A%0Afor%20idx%2C%20tab%20in%20enumerate%28tab_list%29%3A%0A%20%20tab.header%28f%22This%20is%20tab%20%7Bidx%2B1%7D%22%29%0A%20%20tab.write%28f%22Your%20random%20number%20for%20this%20tab%20is%20%7Brandom.randint%280%2C%2010%29%7D%22%29%0A
 
 " class="stlite"></iframe>
@@ -693,6 +705,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It’s also possible to do this using the ‘with’ syntax.</p>
 <p>In this example, in every separate tab, we pull back a random wikipedia page.</p>
 <p>(However, due to the way this works behind the scenes, we don’t get a new page on changing the number of tabs even though the app is rerunning each time)</p>
+<div id="a5c43341" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit.components.v1 <span class="im">as</span> components</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>number_of_tabs_to_create <span class="op">=</span> st.number_input(<span class="st">"Enter the number of tabs you want to create"</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>tab_list <span class="op">=</span>  st.tabs([<span class="ss">f"Tab </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(number_of_tabs_to_create)])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, tab <span class="kw">in</span> <span class="bu">enumerate</span>(tab_list):</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">with</span> tab:</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    st.header(<span class="ss">f"This is tab </span><span class="sc">{</span>idx<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    components.iframe(<span class="st">"https://commons.wikimedia.org/wiki/Special:Random/File"</span>, height<span class="op">=</span><span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20streamlit.components.v1%20as%20components%0A%0Anumber_of_tabs_to_create%20%3D%20st.number_input%28%22Enter%20the%20number%20of%20tabs%20you%20want%20to%20create%22%2C%202%2C%205%2C%203%29%0A%0Atab_list%20%3D%20%20st.tabs%28%5Bf%22Tab%20%7Bi%2B1%7D%22%20for%20i%20in%20range%28number_of_tabs_to_create%29%5D%29%0A%0Afor%20idx%2C%20tab%20in%20enumerate%28tab_list%29%3A%0A%20%20with%20tab%3A%0A%20%20%20%20st.header%28f%22This%20is%20tab%20%7Bidx%2B1%7D%22%29%0A%20%20%20%20components.iframe%28%22https%3A//commons.wikimedia.org/wiki/Special%3ARandom/File%22%2C%20height%3D500%29%0A
 
 " class="stlite"></iframe>
@@ -713,6 +738,44 @@ Warning
 <div class="callout-body-container callout-body">
 <p>This is not a supported part of Streamlit - the ways in which streamlit internally names these tabs may change over time, causing this code to no longer work.</p>
 </div>
+</div>
+<div id="f8c55366" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Credit to user 'Dallas on https://discuss.streamlit.io/t/customizing-the-appearance-of-tabs/48913</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>custom_css <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;style&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    .stTabs [data-baseweb="tab-list"] {</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">        gap: 2px;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">    .stTabs [data-baseweb="tab"] {</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">        height: 50px;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">        white-space: pre-wrap;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">        background-color: #32a852;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">        border-radius: 4px 4px 0px 0px;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">        gap: 1px;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">        padding-top: 10px;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">        padding-bottom: 10px;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">    .stTabs [aria-selected="true"] {</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="st">        background-color: #912a90;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/style&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>st.markdown(custom_css, unsafe_allow_html<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tab_a:</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    st.text(<span class="st">"This is some content within tab 1"</span>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tab_b:</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    st.text(<span class="st">"This is some content within tab 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <iframe src="https://share.stlite.net/?embed=true#code=%23%20Credit%20to%20user%20%27Dallas%20on%20https%3A//discuss.streamlit.io/t/customizing-the-appearance-of-tabs/48913%0A%0Aimport%20streamlit%20as%20st%0A%0Acustom_css%20%3D%20%22%22%22%0A%3Cstyle%3E%0A%20%20%20%20.stTabs%20%5Bdata-baseweb%3D%22tab-list%22%5D%20%7B%0A%20%20%20%20%20%20%20%20gap%3A%202px%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20.stTabs%20%5Bdata-baseweb%3D%22tab%22%5D%20%7B%0A%20%20%20%20%20%20%20%20height%3A%2050px%3B%0A%20%20%20%20%20%20%20%20white-space%3A%20pre-wrap%3B%0A%20%20%20%20%20%20%20%20background-color%3A%20%2332a852%3B%0A%20%20%20%20%20%20%20%20border-radius%3A%204px%204px%200px%200px%3B%0A%20%20%20%20%20%20%20%20gap%3A%201px%3B%0A%20%20%20%20%20%20%20%20padding-top%3A%2010px%3B%0A%20%20%20%20%20%20%20%20padding-bottom%3A%2010px%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20.stTabs%20%5Baria-selected%3D%22true%22%5D%20%7B%0A%20%20%20%20%20%20%20%20background-color%3A%20%23912a90%3B%0A%20%20%20%20%7D%0A%0A%3C/style%3E%0A%22%22%22%0A%0Ast.markdown%28custom_css%2C%20unsafe_allow_html%3DTrue%29%0A%0Atab_a%2C%20tab_b%20%3D%20st.tabs%28%5B%22A%20Tab%22%2C%20%22Another%20Tab%22%5D%29%0A%0Awith%20tab_a%3A%0A%20%20%20%20st.text%28%22This%20is%20some%20content%20within%20tab%201%22%29%0A%0Awith%20tab_b%3A%0A%20%20%20%20st.text%28%22This%20is%20some%20content%20within%20tab%202%22%29%0A
 
