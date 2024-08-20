@@ -3,3 +3,134 @@ title: "Partial Reruns"
 filters:
   - whitphx/stlite
 ---
+
+Partial reruns are a faily new feature in Streamlit that allow you to break out of the traditional top-to-bottom rerun pattern of a Streamlit app.
+
+Let's imagine that we have an app with two visualisations in - a bar chart on the left, and a scatterplot on the right.
+
+We have two separate sets of filters - one that only affects the left visual, and one that affects the right.
+
+In a standard app, the whole thing would rerun even though only one of the visuals theoretically needs to be updated. Let's take a look at the app as we would have generally written it:
+
+```{python}
+#| eval: false
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+import time
+
+penguins = load_penguins()
+
+app_column_1, app_column_2 = st.columns(2)
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+with app_column_1:
+    time.sleep(3)
+    species = st.selectbox("Select a penguin species to filter by", ["Adelie", "Gentoo", "Chinstrap"])
+    filtered_df_species = penguins[penguins['species'] == species]
+    st.plotly_chart(px.bar(filtered_df_species['sex'].value_counts(), y='count'))
+
+with app_column_2:
+    time.sleep(3)
+    col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+    axis_options.remove(col_1)
+    col_2 = st.selectbox("Select the column to use for the y axis", axis_options)
+
+    color_factor = st.selectbox("Select the column to colour the chart by",
+    ["species", "sex", "island"])
+
+    fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+    title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+    st.plotly_chart(fig)
+```
+
+```{stlite-python}
+import micropip
+await micropip.install("setuptools")
+await micropip.install("palmerpenguins")
+await micropip.install("plotly")
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+import asyncio
+
+penguins = load_penguins()
+
+app_column_1, app_column_2 = st.columns(2)
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+with app_column_1:
+    await asyncio.sleep(3)
+    species = st.selectbox("Select a penguin species to filter by", ["Adelie", "Gentoo", "Chinstrap"])
+    filtered_df_species = penguins[penguins['species'] == species]
+    st.plotly_chart(px.bar(filtered_df_species['sex'].value_counts(), y='count'))
+
+with app_column_2:
+    await asyncio.sleep(3)
+    col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+    axis_options.remove(col_1)
+    col_2 = st.selectbox("Select the column to use for the y axis", axis_options)
+
+    color_factor = st.selectbox("Select the column to colour the chart by",
+    ["species", "sex", "island"])
+
+    fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+    title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+    st.plotly_chart(fig)
+```
+
+
+
+## The Partial Rerun Decorator
+
+Now let's rewrite this using the fragment code.
+
+```{python}
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+import time
+
+penguins = load_penguins()
+
+app_column_1, app_column_2 = st.columns(2)
+
+axis_options = ['bill_length_mm', 'bill_depth_mm',
+       'flipper_length_mm', 'body_mass_g']
+
+@st.fragment()
+def penguin_barchart():
+    time.sleep(3)
+    species = st.selectbox("Select a penguin species to filter by", ["Adelie", "Gentoo", "Chinstrap"])
+    filtered_df_species = penguins[penguins['species'] == species]
+    st.plotly_chart(px.bar(filtered_df_species['sex'].value_counts(), y='count'))
+
+
+@st.fragment()
+def penguin_scatterplot():
+    time.sleep(3)
+    col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
+    axis_options.remove(col_1)
+    col_2 = st.selectbox("Select the column to use for the y axis", axis_options)
+
+    color_factor = st.selectbox("Select the column to colour the chart by",
+    ["species", "sex", "island"])
+
+    fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,
+    title=f"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}")
+
+    st.plotly_chart(fig)
+
+
+with app_column_1:
+   penguin_barchart()
+
+with app_column_2:
+   penguin_scatterplot()
+```
