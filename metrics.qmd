@@ -8,9 +8,99 @@ If using Streamlit to create a dashboard, there will often be a requirement to c
 
 ## Metrics
 
-Coming Soon!
+```{stlite-python}
+import streamlit as st
+import micropip
 
+st.metric(label="Number of Patients Seen this Week", value=52)
 
-## Dials
+st.metric(label="Number of Patients Seen this Week - South", value=30, delta=-5)
 
-Coming Soon!
+st.metric(label="Number of Patients Seen this Week - North", value=12, delta=-7)
+
+st.metric(label="Waiting List Length", value=147, delta=-15, delta_color="inverse")
+
+st.subheader("A metric without its own header")
+st.metric(label="This Won't Be Displayed", value=5, delta=3, label_visibility="collapsed")
+
+```
+
+### Layout
+
+By combining metrics with [st.columns](layout_columns.qmd), we can make better use of the screen to start building up more of a dashboard layout.
+
+```{python}
+#| eval: False
+import streamlit as st
+import plotly.express as px
+import pandas as pd
+
+st.set_page_config(layout="wide") # <1>
+
+st.title("Activity Dashboard")
+
+col1, col2, col3 = st.columns(3) # <2>
+
+col1.metric(label="Total Number of Patients Seen this Week", value=52) # <3>
+
+col2.metric(label="Number of Patients Seen this Week - South", value=30, delta=-5) # <3>
+
+col2.metric(label="Number of Patients Seen this Week - North", value=12, delta=-7) # <3>
+
+col3.metric(label="Number of Patients Seen this Year", value=1302) # <3>
+
+patients_seen_df = pd.DataFrame( # <4>
+  {
+    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],
+    'Patients Seen': [24, 12, 43, 23, 32, 25]
+  }
+)
+
+st.plotly_chart(   # <5>
+  px.line(patients_seen_df, x='Week', y='Patients Seen', title="Total Patients Seen per Week")
+  )
+```
+
+1. Here, we've started out by setting the page config to 'wide'. This just means that the page will use the whole width of the viewer's screen, rather than limiting itself to the middle third.
+
+2. We set up 3 columns using the st.columns feature, unpacking them on the left-hand side of our assign (the equals sign) into three separate variables called `col1`, `col2`, `col3` for easy reference (though we could call them anything!). `col1` will be the leftmost column and as we haven't specified otherwise, they will be of equal width.
+
+3. We then create our metrics, but instead of using `st.metric`, we use `col1.metric` (and so on). This is an easy shorthand to assign the resulting metric to each of the columns we've just created.
+
+4. Now we're just going to quickly make a dummy dataframe so that we can see the impact of putting something underneath the column layout. We wouldn't usually build the dataframe up like this - we'd load it in from a database or csv.
+
+5. Now we're just creating a plotly chart container and putting a plotly express line chart in it. Note how rather than being inside one of the columns, it takes up the full width of the screen. This is because we've gone back to using `st.plotly_chart` instead of `col1.plotly_chart` or similar.
+
+```{stlite-python}
+import streamlit as st
+import micropip
+await micropip.install("plotly")
+import plotly.express as px
+import pandas as pd
+
+st.set_page_config(layout="wide") # <1>
+
+st.title("Activity Dashboard")
+
+col1, col2, col3 = st.columns(3) # <2>
+
+col1.metric(label="Total Number of Patients Seen this Week", value=52) # <3>
+
+col2.metric(label="Number of Patients Seen this Week - South", value=30, delta=-5) # <3>
+
+col2.metric(label="Number of Patients Seen this Week - North", value=12, delta=-7) # <3>
+
+col3.metric(label="Number of Patients Seen this Year", value=1302) # <3>
+
+patients_seen_df = pd.DataFrame( # <4>
+  {
+    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],
+    'Patients Seen': [24, 12, 43, 23, 32, 25]
+  }
+)
+
+st.plotly_chart(   # <5>
+  px.line(patients_seen_df, x='Week', y='Patients Seen', title="Total Patients Seen per Week")
+  )
+
+```

@@ -479,5 +479,38 @@
       "Layout",
       "<span class='chapter-number'>22</span>  <span class='chapter-title'>Tabs</span>"
     ]
+  },
+  {
+    "objectID": "metrics.html",
+    "href": "metrics.html",
+    "title": "6  Metrics and Dials",
+    "section": "",
+    "text": "6.1 Metrics",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
+    ]
+  },
+  {
+    "objectID": "metrics.html#dials",
+    "href": "metrics.html#dials",
+    "title": "6  Metrics and Dials",
+    "section": "6.2 Dials",
+    "text": "6.2 Dials\nA dial like",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
+    ]
+  },
+  {
+    "objectID": "metrics.html#metrics",
+    "href": "metrics.html#metrics",
+    "title": "6  Metrics and Dials",
+    "section": "",
+    "text": "6.1.1 Layout\nBy combining metrics with st.columns, we can make better use of the screen to start building up more of a dashboard layout.\n\nimport streamlit as st\nimport plotly.express as px\nimport pandas as pd\n\n1st.set_page_config(layout=\"wide\")\n\nst.title(\"Activity Dashboard\")\n\n2col1, col2, col3 = st.columns(3)\n\n3col1.metric(label=\"Total Number of Patients Seen this Week\", value=52)\n\ncol2.metric(label=\"Number of Patients Seen this Week - South\", value=30, delta=-5)\n\ncol2.metric(label=\"Number of Patients Seen this Week - North\", value=12, delta=-7)\n\ncol3.metric(label=\"Number of Patients Seen this Year\", value=1302)\n\npatients_seen_df = pd.DataFrame(\n  {\n    'week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],\n    'patients_seen': [24, 12, 43, 23, 32, 25]\n  }\n4)\n\n5st.plotly_chart(px.line(patients_seen_df, x='week', y='patients_seen'))\n\n\n1\n\nHere, we’ve started out by setting the page config to ‘wide’. This just means that the page will use the whole width of the viewer’s screen, rather than limiting itself to the middle third.\n\n2\n\nWe set up 3 columns using the st.columns feature, unpacking them on the left-hand side of our assign (the equals sign) into three separate variables called col1, col2, col3 for easy reference (though we could call them anything!). col1 will be the leftmost column and as we haven’t specified otherwise, they will be of equal width.\n\n3\n\nWe then create our metrics, but instead of using st.metric, we use col1.metric (and so on). This is an easy shorthand to assign the resulting metric to each of the columns we’ve just created.\n\n4\n\nNow we’re just going to quickly make a dummy dataframe so that we can see the impact of putting something underneath the column layout. We wouldn’t usually build the dataframe up like this - we’d load it in from a database or csv.\n\n5\n\nNow we’re just creating a plotly chart container and putting a plotly express line chart in it. Note how rather than being inside one of the columns, it takes up the full width of the screen. This is because we’ve gone back to using st.plotly_chart instead of col1.plotly_chart or similar.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
+    ]
   }
 ]
