@@ -155,7 +155,7 @@
     "href": "interactive_charts.html#reacting-to-user-inputs",
     "title": "5  Interactive Charts",
     "section": "5.2 Reacting to user inputs",
-    "text": "5.2 Reacting to user inputs\nWhile we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.\n\nimport streamlit as st\nfrom palmerpenguins import load_penguins\nimport plotly.express as px\nfrom io import StringIO\n\npenguins = load_penguins()\n\naxis_options = ['bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g']\n\ncol_1 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\naxis_options.remove(col_1)\n\ncol_2 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\ncolor_factor = st.selectbox(\"Select the column to colour the chart by\",\n[\"species\", \"sex\", \"island\"])\n\nfig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,\ntitle=f\"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}\")\n\nst.plotly_chart(fig)",
+    "text": "5.2 Reacting to user inputs\nWhile we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.\n\nimport streamlit as st\nfrom palmerpenguins import load_penguins\nimport plotly.express as px\nfrom io import StringIO\n\npenguins = load_penguins()\n\naxis_options = ['bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g']\n\ncol_1 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\naxis_options.remove(col_1)\n\ncol_2 = st.selectbox(\"Select the column to use for the y axis\", axis_options)\n\ncolor_factor = st.selectbox(\"Select the column to colour the chart by\",\n[\"species\", \"sex\", \"island\"])\n\nfig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,\ntitle=f\"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}\")\n\nst.plotly_chart(fig)",
     "crumbs": [
       "Outputs",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Interactive Charts</span>"
@@ -364,7 +364,7 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "12  File Uploads",
     "section": "12.2 Uploading image files",
-    "text": "12.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n12.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-20 11:54:17.340 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
+    "text": "12.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n12.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-20 13:54:53.180 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>File Uploads</span>"
@@ -540,7 +540,62 @@
     "href": "layout_sidebar.html",
     "title": "20  Sidebar",
     "section": "",
-    "text": "20.1 Collapsible Sidebars\nThe Streamlit sidebar gives us a distinct area on the left-hand side of the screen to use.",
+    "text": "20.1 Collapsible Sidebars\nThe Streamlit sidebar gives us a distinct area on the left-hand side of the screen to use.\nimport streamlit as st\n\n1with st.sidebar:\n2  st.header(\"I'm a sidebar\")\n  st.write(\"We can use inputs our sidebar too.\")\n  name = st.text_input(\"What's your name?\", value=None)\n\nst.title(\"Greeting App!\")\n\n3if name is not None:\n  st.write(f\"Nice to meet you, {name}!\")\nelse:\n  st.write(\"I can't greet you until you enter your name!\")\n\n\n1\n\nWe can use the with notation along with st.sidebar to create the sidebar\n\n2\n\nWe indent the code we want to exist within the sidebar\n\n3\n\nOnce we write a line of code that is not indented, this signals the beginning of code that will just appear in the main area of the streamlit app.",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Sidebar</span>"
+    ]
+  },
+  {
+    "objectID": "layout_sidebar.html#collapsible-sidebars",
+    "href": "layout_sidebar.html#collapsible-sidebars",
+    "title": "20  Sidebar",
+    "section": "",
+    "text": "20.1.1 Collapsing, expanding and resizing the sidebar\nWhen hovering over the sidebar, we can see this arrow appear.\n\nClicking on this collapses the sidebar, making the main body of the app take up the full width.\n\nThis can be very handy - but be aware that it may make for a non-intuitive experience for your end users.\nHovering over the point where the sidebar ends and the main part of the app begins, our cursor will change to indicate that the sidebar can be resized. Clicking and dragging will allow us to make the sidebar narrower and wider, within some predefined limits.",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Sidebar</span>"
+    ]
+  },
+  {
+    "objectID": "layout_sidebar.html#alternative-sidebar-syntax",
+    "href": "layout_sidebar.html#alternative-sidebar-syntax",
+    "title": "20  Sidebar",
+    "section": "20.2 Alternative sidebar syntax",
+    "text": "20.2 Alternative sidebar syntax\nLike a lot of other layout elements, such as columns and tabs, there are multiple ways to refer to the sidebar, and which is best may depend on precisely what you are trying to do with your app.\n\nUse the with notation, as above.\n\n\nimport streamlit as st\n\nwith st.sidebar:\n2  st.header(\"I'm a sidebar\")\n  st.write(\"We can use inputs our sidebar too.\")\n  name = st.text_input(\"What's your name?\", value=None)\n\nst.title(\"Greeting App!\")\n\nif name is not None:\n  st.write(f\"Nice to meet you, {name}!\")\nelse:\n  st.write(\"I can't greet you until you enter your name!\")\n\n\n2\n\nWherever you would use a component that begins with st. (e.g. st.text(), st.number_input()), replace this with st.sidebar() (e.g. st.sidebar.text(), st.sidebar.number_input())\n\n\n\n\nThe code below is completely equivalent to the code above.\n\nimport streamlit as st\n\nst.sidebar.header(\"I'm a sidebar\")\nst.sidebar.write(\"We can use inputs our sidebar too.\")\nname = st.sidebar.text_input(\"What's your name?\", value=None)\n\nst.title(\"Greeting App!\")\n\nif name is not None:\n  st.write(f\"Nice to meet you, {name}!\")\nelse:\n  st.write(\"I can't greet you until you enter your name!\")\n\n\n\n\n\n\n\nNote\n\n\n\nYou can often mix and match the approaches within an app too - though picking one approach may be easier for the next person who interacts with your code to follow. If it’s a good way of achieving what you need to, though, then you can go ahead and do this!",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Sidebar</span>"
+    ]
+  },
+  {
+    "objectID": "layout_sidebar.html#initial-sidebar-state",
+    "href": "layout_sidebar.html#initial-sidebar-state",
+    "title": "20  Sidebar",
+    "section": "20.3 Initial sidebar state",
+    "text": "20.3 Initial sidebar state\nWhile there are not many ways to customise your sidebar from within streamlit, you can adjust whether it displays as being visible or not by default using st.set_page_config().\n\n\n\n\n\n\nTip\n\n\n\nst.set_page_config() has to be the first streamlit command you run after importing streamlit.\nYou can run other general python commands between the import and setting the page config - but you cannot, for example, use st.header() before calling st.set_page_config().\n\n\n\nimport streamlit as st\n\nst.set_page_config(initial_sidebar_state='collapsed')\n\nwith st.sidebar:\n  st.header(\"I'm a sidebar\")\n\nst.title(\"Collapsed Sidebar Demo!\")\n\nst.write(\"The sidebar in this app is closed by default. Click on the arrow in the top left of the screen to open it.\")",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Sidebar</span>"
+    ]
+  },
+  {
+    "objectID": "layout_sidebar.html#multipage-app-navigation",
+    "href": "layout_sidebar.html#multipage-app-navigation",
+    "title": "20  Sidebar",
+    "section": "20.4 Multipage app navigation",
+    "text": "20.4 Multipage app navigation\nLater in the book we discuss multipage apps, which use the sidebar by default for page navigation.\nAny things you add to your app’s sidebar will just appear below the list of pages.",
+    "crumbs": [
+      "Layout",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Sidebar</span>"
+    ]
+  },
+  {
+    "objectID": "layout_sidebar.html#sidebar-styling",
+    "href": "layout_sidebar.html#sidebar-styling",
+    "title": "20  Sidebar",
+    "section": "20.5 Sidebar styling",
+    "text": "20.5 Sidebar styling\n\n20.5.1 Sidebar Colour\nThe sidebar colour can be updated using Streamlit’s theming feature.\nThe colour that needs changing is the secondaryBackgroundColor in the config.toml file.\nMore detail about theming with config.toml can be found in a later chapter.\n\n\n20.5.2 Making the sidebar expander more obvious\nWith custom CSS, we can make the sidebar expander button more obvious.\n\n\n\n20.5.3 Sidebar Font colour and size\nIf using multipage apps, you may need some futher customisations to make the sidebar look good with the colour changes you make. However, more advanced customisations require using CSS.\nHere is an example where we change the default font colour of the auto-generated navigation items.\n\n\n\n\n\n\nWarning\n\n\n\nAs the streamlit library evolves, the names of various elements on the page may change, meaning that these may not remain consistent over time.\n\n\n\n# Credit to Amy H in the PenCHORD team for this!\n# https://github.com/kailo-beewell/kailo_beewell_dashboard_package/blob/be249c515d5cfd7d168abf14f03927322b72322b/kailo_beewell_dashboard/css/style.css#L2\n\nst.markdown(\n  \"\"\"\n&lt;style&gt;\n/* Sidebar font color as default is to set non-selected to more transparent */\n[data-testid=stSidebarNavItems] &gt; li &gt; div &gt; a &gt; span\n{\n    color: #05291F;\n}\n\n/* Sidebar font size */\n    [data-testid=stSidebarNavItems]\n    {\n        font-size: 25px;\n    }\n\n&lt;/style&gt;\n  \"\"\",\n  allow_unsafe_html=True\n)",
     "crumbs": [
       "Layout",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>Sidebar</span>"
@@ -588,6 +643,28 @@
     "crumbs": [
       "Layout",
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>Tabs</span>"
+    ]
+  },
+  {
+    "objectID": "partial_reruns.html",
+    "href": "partial_reruns.html",
+    "title": "28  Partial Reruns",
+    "section": "",
+    "text": "28.1 The Partial Rerun Decorator\nNow let’s rewrite this using the fragment code.\nimport streamlit as st\nfrom palmerpenguins import load_penguins\nimport plotly.express as px\nimport time\n\npenguins = load_penguins()\n\napp_column_1, app_column_2 = st.columns(2)\n\naxis_options = ['bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g']\n\n@st.fragment()\ndef penguin_barchart():\n    time.sleep(3)\n    species = st.selectbox(\"Select a penguin species to filter by\", [\"Adelie\", \"Gentoo\", \"Chinstrap\"])\n    filtered_df_species = penguins[penguins['species'] == species]\n    st.plotly_chart(px.bar(filtered_df_species['sex'].value_counts(), y='count'))\n\n\n@st.fragment()\ndef penguin_scatterplot():\n    time.sleep(3)\n    col_1 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n    axis_options.remove(col_1)\n    col_2 = st.selectbox(\"Select the column to use for the y axis\", axis_options)\n\n    color_factor = st.selectbox(\"Select the column to colour the chart by\",\n    [\"species\", \"sex\", \"island\"])\n\n    fig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,\n    title=f\"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}\")\n\n    st.plotly_chart(fig)\n\n\nwith app_column_1:\n   penguin_barchart()\n\nwith app_column_2:\n   penguin_scatterplot()\nNotice that now when we change the parameters in the drop-down select boxes, only half of the app fades out - indicating that only half of the app is updating at a time; each half of the page can now act independently of the other.",
+    "crumbs": [
+      "Controlling Application Flow",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Partial Reruns</span>"
+    ]
+  },
+  {
+    "objectID": "partial_reruns.html#the-partial-rerun-decorator",
+    "href": "partial_reruns.html#the-partial-rerun-decorator",
+    "title": "28  Partial Reruns",
+    "section": "",
+    "text": "Note\n\n\n\nAs the fragments feature is so new as of writing this book, it has not yet been integrated into the library we use for displaying the example apps.\nInstead, you can view the output of this code in the embedded webpage below.",
+    "crumbs": [
+      "Controlling Application Flow",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Partial Reruns</span>"
     ]
   },
   {

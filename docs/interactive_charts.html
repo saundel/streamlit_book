@@ -642,7 +642,7 @@ Tip
 <p>The details and specific arguments that are available for each can be found in the Streamlit documentation <a href="https://docs.streamlit.io/develop/api-reference/charts">here</a>.</p>
 </div>
 </div>
-<div id="6bee086e" class="cell" data-execution_count="1">
+<div id="d334c27e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -675,7 +675,7 @@ Tip
 <p>This can become particularly valuable when we start to explore layout options like columns later in the book.</p>
 </div>
 </div>
-<div id="0d9b8276" class="cell" data-execution_count="2">
+<div id="6705f611" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -700,7 +700,7 @@ Tip
 <section id="reacting-to-user-inputs" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="reacting-to-user-inputs"><span class="header-section-number">5.2</span> Reacting to user inputs</h2>
 <p>While we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.</p>
-<div id="bf62f416" class="cell" data-execution_count="3">
+<div id="c8869017" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -715,7 +715,7 @@ Tip
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>axis_options.remove(col_1)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>col_2 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>col_2 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the y axis"</span>, axis_options)</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>color_factor <span class="op">=</span> st.selectbox(<span class="st">"Select the column to colour the chart by"</span>,</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>[<span class="st">"species"</span>, <span class="st">"sex"</span>, <span class="st">"island"</span>])</span>
@@ -725,7 +725,7 @@ Tip
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0Afrom%20io%20import%20StringIO%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Aaxis_options%20%3D%20%5B%27bill_length_mm%27%2C%20%27bill_depth_mm%27%2C%0A%20%20%20%20%20%20%20%27flipper_length_mm%27%2C%20%27body_mass_g%27%5D%0A%0Acol_1%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Aaxis_options.remove%28col_1%29%0A%0Acol_2%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Acolor_factor%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20colour%20the%20chart%20by%22%2C%0A%5B%22species%22%2C%20%22sex%22%2C%20%22island%22%5D%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3Dcol_1%2C%20y%3Dcol_2%2C%20color%3Dcolor_factor%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20%7Bcol_1%7D%20vs%20%7Bcol_2%7D%2C%20coloured%20by%20%7Bcolor_factor%7D%22%29%0A%0Ast.plotly_chart%28fig%29
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0Afrom%20io%20import%20StringIO%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Aaxis_options%20%3D%20%5B%27bill_length_mm%27%2C%20%27bill_depth_mm%27%2C%0A%20%20%20%20%20%20%20%27flipper_length_mm%27%2C%20%27body_mass_g%27%5D%0A%0Acol_1%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Aaxis_options.remove%28col_1%29%0A%0Acol_2%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20y%20axis%22%2C%20axis_options%29%0A%0Acolor_factor%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20colour%20the%20chart%20by%22%2C%0A%5B%22species%22%2C%20%22sex%22%2C%20%22island%22%5D%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3Dcol_1%2C%20y%3Dcol_2%2C%20color%3Dcolor_factor%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20%7Bcol_1%7D%20vs%20%7Bcol_2%7D%2C%20coloured%20by%20%7Bcolor_factor%7D%22%29%0A%0Ast.plotly_chart%28fig%29
 
 " class="stlite"></iframe>
 

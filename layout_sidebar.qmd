@@ -14,9 +14,99 @@ The Streamlit sidebar gives us a distinct area on the left-hand side of the scre
 import streamlit as st
 
 with st.sidebar: # <1>
-  st.header("I'm A sidebar")
+  st.header("I'm a sidebar") # <2>
   st.write("We can use inputs our sidebar too.")
   name = st.text_input("What's your name?", value=None)
+
+st.title("Greeting App!")
+
+if name is not None: # <3>
+  st.write(f"Nice to meet you, {name}!")
+else:
+  st.write("I can't greet you until you enter your name!")
+```
+
+1. We can use the `with` notation along with `st.sidebar` to create the sidebar
+2. We indent the code we want to exist within the sidebar
+3. Once we write a line of code that is not indented, this signals the beginning of code that will just appear in the main area of the streamlit app.
+
+
+```{stlite-python}
+import streamlit as st
+
+with st.sidebar:
+  st.header("I'm a sidebar")
+  st.write("We can use inputs our sidebar too.")
+  name = st.text_input("What's your name?", value=None)
+
+st.title("Greeting App!")
+
+if name is not None:
+  st.write(f"Nice to meet you, {name}!")
+else:
+  st.write("I can't greet you until you enter your name!")
+
+# This is just here to ensure the resulting embedded app is tall enough to display the sidebar natively
+st.container(height=200)
+```
+
+
+### Collapsing, expanding and resizing the sidebar
+
+When hovering over the sidebar, we can see this arrow appear.
+
+![](assets/2024-08-20-12-35-54.png)
+
+Clicking on this collapses the sidebar, making the main body of the app take up the full width.
+
+![](assets/2024-08-20-12-36-24.png)
+
+This can be very handy - but be aware that it may make for a non-intuitive experience for your end users.
+
+Hovering over the point where the sidebar ends and the main part of the app begins, our cursor will change to indicate that the sidebar can be resized. Clicking and dragging will allow us to make the sidebar narrower and wider, within some predefined limits.
+
+![](assets/2024-08-20-12-37-49.png)
+
+![](assets/2024-08-20-12-38-24.png)
+
+## Alternative sidebar syntax
+
+Like a lot of other layout elements, such as columns and tabs, there are multiple ways to refer to the sidebar, and which is best may depend on precisely what you are trying to do with your app.
+
+1. Use the `with` notation, as above.
+
+```{python}
+#| eval: false
+
+import streamlit as st
+
+with st.sidebar: # <1>
+  st.header("I'm a sidebar") # <2>
+  st.write("We can use inputs our sidebar too.")
+  name = st.text_input("What's your name?", value=None)
+
+st.title("Greeting App!")
+
+if name is not None: # <3>
+  st.write(f"Nice to meet you, {name}!")
+else:
+  st.write("I can't greet you until you enter your name!")
+```
+
+2. Wherever you would use a component that begins with `st.` (e.g. `st.text()`, `st.number_input()`), replace this with `st.sidebar()` (e.g. `st.sidebar.text()`, `st.sidebar.number_input()`)
+
+The code below is completely equivalent to the code above.
+
+```{python}
+#| eval: false
+
+import streamlit as st
+
+st.sidebar.header("I'm a sidebar")
+st.sidebar.write("We can use inputs our sidebar too.")
+name = st.sidebar.text_input("What's your name?", value=None)
+
+st.title("Greeting App!")
 
 if name is not None:
   st.write(f"Nice to meet you, {name}!")
@@ -24,17 +114,124 @@ else:
   st.write("I can't greet you until you enter your name!")
 ```
 
+:::{.callout-note}
+You can often mix and match the approaches within an app too - though picking one approach may be easier for the next person who interacts with your code to follow. If it's a good way of achieving what you need to, though, then you can go ahead and do this!
+:::
+
+## Initial sidebar state
+
+While there are not many ways to customise your sidebar from within streamlit, you can adjust whether it displays as being visible or not by default using `st.set_page_config()`.
+
+:::{.callout-tip}
+`st.set_page_config()` has to be the first streamlit command you run after importing streamlit.
+
+You can run other general python commands between the import and setting the page config - but you cannot, for example, use `st.header()` before calling `st.set_page_config()`.
+:::
+
+```{python}
+#| eval: false
+
+import streamlit as st
+
+st.set_page_config(initial_sidebar_state='collapsed')
+
+with st.sidebar:
+  st.header("I'm a sidebar")
+
+st.title("Collapsed Sidebar Demo!")
+
+st.write("The sidebar in this app is closed by default. Click on the arrow in the top left of the screen to open it.")
+```
 
 ```{stlite-python}
 import streamlit as st
 
-with st.sidebar:
-  st.header("I'm A sidebar")
-  st.write("We can use inputs our sidebar too.")
-  name = st.text_input("What's your name?", value=None)
+st.set_page_config(initial_sidebar_state='collapsed')
 
-if name is not None:
-  st.write(f"Nice to meet you, {name}!")
-else:
-  st.write("I can't greet you until you enter your name!")
+with st.sidebar:
+  st.header("I'm a sidebar")
+
+st.title("Collapsed Sidebar Demo!")
+
+st.write("The sidebar in this app is closed by default. Click on the arrow in the top left of the screen to open it.")
+```
+
+## Multipage app navigation
+
+Later in the book we discuss multipage apps, which use the sidebar by default for page navigation.
+
+Any things you add to your app's sidebar will just appear below the list of pages.
+
+## Sidebar styling
+
+### Sidebar Colour
+
+The sidebar colour can be updated using Streamlit's [theming](https://docs.streamlit.io/develop/concepts/configuration/theming) feature.
+
+The colour that needs changing is the `secondaryBackgroundColor` in the `config.toml` file.
+
+More detail about theming with `config.toml` can be found in a [later chapter](app_colours.qmd).
+
+### Making the sidebar expander more obvious
+
+With custom CSS, we can make the sidebar expander button more obvious.
+
+```{stlite-python}
+import streamlit as st
+
+st.markdown(
+  """
+<style>
+    /* Expander */
+    div[data-testid=stExpander] > details > summary > span > div > p
+    {
+        font-size: 30px;
+    }
+</style>
+  """,
+  allow_unsafe_html=True
+)
+
+with st.sidebar:
+  st.header("I'm a sidebar")
+
+st.title("Sidebar Demo!")
+
+st.write("The button to expand or close the sidebar is bigger in this example")
+```
+
+### Sidebar Font colour and size
+
+If using multipage apps, you may need some futher customisations to make the sidebar look good with the colour changes you make. However, more advanced customisations require using CSS.
+
+Here is an example where we change the default font colour of the auto-generated navigation items.
+
+:::{.callout-warning}
+As the streamlit library evolves, the names of various elements on the page may change, meaning that these may not remain consistent over time.
+:::
+
+```{python}
+#| eval: false
+# Credit to Amy H in the PenCHORD team for this!
+# https://github.com/kailo-beewell/kailo_beewell_dashboard_package/blob/be249c515d5cfd7d168abf14f03927322b72322b/kailo_beewell_dashboard/css/style.css#L2
+
+st.markdown(
+  """
+<style>
+/* Sidebar font color as default is to set non-selected to more transparent */
+[data-testid=stSidebarNavItems] > li > div > a > span
+{
+    color: #05291F;
+}
+
+/* Sidebar font size */
+    [data-testid=stSidebarNavItems]
+    {
+        font-size: 25px;
+    }
+
+</style>
+  """,
+  allow_unsafe_html=True
+)
 ```

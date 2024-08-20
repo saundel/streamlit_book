@@ -132,7 +132,7 @@ col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
 
 axis_options.remove(col_1)
 
-col_2 = st.selectbox("Select the column to use for the x axis", axis_options)
+col_2 = st.selectbox("Select the column to use for the y axis", axis_options)
 
 color_factor = st.selectbox("Select the column to colour the chart by",
 ["species", "sex", "island"])
@@ -163,7 +163,7 @@ col_1 = st.selectbox("Select the column to use for the x axis", axis_options)
 
 axis_options.remove(col_1)
 
-col_2 = st.selectbox("Select the column to use for the x axis", axis_options)
+col_2 = st.selectbox("Select the column to use for the y axis", axis_options)
 
 color_factor = st.selectbox("Select the column to colour the chart by",
 ["species", "sex", "island"])
