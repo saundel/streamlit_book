@@ -6,7 +6,7 @@ import plotly.express as px
 
 st.write("All of the things we've learned about so far can be used within a multipage app!")
 
-st.write("Just remember that each page is effectively a self-contained app - without using things like session state, we can't ")
+st.write("Just remember that each page is effectively a self-contained app - without using things like session state, we can't use information from other pages on this page, and vice-versa.")
 
 tab1, tab2 = st.tabs(["Penguin Graphs", "Video"])
 
