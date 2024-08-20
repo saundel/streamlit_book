@@ -17,6 +17,10 @@ In the early days of Streamlit, people came up with various creative workarounds
 Information prior to 2022 is likely to be from before Streamlit supported this natively, so is not likely to be as relevant.
 :::
 
+## Method 1: 'st.Page' and 'st.navigation'
+
+
+
 
 ## Method 2: 'pages' subfolder
 
@@ -56,14 +60,116 @@ In Windows explorer, this is how the files and folders appear.
 :::{.callout-note collapse="true"}
 ### Click here for the code for the second page
 
-```{.python include="snippets/simple_multipage_app_2/pages/1_🐧_Penguin_Information.py" code-line-numbers="true"}
+```{.python code-line-numbers="true"}
+import streamlit as st
+
+st.write("Let's try loading in a variable from the previous page.")
+
+with st.expander("Click here to see the code that made the homepage"):
+    st.code("""
+            import streamlit as st
+
+st.set_page_config(layout="wide", page_title="Homepage")
+
+st.title("Welcome to the penguin app!")
+
+species_options = ["Gentoo", "Chinstrap", "Adelie"]
+
+chosen_species = st.selectbox("Which penguin species are you interested in finding out more about?", species_options)
+
+if chosen_species == "Gentoo":
+    st.write(
+        '''
+        The gentoo penguin (JEN-too) (Pygoscelis papua) is a penguin species (or possibly a species complex) in the genus Pygoscelis, most closely related to the Adélie penguin (P. adeliae) and the chinstrap penguin (P. antarcticus). The earliest scientific description was made in 1781 by Johann Reinhold Forster with a type locality in the Falkland Islands. The species calls in a variety of ways, but the most frequently heard is a loud trumpeting, which the bird emits with its head thrown back.
+        '''
+    )
+elif chosen_species == "Chinstrap":
+    st.write(
+        '''
+The chinstrap penguin (Pygoscelis antarcticus) is a species of penguin that inhabits a variety of islands and shores in the Southern Pacific and the Antarctic Oceans. Its name stems from the narrow black band under its head, which makes it appear as if it were wearing a black helmet, making it easy to identify.[2] Other common names include ringed penguin, bearded penguin, and stonecracker penguin, due to its loud, harsh call.[3]
+        '''
+    )
+
+elif chosen_species == "Adelie":
+    st.write(
+        '''
+        The Adélie penguin (Pygoscelis adeliae) is a species of penguin common along the entire coast of the Antarctic continent, which is the only place where it is found. It is the most widespread penguin species, and, along with the emperor penguin, is the most southerly distributed of all penguins. It is named after Adélie Land, in turn, named for Adèle Dumont d'Urville, who was married to French explorer Jules Dumont d'Urville, who first discovered this penguin in 1840. Adélie penguins obtain their food by both predation and foraging, with a diet of mainly krill and fish.
+        '''
+    )
+
+st.markdown("*All information from wikipedia*")
+""")
+
+st.write("We're going to try loading the `species_options` list in, which just contains the strings 'Gentoo', 'Adelie' and 'Chinstrap'.")
+
+st.write("What we'll see is that it doesn't work and instead returns an error. This is because the variables on the other pages are completely separate and can't be accessed on this page.")
+
+st.write("This is a key thing to be aware of within multipage apps. Without using things like session state, we can't use information from other pages on this page, and vice-versa")
+
+chosen_species = st.selectbox("Which penguin species are you interested in finding out more about?", species_options)
+
 ```
 :::
 
 :::{.callout-note collapse="true"}
 ### Click here for the code for the third page
 
-```{.python include="snippets/simple_multipage_app_2/pages/2_📈_Penguin_Trends.py" code-line-numbers="true"}
+```{.python code-line-numbers="true"}
+import streamlit as st
+
+import streamlit as st
+from palmerpenguins import load_penguins
+import plotly.express as px
+
+st.write("All of the things we've learned about so far can be used within a multipage app!")
+
+st.write("Just remember that each page is effectively a self-contained app - without using things like session state, we can't use information from other pages on this page, and vice-versa.")
+
+tab1, tab2 = st.tabs(["Penguin Graphs", "Video"])
+
+penguins = load_penguins()
+
+with tab1:
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",
+        title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")
+
+        st.plotly_chart(fig)
+
+        with st.expander("Click here to see the code for the graph"):
+            st.code(
+              """
+              fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",
+                    title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")
+              """
+            )
+
+    with col2:
+        fig = px.scatter(penguins, x='flipper_length_mm', y='body_mass_g', color="species",
+                    title=f"Penguins Dataset - Flipper Length (mm) vs Body Weight(g), coloured by Species")
+
+        st.plotly_chart(fig)
+
+        with st.expander("Click here to see the code for the graph"):
+            st.code(
+              """
+              fig = px.scatter(penguins, x='flipper_length_mm', y='body_mass_g', color="species",
+                    title=f"Penguins Dataset - Flipper Length (mm) vs Body Weight(g), coloured by Species")
+              """
+            )
+
+    with st.expander("Click here to see the underlying data"):
+        st.dataframe(penguins)
+
+with tab2:
+    st.header("Penguin Video")
+
+    expander_video = st.expander("Click here to watch a penguin video")
+    expander_video.video("https://www.youtube.com/watch?v=nFAK8Vj62WM")
+
 ```
 :::
 

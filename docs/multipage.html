@@ -634,8 +634,8 @@ Warning
 <p>The subfolder <strong>has</strong> to be called <em>pages</em> to be picked up! You cannot rename it to something else.</p>
 </div>
 </div>
-<p>Let’s look at an example three page app.</p>
-<iframe width="780" height="800" src="https://penguin-trends-multipage-example-method-2.streamlit.app?embed=True" title="Quarto Components"></iframe>
+<p>Let’s look at an example multipage app with 5 pages.</p>
+<iframe width="1100" height="800" src="https://penguin-trends-multipage-example-method-2.streamlit.app?embed=True" title="Quarto Components"></iframe>
 <p>The structure of our app in our filesystem looks like this.</p>
 <p>In Windows explorer, this is how the files and folders appear.</p>
 <p><img src="assets/2024-08-20-16-04-46.png" class="img-fluid"></p>
@@ -699,7 +699,52 @@ Click here for the code for the second page
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>st.write(<span class="st">"Let's try loading in a variable from the previous page."</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="cf">with</span> st.expander(<span class="st">"Click here to see the code that made the homepage"</span>):</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    st.code(<span class="st">"""</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">            import streamlit as st</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">st.set_page_config(layout="wide", page_title="Homepage")</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="st">st.title("Welcome to the penguin app!")</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="st">species_options = ["Gentoo", "Chinstrap", "Adelie"]</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="st">chosen_species = st.selectbox("Which penguin species are you interested in finding out more about?", species_options)</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="st">if chosen_species == "Gentoo":</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="st">    st.write(</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="st">        '''</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="st">        The gentoo penguin (JEN-too) (Pygoscelis papua) is a penguin species (or possibly a species complex) in the genus Pygoscelis, most closely related to the Adélie penguin (P. adeliae) and the chinstrap penguin (P. antarcticus). The earliest scientific description was made in 1781 by Johann Reinhold Forster with a type locality in the Falkland Islands. The species calls in a variety of ways, but the most frequently heard is a loud trumpeting, which the bird emits with its head thrown back.</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="st">        '''</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="st">    )</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="st">elif chosen_species == "Chinstrap":</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="st">    st.write(</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="st">        '''</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="st">The chinstrap penguin (Pygoscelis antarcticus) is a species of penguin that inhabits a variety of islands and shores in the Southern Pacific and the Antarctic Oceans. Its name stems from the narrow black band under its head, which makes it appear as if it were wearing a black helmet, making it easy to identify.[2] Other common names include ringed penguin, bearded penguin, and stonecracker penguin, due to its loud, harsh call.[3]</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="st">        '''</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="st">    )</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="st">elif chosen_species == "Adelie":</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="st">    st.write(</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="st">        '''</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="st">        The Adélie penguin (Pygoscelis adeliae) is a species of penguin common along the entire coast of the Antarctic continent, which is the only place where it is found. It is the most widespread penguin species, and, along with the emperor penguin, is the most southerly distributed of all penguins. It is named after Adélie Land, in turn, named for Adèle Dumont d'Urville, who was married to French explorer Jules Dumont d'Urville, who first discovered this penguin in 1840. Adélie penguins obtain their food by both predation and foraging, with a diet of mainly krill and fish.</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="st">        '''</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="st">    )</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="st">st.markdown("*All information from wikipedia*")</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="st">"""</span>)</span>
+<span id="cb2-39"><a href="#cb2-39"></a></span>
+<span id="cb2-40"><a href="#cb2-40"></a>st.write(<span class="st">"We're going to try loading the `species_options` list in, which just contains the strings 'Gentoo', 'Adelie' and 'Chinstrap'."</span>)</span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a>st.write(<span class="st">"What we'll see is that it doesn't work and instead returns an error. This is because the variables on the other pages are completely separate and can't be accessed on this page."</span>)</span>
+<span id="cb2-43"><a href="#cb2-43"></a></span>
+<span id="cb2-44"><a href="#cb2-44"></a>st.write(<span class="st">"This is a key thing to be aware of within multipage apps. Without using things like session state, we can't use information from other pages on this page, and vice-versa"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a>chosen_species <span class="op">=</span> st.selectbox(<span class="st">"Which penguin species are you interested in finding out more about?"</span>, species_options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -715,7 +760,196 @@ Click here for the code for the third page
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>st.write(<span class="st">"All of the things we've learned about so far can be used within a multipage app!"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>st.write(<span class="st">"Just remember that each page is effectively a self-contained app - without using things like session state, we can't use information from other pages on this page, and vice-versa."</span>)</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>tab1, tab2 <span class="op">=</span> st.tabs([<span class="st">"Penguin Graphs"</span>, <span class="st">"Video"</span>])</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="cf">with</span> tab1:</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    col1, col2 <span class="op">=</span> st.columns(<span class="dv">2</span>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="cf">with</span> col1:</span>
+<span id="cb3-20"><a href="#cb3-20"></a>        fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">"sex"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21"></a>        title<span class="op">=</span><span class="ss">f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a>        st.plotly_chart(fig)</span>
+<span id="cb3-24"><a href="#cb3-24"></a></span>
+<span id="cb3-25"><a href="#cb3-25"></a>        <span class="cf">with</span> st.expander(<span class="st">"Click here to see the code for the graph"</span>):</span>
+<span id="cb3-26"><a href="#cb3-26"></a>            st.code(</span>
+<span id="cb3-27"><a href="#cb3-27"></a>              <span class="st">"""</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="st">              fig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color="sex",</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="st">                    title=f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex")</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="st">              """</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a>            )</span>
+<span id="cb3-32"><a href="#cb3-32"></a></span>
+<span id="cb3-33"><a href="#cb3-33"></a>    <span class="cf">with</span> col2:</span>
+<span id="cb3-34"><a href="#cb3-34"></a>        fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'flipper_length_mm'</span>, y<span class="op">=</span><span class="st">'body_mass_g'</span>, color<span class="op">=</span><span class="st">"species"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35"></a>                    title<span class="op">=</span><span class="ss">f"Penguins Dataset - Flipper Length (mm) vs Body Weight(g), coloured by Species"</span>)</span>
+<span id="cb3-36"><a href="#cb3-36"></a></span>
+<span id="cb3-37"><a href="#cb3-37"></a>        st.plotly_chart(fig)</span>
+<span id="cb3-38"><a href="#cb3-38"></a></span>
+<span id="cb3-39"><a href="#cb3-39"></a>        <span class="cf">with</span> st.expander(<span class="st">"Click here to see the code for the graph"</span>):</span>
+<span id="cb3-40"><a href="#cb3-40"></a>            st.code(</span>
+<span id="cb3-41"><a href="#cb3-41"></a>              <span class="st">"""</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="st">              fig = px.scatter(penguins, x='flipper_length_mm', y='body_mass_g', color="species",</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="st">                    title=f"Penguins Dataset - Flipper Length (mm) vs Body Weight(g), coloured by Species")</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="st">              """</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a>            )</span>
+<span id="cb3-46"><a href="#cb3-46"></a></span>
+<span id="cb3-47"><a href="#cb3-47"></a>    <span class="cf">with</span> st.expander(<span class="st">"Click here to see the underlying data"</span>):</span>
+<span id="cb3-48"><a href="#cb3-48"></a>        st.dataframe(penguins)</span>
+<span id="cb3-49"><a href="#cb3-49"></a></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="cf">with</span> tab2:</span>
+<span id="cb3-51"><a href="#cb3-51"></a>    st.header(<span class="st">"Penguin Video"</span>)</span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
+<span id="cb3-53"><a href="#cb3-53"></a>    expander_video <span class="op">=</span> st.expander(<span class="st">"Click here to watch a penguin video"</span>)</span>
+<span id="cb3-54"><a href="#cb3-54"></a>    expander_video.video(<span class="st">"https://www.youtube.com/watch?v=nFAK8Vj62WM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here for the code for the fourth page
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a>st.title(<span class="st">"Interactive Data Explorer"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>st.write(<span class="st">"Here, let's explore what happens to values we've input when moving to a different page."</span>)</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>st.write(<span class="st">"If you enter your name on this page, the rest of the page will load."</span>)</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a>st.write(<span class="st">"Try then moving to a different page using the navigation sidebar before returning to this page."</span>)</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>st.write(<span class="st">"What do you notice?"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a>user_name <span class="op">=</span> st.text_input(<span class="st">"Enter Your Name"</span>, <span class="va">None</span>)</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="cf">if</span> user_name <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb4-18"><a href="#cb4-18"></a>    st.write(<span class="ss">f"Please enter your name to load the rest of the page"</span>)</span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="cf">else</span>:</span>
+<span id="cb4-20"><a href="#cb4-20"></a>    st.write(<span class="ss">f"Welcome to the interactive penguin data explorer, </span><span class="sc">{</span>user_name<span class="sc">}</span><span class="ss">!"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a>    penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb4-23"><a href="#cb4-23"></a></span>
+<span id="cb4-24"><a href="#cb4-24"></a>    axis_options <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>,</span>
+<span id="cb4-25"><a href="#cb4-25"></a>        <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb4-26"><a href="#cb4-26"></a></span>
+<span id="cb4-27"><a href="#cb4-27"></a>    col_1 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb4-28"><a href="#cb4-28"></a></span>
+<span id="cb4-29"><a href="#cb4-29"></a>    axis_options.remove(col_1)</span>
+<span id="cb4-30"><a href="#cb4-30"></a></span>
+<span id="cb4-31"><a href="#cb4-31"></a>    col_2 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb4-32"><a href="#cb4-32"></a></span>
+<span id="cb4-33"><a href="#cb4-33"></a>    color_factor <span class="op">=</span> st.selectbox(<span class="st">"Select the column to colour the chart by"</span>,</span>
+<span id="cb4-34"><a href="#cb4-34"></a>    [<span class="st">"species"</span>, <span class="st">"sex"</span>, <span class="st">"island"</span>])</span>
+<span id="cb4-35"><a href="#cb4-35"></a></span>
+<span id="cb4-36"><a href="#cb4-36"></a>    fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span>col_1, y<span class="op">=</span>col_2, color<span class="op">=</span>color_factor,</span>
+<span id="cb4-37"><a href="#cb4-37"></a>    title<span class="op">=</span><span class="ss">f"Penguins Dataset - </span><span class="sc">{</span>col_1<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>col_2<span class="sc">}</span><span class="ss">, coloured by </span><span class="sc">{</span>color_factor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-38"><a href="#cb4-38"></a></span>
+<span id="cb4-39"><a href="#cb4-39"></a>    st.plotly_chart(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here for the code for the fifth page
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>st.markdown(</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="st">"""</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">&lt;style&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="st">/* Sidebar font color as default is to set non-selected to more transparent */</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="st">[data-testid=stSidebarNavItems] &gt; li &gt; div &gt; a &gt; span</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="st">{</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="st">    color: #05291F;</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">}</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="st">/* Sidebar font size */</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="st">    [data-testid=stSidebarNavItems]</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="st">    {</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="st">        font-size: 20px;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="st">    }</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="st">&lt;/style&gt;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="st">  """</span>,</span>
+<span id="cb5-21"><a href="#cb5-21"></a>  unsafe_allow_html<span class="op">=</span><span class="va">True</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>)</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a></span>
+<span id="cb5-25"><a href="#cb5-25"></a>st.title(<span class="st">"Sidebar Theming and Additions"</span>)</span>
+<span id="cb5-26"><a href="#cb5-26"></a></span>
+<span id="cb5-27"><a href="#cb5-27"></a>st.write(<span class="st">"Finally, let's look at the impact of some custom CSS on the sidebar."</span>)</span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a>st.write(<span class="st">"We've embedded some code when the page first loads that should increase the size of the page names in the sidebar, and also make the page names in the sidebar darker."</span>)</span>
+<span id="cb5-30"><a href="#cb5-30"></a></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="cf">with</span> st.expander(<span class="st">"Click here to view the code"</span>):</span>
+<span id="cb5-32"><a href="#cb5-32"></a>    st.code(</span>
+<span id="cb5-33"><a href="#cb5-33"></a>    <span class="st">'''</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="st">&lt;style&gt;</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="st">/* Sidebar font color as default is to set non-selected to more transparent */</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="st">[data-testid=stSidebarNavItems] &gt; li &gt; div &gt; a &gt; span</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="st">{</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="st">    color: #05291F;</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="st">}</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="st">/* Sidebar font size */</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="st">    [data-testid=stSidebarNavItems]</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="st">    {</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="st">        font-size: 20px;</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="st">    }</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a></span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="st">&lt;/style&gt;</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="st">    '''</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a>    )</span>
+<span id="cb5-50"><a href="#cb5-50"></a></span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="cf">with</span> st.sidebar:</span>
+<span id="cb5-53"><a href="#cb5-53"></a>    st.write(<span class="st">"Let's also explore what happens when we add additional things to the sidebar"</span>)</span>
+<span id="cb5-54"><a href="#cb5-54"></a></span>
+<span id="cb5-55"><a href="#cb5-55"></a>    st.write(<span class="st">"It looks like it automatically appears below the navigation"</span>)</span>
+<span id="cb5-56"><a href="#cb5-56"></a></span>
+<span id="cb5-57"><a href="#cb5-57"></a>    num_repeats <span class="op">=</span> st.slider(<span class="st">"Pick a number"</span>, <span class="dv">1</span>, <span class="dv">50</span>, <span class="dv">2</span>)</span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>    text_repeats <span class="op">=</span> st.text_input(<span class="st">"Enter some text"</span>, <span class="va">None</span>)</span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a></span>
+<span id="cb5-62"><a href="#cb5-62"></a><span class="cf">if</span> text_repeats <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb5-63"><a href="#cb5-63"></a>    st.write(<span class="st">"Enter some text in the box in the sidebar"</span>)</span>
+<span id="cb5-64"><a href="#cb5-64"></a><span class="cf">else</span>:</span>
+<span id="cb5-65"><a href="#cb5-65"></a>    st.write(<span class="st">"Here is your text repeated that many times!"</span>)</span>
+<span id="cb5-66"><a href="#cb5-66"></a></span>
+<span id="cb5-67"><a href="#cb5-67"></a>    st.write(text_repeats <span class="op">*</span> num_repeats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
