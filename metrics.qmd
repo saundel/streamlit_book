@@ -104,3 +104,136 @@ st.plotly_chart(   # <5>
   )
 
 ```
+
+### Styling Metric Cards
+
+The Streamlit Extras package provides us with options to apply a style to our metric cards.
+
+You will need to `pip install streamlit-extras` if it's not already installed in your environment.
+
+```{python}
+#| eval: false
+import streamlit as st
+import plotly.express as px
+import pandas as pd
+from streamlit_extras.metric_cards import style_metric_cards # <1>
+
+st.set_page_config(layout="wide")
+
+st.title("Activity Dashboard")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric(label="Total Number of Patients\nSeen this Week", value=52)
+
+col2.metric(label="Number of Patients\nSeen this Week - South", value=30, delta=-5)
+
+col2.metric(label="Number of Patients\nSeen this Week - North", value=12, delta=-7)
+
+col3.metric(label="Number of Patients Seen this Year", value=1302)
+
+style_metric_cards(background_color="#6434eb", border_color= "#eb9234", border_size_px=3) # <2>
+
+patients_seen_df = pd.DataFrame(
+  {
+    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],
+    'Patients Seen': [24, 12, 43, 23, 32, 25]
+  }
+)
+
+st.plotly_chart(
+  px.line(patients_seen_df, x='Week', y='Patients Seen', title="Total Patients Seen per Week")
+  )
+
+```
+
+1. We import the function `style_metric_cards` from `streamlit_extras.metric_cards`
+2. We then use this function after we've created our metric cards, passing in the relevant arguments to change the background colour, border colour, border size and more.
+
+Full details of all the available parameters can be found in the [streamlit extras documentation](https://arnaudmiribel.github.io/streamlit-extras/extras/metric_cards/)
+
+:::{.callout-tip}
+The six-character alphanumeric codes we passed into the 'background_color' and 'border_color' arguments are called **hex colours** and are a common way of specifying colours on computers - particularly in web development.
+
+There are lots of sites to help you look up hex colours to find the perfect one for you.
+
+[This page](https://www.w3schools.com/colors/colors_picker.asp?colorhex=E8B5CE) from w3 schools is a starting point.
+
+You can also just go to google and seach 'hex colour picker' to bring up an interactive picker straight away!
+:::
+
+```{stlite-python}
+import streamlit as st
+import micropip
+await micropip.install("plotly")
+await micropip.install("streamlit-extras")
+import plotly.express as px
+import pandas as pd
+from streamlit_extras.metric_cards import style_metric_cards
+
+st.set_page_config(layout="wide")
+
+st.title("Activity Dashboard")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric(label="Total Number of Patients Seen this Week", value=52)
+
+col2.metric(label="Number of Patients Seen this Week - South", value=30, delta=-5)
+
+col2.metric(label="Number of Patients Seen this Week - North", value=12, delta=-7)
+
+col3.metric(label="Number of Patients Seen this Year", value=1302)
+
+style_metric_cards(background_color="#6434eb", border_color= "#eb9234", border_size_px=3)
+
+patients_seen_df = pd.DataFrame(
+  {
+    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],
+    'Patients Seen': [24, 12, 43, 23, 32, 25]
+  }
+)
+
+st.plotly_chart(
+  px.line(patients_seen_df, x='Week', y='Patients Seen', title="Total Patients Seen per Week")
+  )
+
+```
+
+
+## Indicators
+
+To get other sorts of displays that we might be familiar with in other dashboarding software, we may need to instead move to plotly or another graphing library rather than using things built in to Streamlit.
+
+```{stlite-python}
+import streamlit as st
+import micropip
+await micropip.install("plotly")
+await micropip.install("streamlit-extras")
+import plotly.graph_objects as go
+
+def indicator(value, title, lower_limit=0, upper_limit=1):
+    return go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = value,
+        title = {'text': title},
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge = {
+        'axis': {'range': [lower_limit, upper_limit]}
+    }
+    ))
+
+st.plotly_chart(indicator(value=80, title="Percentage of Tasks Completed", upper_limit=100))
+
+st.plotly_chart(indicator(value=3, title="Number of Patients Seen Today", upper_limit=10))
+
+```
+
+
+Take a look at [this documentation from plotly](https://plotly.com/python/gauge-charts/) to see how to enhance these charts further, such as
+
+- adding a target
+- adding segments/reference points to the arc
+- changing the colour of the bar
+
+[This page](https://plotly.com/python/indicator/) contains additional things you can do with the `indicator` graph object in Plotly, such as overlaying a metric card on a plotly chart.

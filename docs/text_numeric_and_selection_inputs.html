@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics, Dials and Other Dashboard Accoutrements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics and Dials</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -615,15 +615,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In streamlit, if we save the output of one of the built-in input widgets to a variable, this variable will be the value the user has selected, and will be used anywhere you subsequently reference this value in the app.</p>
 <p>Let’s start by having a text input to greet the user.</p>
 <p>Try changing the value in the input box each time, pressing enter when you have finished typing. Notice how the sentence underneath the text box updates.</p>
-<div id="eec5f6a2" class="cell" data-execution_count="1">
+<div id="e1f23e0c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> st.text_input(<span class="st">"Enter your name"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>st.write(<span class="ss">f"Hello </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">! Welcome to Streamlit."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2024-08-19 17:56:01.723 WARNING streamlit.runtime.state.session_state_proxy: Session state does not function when running a script without `streamlit run`
-2024-08-19 17:56:01.923 
+<pre><code>2024-08-20 10:18:07.330 WARNING streamlit.runtime.state.session_state_proxy: Session state does not function when running a script without `streamlit run`
+2024-08-20 10:18:07.885 
   Warning: to view this Streamlit app on a browser, run it with the following
   command:
 
@@ -639,7 +639,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Number boxes and sliders are two good ways to do this.</p>
 <p>The benefit of this is that the resulting output can be guaranteed to be a number - unlike using a text input, where the user could choose to enter a non-numeric value which may break later steps of your app.</p>
 <p>Let’s take a look at how we can use these two kinds of inputs.</p>
-<div id="bde82dda" class="cell" data-execution_count="2">
+<div id="0d348561" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>st.subheader(<span class="st">"Numeric Input"</span>)</span>

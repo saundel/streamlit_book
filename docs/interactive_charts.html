@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics, Dials and Other Dashboard Accoutrements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics and Dials</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -579,7 +579,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#reacting-to-user-inputs" id="toc-reacting-to-user-inputs" class="nav-link active" data-scroll-target="#reacting-to-user-inputs"><span class="header-section-number">5.1</span> Reacting to user inputs</a></li>
+  <li><a href="#making-use-of-the-available-space" id="toc-making-use-of-the-available-space" class="nav-link active" data-scroll-target="#making-use-of-the-available-space"><span class="header-section-number">5.1</span> Making use of the available space</a></li>
+  <li><a href="#reacting-to-user-inputs" id="toc-reacting-to-user-inputs" class="nav-link" data-scroll-target="#reacting-to-user-inputs"><span class="header-section-number">5.2</span> Reacting to user inputs</a></li>
   </ul>
 </nav>
     </div>
@@ -641,7 +642,7 @@ Tip
 <p>The details and specific arguments that are available for each can be found in the Streamlit documentation <a href="https://docs.streamlit.io/develop/api-reference/charts">here</a>.</p>
 </div>
 </div>
-<div id="2e66e31f" class="cell" data-execution_count="1">
+<div id="3f980fb3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -656,33 +657,73 @@ Tip
 <iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3D%27bill_length_mm%27%2C%20y%3D%27bill_depth_mm%27%2C%20color%3D%22sex%22%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20Bill%20Length%20%28mm%29%20vs%20Bill%20Depth%20%28mm%29%2C%20coloured%20by%20Sex%22%29%0A%0Ast.plotly_chart%28fig%29
 
 " class="stlite"></iframe>
-<section id="reacting-to-user-inputs" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="reacting-to-user-inputs"><span class="header-section-number">5.1</span> Reacting to user inputs</h2>
-<p>While we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.</p>
-<div id="5862d66e" class="cell" data-execution_count="2">
+<section id="making-use-of-the-available-space" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="making-use-of-the-available-space"><span class="header-section-number">5.1</span> Making use of the available space</h2>
+<p>Many streamlit components have a parameter called <code>use_container_width</code>.</p>
+<p>When set to <code>True</code> in something like <code>st.pyplot</code>, it ensures the output is rescaled to use the maximum available width of the screen.</p>
+<p>The parameter is set to <code>False</code> by default, which will result in outputs often not optimally using the available space.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This can become particularly valuable when we start to explore layout options like columns later in the book.</p>
+</div>
+</div>
+<div id="f3ba4485" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>axis_options <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>       <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>col_1 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>axis_options.remove(col_1)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>col_2 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>color_factor <span class="op">=</span> st.selectbox(<span class="st">"Select the column to colour the chart by"</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>[<span class="st">"species"</span>, <span class="st">"sex"</span>, <span class="st">"island"</span>])</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span>col_1, y<span class="op">=</span>col_2, color<span class="op">=</span>color_factor,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="ss">f"Penguins Dataset - </span><span class="sc">{</span>col_1<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>col_2<span class="sc">}</span><span class="ss">, coloured by </span><span class="sc">{</span>color_factor<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">"sex"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="ss">f"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>st.subheader(<span class="st">"use_container_width=False"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>st.subheader(<span class="st">"use_container_width=True"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig, use_container_width <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3D%27bill_length_mm%27%2C%20y%3D%27bill_depth_mm%27%2C%20color%3D%22sex%22%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20Bill%20Length%20%28mm%29%20vs%20Bill%20Depth%20%28mm%29%2C%20coloured%20by%20Sex%22%29%0A%0Ast.subheader%28%22use_container_width%3DFalse%22%29%0A%0Ast.plotly_chart%28fig%29%0A%0Ast.subheader%28%22use_container_width%3DTrue%22%29%0A%0Ast.plotly_chart%28fig%2C%20use_container_width%20%3D%20True%29
+
+" class="stlite"></iframe>
+</section>
+<section id="reacting-to-user-inputs" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="reacting-to-user-inputs"><span class="header-section-number">5.2</span> Reacting to user inputs</h2>
+<p>While we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.</p>
+<div id="7b3a814f" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>axis_options <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>       <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>col_1 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>axis_options.remove(col_1)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>col_2 <span class="op">=</span> st.selectbox(<span class="st">"Select the column to use for the x axis"</span>, axis_options)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>color_factor <span class="op">=</span> st.selectbox(<span class="st">"Select the column to colour the chart by"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>[<span class="st">"species"</span>, <span class="st">"sex"</span>, <span class="st">"island"</span>])</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(penguins, x<span class="op">=</span>col_1, y<span class="op">=</span>col_2, color<span class="op">=</span>color_factor,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="ss">f"Penguins Dataset - </span><span class="sc">{</span>col_1<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>col_2<span class="sc">}</span><span class="ss">, coloured by </span><span class="sc">{</span>color_factor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>st.plotly_chart(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <iframe src="https://share.stlite.net/?embed=true#code=import%20micropip%0Aawait%20micropip.install%28%22setuptools%22%29%0Aawait%20micropip.install%28%22palmerpenguins%22%29%0Aawait%20micropip.install%28%22plotly%22%29%0Aimport%20streamlit%20as%20st%0Afrom%20palmerpenguins%20import%20load_penguins%0Aimport%20plotly.express%20as%20px%0Afrom%20io%20import%20StringIO%0A%0Apenguins%20%3D%20load_penguins%28%29%0A%0Aaxis_options%20%3D%20%5B%27bill_length_mm%27%2C%20%27bill_depth_mm%27%2C%0A%20%20%20%20%20%20%20%27flipper_length_mm%27%2C%20%27body_mass_g%27%5D%0A%0Acol_1%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Aaxis_options.remove%28col_1%29%0A%0Acol_2%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20use%20for%20the%20x%20axis%22%2C%20axis_options%29%0A%0Acolor_factor%20%3D%20st.selectbox%28%22Select%20the%20column%20to%20colour%20the%20chart%20by%22%2C%0A%5B%22species%22%2C%20%22sex%22%2C%20%22island%22%5D%29%0A%0Afig%20%3D%20px.scatter%28penguins%2C%20x%3Dcol_1%2C%20y%3Dcol_2%2C%20color%3Dcolor_factor%2C%0Atitle%3Df%22Penguins%20Dataset%20-%20%7Bcol_1%7D%20vs%20%7Bcol_2%7D%2C%20coloured%20by%20%7Bcolor_factor%7D%22%29%0A%0Ast.plotly_chart%28fig%29
 
@@ -1589,8 +1630,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./metrics.html" class="pagination-link" aria-label="Metrics, Dials and Other Dashboard Accoutrements">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics, Dials and Other Dashboard Accoutrements</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./metrics.html" class="pagination-link" aria-label="Metrics and Dials">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics and Dials</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

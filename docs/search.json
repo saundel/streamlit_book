@@ -133,10 +133,65 @@
     "href": "interactive_charts.html",
     "title": "5  Interactive Charts",
     "section": "",
-    "text": "5.1 Reacting to user inputs\nWhile we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.\nimport streamlit as st\nfrom palmerpenguins import load_penguins\nimport plotly.express as px\nfrom io import StringIO\n\npenguins = load_penguins()\n\naxis_options = ['bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g']\n\ncol_1 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\naxis_options.remove(col_1)\n\ncol_2 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\ncolor_factor = st.selectbox(\"Select the column to colour the chart by\",\n[\"species\", \"sex\", \"island\"])\n\nfig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,\ntitle=f\"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}\")\n\nst.plotly_chart(fig)",
+    "text": "5.1 Making use of the available space\nMany streamlit components have a parameter called use_container_width.\nWhen set to True in something like st.pyplot, it ensures the output is rescaled to use the maximum available width of the screen.\nThe parameter is set to False by default, which will result in outputs often not optimally using the available space.\nimport streamlit as st\nfrom palmerpenguins import load_penguins\nimport plotly.express as px\n\npenguins = load_penguins()\n\nfig = px.scatter(penguins, x='bill_length_mm', y='bill_depth_mm', color=\"sex\",\ntitle=f\"Penguins Dataset - Bill Length (mm) vs Bill Depth (mm), coloured by Sex\")\n\nst.subheader(\"use_container_width=False\")\n\nst.plotly_chart(fig)\n\nst.subheader(\"use_container_width=True\")\n\nst.plotly_chart(fig, use_container_width = True)",
     "crumbs": [
       "Outputs",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Interactive Charts</span>"
+    ]
+  },
+  {
+    "objectID": "interactive_charts.html#making-use-of-the-available-space",
+    "href": "interactive_charts.html#making-use-of-the-available-space",
+    "title": "5  Interactive Charts",
+    "section": "",
+    "text": "Tip\n\n\n\nThis can become particularly valuable when we start to explore layout options like columns later in the book.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Interactive Charts</span>"
+    ]
+  },
+  {
+    "objectID": "interactive_charts.html#reacting-to-user-inputs",
+    "href": "interactive_charts.html#reacting-to-user-inputs",
+    "title": "5  Interactive Charts",
+    "section": "5.2 Reacting to user inputs",
+    "text": "5.2 Reacting to user inputs\nWhile we haven’t gone into detail about user inputs yet, here is an example of a plotly chart updating based on the options a user is selecting.\n\nimport streamlit as st\nfrom palmerpenguins import load_penguins\nimport plotly.express as px\nfrom io import StringIO\n\npenguins = load_penguins()\n\naxis_options = ['bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g']\n\ncol_1 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\naxis_options.remove(col_1)\n\ncol_2 = st.selectbox(\"Select the column to use for the x axis\", axis_options)\n\ncolor_factor = st.selectbox(\"Select the column to colour the chart by\",\n[\"species\", \"sex\", \"island\"])\n\nfig = px.scatter(penguins, x=col_1, y=col_2, color=color_factor,\ntitle=f\"Penguins Dataset - {col_1} vs {col_2}, coloured by {color_factor}\")\n\nst.plotly_chart(fig)",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Interactive Charts</span>"
+    ]
+  },
+  {
+    "objectID": "metrics.html",
+    "href": "metrics.html",
+    "title": "6  Metrics and Dials",
+    "section": "",
+    "text": "6.1 Metrics",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
+    ]
+  },
+  {
+    "objectID": "metrics.html#metrics",
+    "href": "metrics.html#metrics",
+    "title": "6  Metrics and Dials",
+    "section": "",
+    "text": "6.1.1 Layout\nBy combining metrics with st.columns, we can make better use of the screen to start building up more of a dashboard layout.\n\nimport streamlit as st\nimport plotly.express as px\nimport pandas as pd\n\n1st.set_page_config(layout=\"wide\")\n\nst.title(\"Activity Dashboard\")\n\n2col1, col2, col3 = st.columns(3)\n\n3col1.metric(label=\"Total Number of Patients Seen this Week\", value=52)\n\ncol2.metric(label=\"Number of Patients Seen this Week - South\", value=30, delta=-5)\n\ncol2.metric(label=\"Number of Patients Seen this Week - North\", value=12, delta=-7)\n\ncol3.metric(label=\"Number of Patients Seen this Year\", value=1302)\n\n4patients_seen_df = pd.DataFrame(\n  {\n    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],\n    'Patients Seen': [24, 12, 43, 23, 32, 25]\n  }\n)\n\n5st.plotly_chart(\n  px.line(patients_seen_df, x='Week', y='Patients Seen', title=\"Total Patients Seen per Week\")\n  )\n\n\n1\n\nHere, we’ve started out by setting the page config to ‘wide’. This just means that the page will use the whole width of the viewer’s screen, rather than limiting itself to the middle third.\n\n2\n\nWe set up 3 columns using the st.columns feature, unpacking them on the left-hand side of our assign (the equals sign) into three separate variables called col1, col2, col3 for easy reference (though we could call them anything!). col1 will be the leftmost column and as we haven’t specified otherwise, they will be of equal width.\n\n3\n\nWe then create our metrics, but instead of using st.metric, we use col1.metric (and so on). This is an easy shorthand to assign the resulting metric to each of the columns we’ve just created.\n\n4\n\nNow we’re just going to quickly make a dummy dataframe so that we can see the impact of putting something underneath the column layout. We wouldn’t usually build the dataframe up like this - we’d load it in from a database or csv.\n\n5\n\nNow we’re just creating a plotly chart container and putting a plotly express line chart in it. Note how rather than being inside one of the columns, it takes up the full width of the screen. This is because we’ve gone back to using st.plotly_chart instead of col1.plotly_chart or similar.\n\n\n\n\n\n\n\n6.1.2 Styling Metric Cards\nThe Streamlit Extras package provides us with options to apply a style to our metric cards.\nYou will need to pip install streamlit-extras if it’s not already installed in your environment.\n\nimport streamlit as st\nimport plotly.express as px\nimport pandas as pd\n1from streamlit_extras.metric_cards import style_metric_cards\n\nst.set_page_config(layout=\"wide\")\n\nst.title(\"Activity Dashboard\")\n\ncol1, col2, col3 = st.columns(3)\n\ncol1.metric(label=\"Total Number of Patients\\nSeen this Week\", value=52)\n\ncol2.metric(label=\"Number of Patients\\nSeen this Week - South\", value=30, delta=-5)\n\ncol2.metric(label=\"Number of Patients\\nSeen this Week - North\", value=12, delta=-7)\n\ncol3.metric(label=\"Number of Patients Seen this Year\", value=1302)\n\n2style_metric_cards(background_color=\"#6434eb\", border_color= \"#eb9234\", border_size_px=3)\n\npatients_seen_df = pd.DataFrame(\n  {\n    'Week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],\n    'Patients Seen': [24, 12, 43, 23, 32, 25]\n  }\n)\n\nst.plotly_chart(\n  px.line(patients_seen_df, x='Week', y='Patients Seen', title=\"Total Patients Seen per Week\")\n  )\n\n\n1\n\nWe import the function style_metric_cards from streamlit_extras.metric_cards\n\n2\n\nWe then use this function after we’ve created our metric cards, passing in the relevant arguments to change the background colour, border colour, border size and more.\n\n\n\n\nFull details of all the available parameters can be found in the streamlit extras documentation\n\n\n\n\n\n\nTip\n\n\n\nThe six-character alphanumeric codes we passed into the ‘background_color’ and ‘border_color’ arguments are called hex colours and are a common way of specifying colours on computers - particularly in web development.\nThere are lots of sites to help you look up hex colours to find the perfect one for you.\nThis page from w3 schools is a starting point.\nYou can also just go to google and seach ‘hex colour picker’ to bring up an interactive picker straight away!",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
+    ]
+  },
+  {
+    "objectID": "metrics.html#indicators",
+    "href": "metrics.html#indicators",
+    "title": "6  Metrics and Dials",
+    "section": "6.2 Indicators",
+    "text": "6.2 Indicators\nTo get other sorts of displays that we might be familiar with in other dashboarding software, we may need to instead move to plotly or another graphing library rather than using things built in to Streamlit.\n\nTake a look at this documentation from plotly to see how to enhance these charts further, such as\n\nadding a target\nadding segments/reference points to the arc\nchanging the colour of the bar\n\nThis page contains additional things you can do with the indicator graph object in Plotly, such as overlaying a metric card on a plotly chart.",
+    "crumbs": [
+      "Outputs",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
     ]
   },
   {
@@ -298,7 +353,7 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "13  File Uploads",
     "section": "13.2 Uploading image files",
-    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-19 17:56:07.823 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
+    "text": "13.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n13.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-08-20 10:18:16.707 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>File Uploads</span>"
@@ -478,39 +533,6 @@
     "crumbs": [
       "Layout",
       "<span class='chapter-number'>22</span>  <span class='chapter-title'>Tabs</span>"
-    ]
-  },
-  {
-    "objectID": "metrics.html",
-    "href": "metrics.html",
-    "title": "6  Metrics and Dials",
-    "section": "",
-    "text": "6.1 Metrics",
-    "crumbs": [
-      "Outputs",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
-    ]
-  },
-  {
-    "objectID": "metrics.html#dials",
-    "href": "metrics.html#dials",
-    "title": "6  Metrics and Dials",
-    "section": "6.2 Dials",
-    "text": "6.2 Dials\nA dial like",
-    "crumbs": [
-      "Outputs",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
-    ]
-  },
-  {
-    "objectID": "metrics.html#metrics",
-    "href": "metrics.html#metrics",
-    "title": "6  Metrics and Dials",
-    "section": "",
-    "text": "6.1.1 Layout\nBy combining metrics with st.columns, we can make better use of the screen to start building up more of a dashboard layout.\n\nimport streamlit as st\nimport plotly.express as px\nimport pandas as pd\n\n1st.set_page_config(layout=\"wide\")\n\nst.title(\"Activity Dashboard\")\n\n2col1, col2, col3 = st.columns(3)\n\n3col1.metric(label=\"Total Number of Patients Seen this Week\", value=52)\n\ncol2.metric(label=\"Number of Patients Seen this Week - South\", value=30, delta=-5)\n\ncol2.metric(label=\"Number of Patients Seen this Week - North\", value=12, delta=-7)\n\ncol3.metric(label=\"Number of Patients Seen this Year\", value=1302)\n\npatients_seen_df = pd.DataFrame(\n  {\n    'week': ['2021-01-01', '2021-01-08', '2021-01-15', '2021-01-22', '2021-01-29', '2021-02-05'],\n    'patients_seen': [24, 12, 43, 23, 32, 25]\n  }\n4)\n\n5st.plotly_chart(px.line(patients_seen_df, x='week', y='patients_seen'))\n\n\n1\n\nHere, we’ve started out by setting the page config to ‘wide’. This just means that the page will use the whole width of the viewer’s screen, rather than limiting itself to the middle third.\n\n2\n\nWe set up 3 columns using the st.columns feature, unpacking them on the left-hand side of our assign (the equals sign) into three separate variables called col1, col2, col3 for easy reference (though we could call them anything!). col1 will be the leftmost column and as we haven’t specified otherwise, they will be of equal width.\n\n3\n\nWe then create our metrics, but instead of using st.metric, we use col1.metric (and so on). This is an easy shorthand to assign the resulting metric to each of the columns we’ve just created.\n\n4\n\nNow we’re just going to quickly make a dummy dataframe so that we can see the impact of putting something underneath the column layout. We wouldn’t usually build the dataframe up like this - we’d load it in from a database or csv.\n\n5\n\nNow we’re just creating a plotly chart container and putting a plotly express line chart in it. Note how rather than being inside one of the columns, it takes up the full width of the screen. This is because we’ve gone back to using st.plotly_chart instead of col1.plotly_chart or similar.",
-    "crumbs": [
-      "Outputs",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Metrics and Dials</span>"
     ]
   }
 ]

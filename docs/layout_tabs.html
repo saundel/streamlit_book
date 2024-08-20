@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics, Dials and Other Dashboard Accoutrements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metrics and Dials</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -616,7 +616,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="22.1" class="anchored" data-anchor-id="tabs-in-streamlit"><span class="header-section-number">22.1</span> Tabs in Streamlit</h2>
 <p>Tabs are an extremely useful way to organise your page into something that is easier to navigate.</p>
 <p>Tabs look like this in a Streamlit app.</p>
-<div id="1d58a75d" class="cell" data-execution_count="1">
+<div id="860ce822" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tab1, tab2, tab3 <span class="op">=</span> st.tabs([<span class="st">"This is Tab 1"</span>, <span class="st">"This is the Second Tab"</span>, <span class="st">"Tab 3 is Here!"</span>])</span>
@@ -653,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Using a ‘with’ statement and indenting the code that should sit within the tab.</li>
 </ol>
-<div id="d130eecd" class="cell" data-execution_count="2">
+<div id="df819dc0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -666,7 +666,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="2" type="1">
 <li>Replacing the <code>st</code> in sections like <code>st.text()</code> with the variable name for the given tab.</li>
 </ol>
-<div id="a744609f" class="cell" data-execution_count="3">
+<div id="34862aa0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
