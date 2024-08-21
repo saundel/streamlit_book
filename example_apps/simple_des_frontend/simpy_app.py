@@ -77,7 +77,12 @@ if button_run_pressed:
 
         output_col_1, output_col_2 = st.columns(2)
         with output_col_1:
+            st.write(f"Average queue time for receptionist: {trial_results_df["Mean Q Time Recep"].mean().round(1)} minutes")
+            st.write(f"Average queue time for nurse: {trial_results_df["Mean Q Time Nurse"].mean().round(1)} minutes")
+
             st.dataframe(trial_results_df.round(1))
+
+
         with output_col_2:
             st.plotly_chart(px.box(trial_results_df, "Mean Q Time Recep",
                                    title="Time Spent Queueing for Receptionist - Run Variation"))
