@@ -636,7 +636,7 @@ Note
 </ul>
 </div>
 </div>
-<div id="691722b1" class="cell" data-execution_count="1">
+<div id="6dc06bae" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -661,7 +661,7 @@ Note
 <h3 data-number="12.1.1" class="anchored" data-anchor-id="limiting-the-file-types"><span class="header-section-number">12.1.1</span> Limiting the file types</h3>
 <p>By default, we haven’t restricted the file types that can be uploaded.</p>
 <p>Let’s do that now!</p>
-<div id="9a93947e" class="cell" data-execution_count="2">
+<div id="a576f568" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -686,7 +686,7 @@ Note
 <h2 data-number="12.2" class="anchored" data-anchor-id="uploading-image-files"><span class="header-section-number">12.2</span> Uploading image files</h2>
 <p>We can easily upload image files too.</p>
 <p>Let’s try loading an image file and displaying it for the user.</p>
-<div id="2406f7ae" class="cell" data-execution_count="3">
+<div id="9df7d77c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>uploaded_image <span class="op">=</span> st.file_uploader(<span class="st">"Please upload an image file"</span>, <span class="bu">type</span><span class="op">=</span>[<span class="st">'png'</span>,<span class="st">'jpg'</span>,<span class="st">'jpeg'</span>,<span class="st">'bmp'</span>, <span class="st">'bitmap'</span>])</span>
@@ -717,7 +717,7 @@ Tip
 </div>
 </div>
 <p>Let’s have a go at it here.</p>
-<div id="c3bf3c1f" class="cell" data-execution_count="4">
+<div id="851c8ac9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageEnhance</span>
@@ -767,7 +767,7 @@ Background removal
 <p>We could take this even further with the <code>rembg</code> library, which removes the image’s background.</p>
 <p>We can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.</p>
 <p><em>It doesn’t work with stlite/browser-based Python due to dependencies of the <code>rembg</code> library that are unavailable via that method.</em></p>
-<div id="f485c3fd" class="cell" data-execution_count="5">
+<div id="c8dfea5e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
@@ -789,7 +789,7 @@ Background removal
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Edited Image"</span>)</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    st.image(img_edited)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2024-08-20 16:39:56.128 
+<pre><code>2024-08-21 09:25:45.170 
   Warning: to view this Streamlit app on a browser, run it with the following
   command:
 

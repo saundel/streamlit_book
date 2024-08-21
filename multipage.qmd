@@ -19,6 +19,94 @@ Information prior to 2022 is likely to be from before Streamlit supported this n
 
 ## Method 1: 'st.Page' and 'st.navigation'
 
+Let's first take a look at the multipage app itself and explore how a multipage app behaves.
+
+```{=html}
+<iframe width="1100" height="800" src="https://penguin-trends-multipage-example-method-1.streamlit.app?embed=True" title="Quarto Components"></iframe>
+```
+
+:::{.callout-tip}
+The key things to take away are that
+
+- variables are not shared across different app pages
+- moving to a different page will reset the value of any inputs
+:::
+
+The recommended method for multipage apps in Streamlit is to
+
+- create a page that is responsible for routing users to different pages
+  - in this file, we can do additional things like set up the displayed names of each page and add icons before the page names
+- create your actual pages
+
+In this example, we have a folder that looks like this
+
+![](assets/2024-08-20-17-18-02.png)
+
+When starting up the app, we will simply be running `streamlit run app.py` from within the
+
+Let's take a look at the contents of app.py
+
+```{.python code-line-numbers="true"}
+import streamlit as st
+
+pg = st.navigation(
+    [st.Page("Homepage.py", title="Welcome!", icon=":material/add_circle:"),
+     st.Page("Penguin_Information.py"),
+     st.Page("Penguin_Trends.py"),
+     st.Page("Interactive_Data_Explorer.py"),
+     st.Page("Sidebar_Theming.py"),
+     ]
+     )
+
+pg.run()
+```
+
+Let's now look at the code for one of the other pages: `Interactive_Data_Explorer.py`, which appears as "Interactive Data Explorer" in the sidebar of the app.
+
+Note that it looks like a completely standard streamlit app - in fact, this particular page could run completely fine by itself!
+
+:::{.callout-note}
+```{.python include="snippets/simple_multipage_app/Interactive_Data_Explorer.py" code-line-numbers="true"}
+```
+:::
+
+:::{.callout-note}
+The `.streamlit` folder contains `config.toml`, which is used to set the colourscheme of the app
+
+The `requirements.txt` file contains the required packages for the app, which will then be installed automatically when we deploy the app to the streamlit community cloud.
+:::
+
+
+### Nested Sidebars
+
+By modifying our main page's code, we can create subsections within our navigation bars, which can be very helpful for more complex apps.
+
+```{.python code-line-numbers="true"}
+import streamlit as st
+
+homepage = st.Page("Homepage.py", title="Welcome!", icon=":material/add_circle:") # <1>
+info_page = st.Page("Penguin_Information.py")
+trends_page = st.Page("Penguin_Trends.py")
+explorer_page = st.Page("Interactive_Data_Explorer.py")
+theming_page = st.Page("Sidebar_Theming.py")
+
+pg = st.navigation( # <2>
+    {
+        "Section 1": [homepage],
+        "Section 2": [info_page, trends_page],
+        "Section 3": [explorer_page, theming_page]
+    }
+     )
+
+pg.run()
+```
+
+1. Instead of passing the `st.Page` calls directly into `st.navigation` we have created a variable per page. This isn't strictly necessary, but makes it a lot easier to keep track of what's going on in our use of `st.navigation`.
+2. We can
+
+```{=html}
+<iframe width="1100" height="800" src="https://penguin-trends-multipage-example-nested-sidebar.streamlit.app??embed=True" title="Quarto Components"></iframe>
+```
 
 
 
@@ -26,10 +114,13 @@ Information prior to 2022 is likely to be from before Streamlit supported this n
 
 One other common way to deal with multipage apps is to have a `.py` file that is designed to be your main homepage, with all other pages being stored within a 'pages' subfolder.
 
+At the time of writing, this is still used in some examples in the Streamlit documentation, so it is useful to be aware of, and it does have the benefit of being an automated way
+
 :::{.callout-warning}
 The subfolder **has** to be called *pages* to be picked up! You cannot rename it to something else.
 :::
 
+We would start this app by running `streamlit run Homepage.py` when we have navigated to the same folder level as `Homepage.py` in our terminal.
 
 Let's look at an example multipage app with 5 pages.
 
@@ -37,17 +128,16 @@ Let's look at an example multipage app with 5 pages.
 <iframe width="1100" height="800" src="https://penguin-trends-multipage-example-method-2.streamlit.app?embed=True" title="Quarto Components"></iframe>
 ```
 
-The structure of our app in our filesystem looks like this.
-
-
-
-In Windows explorer, this is how the files and folders appear.
+The structure of our app in our filesystem looks like this; in Windows explorer, this is how the files and folders appear.
 
 ![](assets/2024-08-20-16-04-46.png)
+
 
 **The 'pages' folder**
 
 ![](assets/2024-08-20-16-05-41.png)
+
+The numbers at the beginning of the filenames indicate the order these will appear in the sidebar.
 
 :::{.callout-note collapse="true"}
 ### Click here for the code for the homepage
