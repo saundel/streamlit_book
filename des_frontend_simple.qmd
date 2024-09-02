@@ -1,5 +1,5 @@
 ---
-title: "An Interactive Discrete Event Simulation Tool"
+title: "(Coming Soon!) An Interactive Discrete Event Simulation Tool"
 filters:
   - whitphx/stlite
 ---

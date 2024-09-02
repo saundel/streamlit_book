@@ -1,5 +1,5 @@
 ---
-title: "Deploying to Github Pages with Serverless Streamlit (stlite)"
+title: "(Coming Soon!) Deploying to Github Pages with Serverless Streamlit (stlite)"
 filters:
   - whitphx/stlite
 ---

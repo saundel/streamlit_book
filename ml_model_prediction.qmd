@@ -1,5 +1,5 @@
 ---
-title: "An App for Obtaining Predictions from a Machine Learning Model"
+title: "(Coming Soon!) An App for Obtaining Predictions from a Machine Learning Model"
 filters:
   - whitphx/stlite
 ---

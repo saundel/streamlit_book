@@ -1,5 +1,5 @@
 ---
-title: "Custom Page Navigation"
+title: "(Coming Soon!) Custom Page Navigation"
 filters:
   - whitphx/stlite
 ---

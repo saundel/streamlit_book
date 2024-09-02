@@ -1,8 +1,10 @@
 ---
-title: "Quarto Cheat Sheet"
+title: "Streamlit Cheat Sheet"
 ---
 
-The fantastic Quarto Cheat Sheet is well worth bookmarking!
+The fantastic Streamlit Cheat Sheet is well worth bookmarking!
+
+<https://cheat-sheet.streamlit.app/>
 
 ```{=html}
 <iframe width="780" height="500" src="https://cheat-sheet.streamlit.app/" title="Quarto Components"></iframe>
