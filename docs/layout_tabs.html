@@ -616,7 +616,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="21.1" class="anchored" data-anchor-id="tabs-in-streamlit"><span class="header-section-number">21.1</span> Tabs in Streamlit</h2>
 <p>Tabs are an extremely useful way to organise your page into something that is easier to navigate.</p>
 <p>Tabs look like this in a Streamlit app.</p>
-<div id="6db887e3" class="cell" data-execution_count="1">
+<div id="4231ce08" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tab1, tab2, tab3 <span class="op">=</span> st.tabs([<span class="st">"This is Tab 1"</span>, <span class="st">"This is the Second Tab"</span>, <span class="st">"Tab 3 is Here!"</span>])</span>
@@ -653,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Using a ‘with’ statement and indenting the code that should sit within the tab.</li>
 </ol>
-<div id="b06982d4" class="cell" data-execution_count="2">
+<div id="cc99ac22" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -666,7 +666,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="2" type="1">
 <li>Replacing the <code>st</code> in sections like <code>st.text()</code> with the variable name for the given tab.</li>
 </ol>
-<div id="ce80cf22" class="cell" data-execution_count="3">
+<div id="ac85a4ef" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tab_a, tab_b <span class="op">=</span> st.tabs([<span class="st">"A Tab"</span>, <span class="st">"Another Tab"</span>])</span>
@@ -684,7 +684,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this example, notice what happens to the random numbers as you change the number of tabs being generated.</p>
 <section id="using-the-tab.-syntax" class="level3" data-number="21.3.1">
 <h3 data-number="21.3.1" class="anchored" data-anchor-id="using-the-tab.-syntax"><span class="header-section-number">21.3.1</span> Using the ‘tab.’ syntax</h3>
-<div id="c2f708a0" class="cell" data-execution_count="4">
+<div id="94ea821e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -705,7 +705,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It’s also possible to do this using the ‘with’ syntax.</p>
 <p>In this example, in every separate tab, we pull back a random wikipedia page.</p>
 <p>(However, due to the way this works behind the scenes, we don’t get a new page on changing the number of tabs even though the app is rerunning each time)</p>
-<div id="fab8ac5c" class="cell" data-execution_count="5">
+<div id="b2265bc3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit.components.v1 <span class="im">as</span> components</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -739,7 +739,7 @@ Warning
 <p>This is not a supported part of Streamlit - the ways in which streamlit internally names these tabs may change over time, causing this code to no longer work.</p>
 </div>
 </div>
-<div id="49b59b67" class="cell" data-execution_count="6">
+<div id="68ab430e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Credit to user 'Dallas on https://discuss.streamlit.io/t/customizing-the-appearance-of-tabs/48913</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>

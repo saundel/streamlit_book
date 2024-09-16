@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -562,6 +596,78 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>To customise the look of your app much more than this, we need to turn to custom css.</p>
+<p>CSS stands for ‘cascading style sheets’ and is a language used for theming much of the web!</p>
+<p>We can create our own .css file and force Streamlit to load it in.</p>
+<p><img src="assets/2024-09-16-22-37-35.png" class="img-fluid"></p>
+<p>To load the file into the app, we need to include the following command:</p>
+<div id="81bb45eb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"style.css"</span>) <span class="im">as</span> css:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    st.markdown(<span class="ss">f'&lt;style&gt;</span><span class="sc">{</span>css<span class="sc">.</span>read()<span class="sc">}</span><span class="ss">&lt;/style&gt;'</span>, unsafe_allow_html<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This points towards the css file and wrapss it in some HTML tags that will ensure the css is recognised by the web browser.</p>
+<p>The css file can contain any valid css, but we are interested in this chapter in targeting fonts specifically.</p>
+<p>To begin with, we load in a font from the Google font families.</p>
+<p>We then choose some areas of this app to apply it to.</p>
+<p><code>h1, h2, h3, h4, p</code> will target all headers and the main body text in the app.</p>
+<p>More advanced or Streamlit-specific elements may be harder to target.</p>
+<pre class="{css}"><code>@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&amp;display=swap');
+
+html, body, st-emotion-cache [class*="css"] {
+    font-family: 'Lexend', sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    color: #091747;
+}
+
+h1, h2, h3, h4, p {
+    font-family: "Lexend", sans-serif;
+}</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can right click when running your app and choose ‘inspect’ to get an idea of the possible tags to target with your custom CSS.</p>
+<p>The streamlit forums and StackOverflow are also good ways to find examples of people applying custom theming to similar things to what you are looking to do.</p>
+</div>
+</div>
+<p>Here is an example of a Streamlit title with and without the custom theming applied.</p>
+<p><img src="assets/2024-09-16-22-49-15.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Google fonts provide a good option that is easy to load in via the method above.</p>
+<p>You can explore the wide range of fonts offered here:</p>
+<p><a href="https://fonts.google.com/" class="uri">https://fonts.google.com/</a></p>
+<p><strong>Istok Web</strong> is often cited as being the closest Google Font equivalent to the standard NHS font <em>Frutiger</em>.</p>
+<p>To apply this, you would use</p>
+<pre class="{css}"><code>@import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@200&amp;display=swap');
+
+html, body, st-emotion-cache [class*="css"] {
+    font-family: 'Istok Web', sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    color: #091747;
+}
+
+h1, h2, h3, h4, p {
+    font-family: "Istok Web", sans-serif;
+}</code></pre>
+</div>
+</div>
 
 
 
