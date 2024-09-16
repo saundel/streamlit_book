@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Web Apps with Streamlit - 27&nbsp; (Coming Soon!) Adding a ‘Run’ Button</title>
+<title>HSMA - Web Apps with Streamlit - 27&nbsp; Adding a ‘Run’ Button</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -44,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/stlite/iframeResizer.min.js"></script>
+<script src="site_libs/quarto-contrib/stlite/stlite.js"></script>
+<link href="site_libs/quarto-contrib/stlite/style.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html">Controlling Application Flow</a></li><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html">Controlling Application Flow</a></li><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -375,7 +412,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./forms_and_run_buttons.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -538,14 +575,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#streamlit-forms" id="toc-streamlit-forms" class="nav-link active" data-scroll-target="#streamlit-forms"><span class="header-section-number">27.1</span> Streamlit forms</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html">Controlling Application Flow</a></li><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html">Controlling Application Flow</a></li><li class="breadcrumb-item"><a href="./forms_and_run_buttons.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></h1>
+<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></h1>
 </div>
 
 
@@ -562,8 +605,71 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>One simple way to control app flow is by using the <code>st.button</code>.</p>
+<p>Let’s take a look at a simple simulation model.</p>
+<div id="f0892009" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> des_classes <span class="im">import</span> g, Trial</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"Simple One-Step DES"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>num_nurses_slider <span class="op">=</span> st.slider(<span class="st">"What is the number of nurses in the system?"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                              min_value<span class="op">=</span><span class="dv">1</span>, max_value<span class="op">=</span><span class="dv">10</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>sim_duration_input <span class="op">=</span> st.number_input(<span class="st">"How long should the simulation run for (minutes)?"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                      min_value<span class="op">=</span><span class="dv">60</span>, max_value<span class="op">=</span><span class="dv">480</span>, value<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>num_runs_input <span class="op">=</span> st.number_input(<span class="st">"How many runs of the simulation should be done?"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                                  min_value<span class="op">=</span><span class="dv">1</span>, max_value<span class="op">=</span><span class="dv">100</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>g.patient_inter <span class="op">=</span> patient_iat_slider</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>g.mean_n_consult_time <span class="op">=</span> patient_consult_slider</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>g.number_of_nurses <span class="op">=</span> num_nurses_slider</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>g.sim_duration <span class="op">=</span> sim_duration_input</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>g.number_of_runs <span class="op">=</span> num_runs_input</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">############</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># NEW      #</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">############</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># A user must press a streamlit button to run the model</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>button_run_pressed <span class="op">=</span> st.button(<span class="st">"Run simulation"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> button_run_pressed:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    results_df <span class="op">=</span> Trial().run_trial()</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    st.dataframe(results_df)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">############</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">END</span><span class="co"> NEW  #</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">############</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, by creating a button with <code>st.button</code> and specifying that we do not run the line <code>results_df = Trial().run_trial()</code> until <code>button_run_pressed</code> is true, then we will ensure that we do not have this long-running calculation running every time a slider value is adjusted.</p>
+<p>This would work for any code; as long as it is indented a level from <code>if button_run_pressed</code> then it will not execute until the button is pressed.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When a slider or other user input is next adjusted, any outputs that appeared after the button was pressed will disappear until the run button is pressed again.</p>
+</div>
+</div>
+<iframe src="https://share.stlite.net/?embed=true#code=import%20streamlit%20as%20st%0Aimport%20simpy%0Aimport%20random%0Aimport%20pandas%20as%20pd%0A%0Ast.title%28%22Simple%20One-Step%20DES%22%29%0A%0Ast.write%28%22In%20this%20discrete%20event%20simulation%2C%20patients%20arrive%22%29%0A%0A%23%20Class%20to%20store%20global%20parameter%20values%0A%23%20class%20g%3A%0A%23%20%20%20%20%20patient_inter%20%3D%205%0A%23%20%20%20%20%20mean_n_consult_time%20%3D%206%0A%23%20%20%20%20%20number_of_nurses%20%3D%201%0A%23%20%20%20%20%20sim_duration%20%3D%20120%0A%23%20%20%20%20%20number_of_runs%20%3D%205%0A%0Apatient_iat_slider%20%3D%20st.slider%28%22What%20is%20the%20average%20length%20of%20time%20between%20patients%20arriving%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min_value%3D1%2C%20max_value%3D30%2C%20value%3D5%29%0A%0Apatient_consult_slider%20%3D%20st.slider%28%22What%20is%20the%20mean%20length%20of%20time%20%28in%20minutes%29%20for%20a%20consultation%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min_value%20%3D%203%2C%20max_value%3D60%2C%20value%3D6%29%0A%0Anum_nurses_slider%20%3D%20st.slider%28%22What%20is%20the%20number%20of%20nurses%20in%20the%20system%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min_value%3D1%2C%20max_value%3D10%2C%20value%3D1%29%0A%0Asim_duration_input%20%3D%20st.number_input%28%22How%20long%20should%20the%20simulation%20run%20for%20%28minutes%29%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min_value%3D60%2C%20max_value%3D480%2C%20value%3D120%29%0A%0Anum_runs_input%20%3D%20st.number_input%28%22How%20many%20runs%20of%20the%20simulation%20should%20be%20done%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min_value%3D1%2C%20max_value%3D100%2C%20value%3D5%29%0A%0Aclass%20g%3A%0A%20%20%20%20patient_inter%20%3D%20patient_iat_slider%0A%20%20%20%20mean_n_consult_time%20%3D%20patient_consult_slider%0A%20%20%20%20number_of_nurses%20%3D%20num_nurses_slider%0A%20%20%20%20sim_duration%20%3D%20sim_duration_input%0A%20%20%20%20number_of_runs%20%3D%20num_runs_input%0A%0A%23%20Class%20representing%20patients%20coming%20in%20to%20the%20clinic.%0A%23%20Here%2C%20patients%20have%20two%20attributes%20that%20they%20carry%20with%20them%20-%0A%23%20their%20ID%2C%20and%20the%20amount%20of%20time%20they%20spent%20queuing%20for%20the%20nurse.%0A%23%20The%20ID%20is%20passed%20in%20when%20a%20new%20patient%20is%20created.%0Aclass%20Patient%3A%0A%20%20%20%20def%20__init__%28self%2C%20p_id%29%3A%0A%20%20%20%20%20%20%20%20self.id%20%3D%20p_id%0A%20%20%20%20%20%20%20%20self.q_time_nurse%20%3D%200%0A%0A%23%20Class%20representing%20our%20model%20of%20the%20clinic.%0Aclass%20Model%3A%0A%20%20%20%20%23%20Constructor%20to%20set%20up%20the%20model%20for%20a%20run.%20%20We%20pass%20in%20a%20run%20number%20when%0A%20%20%20%20%23%20we%20create%20a%20new%20model.%0A%20%20%20%20def%20__init__%28self%2C%20run_number%29%3A%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20SimPy%20environment%20in%20which%20everything%20will%20live%0A%20%20%20%20%20%20%20%20self.env%20%3D%20simpy.Environment%28%29%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20patient%20counter%20%28which%20we%27ll%20use%20as%20a%20patient%20ID%29%0A%20%20%20%20%20%20%20%20self.patient_counter%20%3D%200%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20SimPy%20resource%20to%20represent%20a%20nurse%2C%20that%20will%20live%20in%20the%0A%20%20%20%20%20%20%20%20%23%20environment%20created%20above.%20%20The%20number%20of%20this%20resource%20we%20have%20is%0A%20%20%20%20%20%20%20%20%23%20specified%20by%20the%20capacity%2C%20and%20we%20grab%20this%20value%20from%20our%20g%20class.%0A%20%20%20%20%20%20%20%20self.nurse%20%3D%20simpy.Resource%28self.env%2C%20capacity%3Dg.number_of_nurses%29%0A%0A%20%20%20%20%20%20%20%20%23%20Store%20the%20passed%20in%20run%20number%0A%20%20%20%20%20%20%20%20self.run_number%20%3D%20run_number%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20new%20Pandas%20DataFrame%20that%20will%20store%20some%20results%20against%0A%20%20%20%20%20%20%20%20%23%20the%20patient%20ID%20%28which%20we%27ll%20use%20as%20the%20index%29.%0A%20%20%20%20%20%20%20%20self.results_df%20%3D%20pd.DataFrame%28%29%0A%20%20%20%20%20%20%20%20self.results_df%5B%22Patient%20ID%22%5D%20%3D%20%5B1%5D%0A%20%20%20%20%20%20%20%20self.results_df%5B%22Q%20Time%20Nurse%22%5D%20%3D%20%5B0.0%5D%0A%20%20%20%20%20%20%20%20self.results_df%5B%22Time%20with%20Nurse%22%5D%20%3D%20%5B0.0%5D%0A%20%20%20%20%20%20%20%20self.results_df.set_index%28%22Patient%20ID%22%2C%20inplace%3DTrue%29%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20an%20attribute%20to%20store%20the%20mean%20queuing%20time%20for%20the%20nurse%0A%20%20%20%20%20%20%20%20%23%20across%20this%20run%20of%20the%20model%0A%20%20%20%20%20%20%20%20self.mean_q_time_nurse%20%3D%200%0A%0A%20%20%20%20%23%20A%20generator%20function%20that%20represents%20the%20DES%20generator%20for%20patient%0A%20%20%20%20%23%20arrivals%0A%20%20%20%20def%20generator_patient_arrivals%28self%29%3A%0A%20%20%20%20%20%20%20%20%23%20We%20use%20an%20infinite%20loop%20here%20to%20keep%20doing%20this%20indefinitely%20whilst%0A%20%20%20%20%20%20%20%20%23%20the%20simulation%20runs%0A%20%20%20%20%20%20%20%20while%20True%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Increment%20the%20patient%20counter%20by%201%20%28this%20means%20our%20first%20patient%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20will%20have%20an%20ID%20of%201%29%0A%20%20%20%20%20%20%20%20%20%20%20%20self.patient_counter%20%2B%3D%201%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Create%20a%20new%20patient%20-%20an%20instance%20of%20the%20Patient%20Class%20we%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20defined%20above.%20%20Remember%2C%20we%20pass%20in%20the%20ID%20when%20creating%20a%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20patient%20-%20so%20here%20we%20pass%20the%20patient%20counter%20to%20use%20as%20the%20ID.%0A%20%20%20%20%20%20%20%20%20%20%20%20p%20%3D%20Patient%28self.patient_counter%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Tell%20SimPy%20to%20start%20up%20the%20attend_clinic%20generator%20function%20with%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20this%20patient%20%28the%20generator%20function%20that%20will%20model%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20patient%27s%20journey%20through%20the%20system%29%0A%20%20%20%20%20%20%20%20%20%20%20%20self.env.process%28self.attend_clinic%28p%29%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Randomly%20sample%20the%20time%20to%20the%20next%20patient%20arriving.%20%20Here%2C%20we%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20sample%20from%20an%20exponential%20distribution%20%28common%20for%20inter-arrival%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20times%29%2C%20and%20pass%20in%20a%20lambda%20value%20of%201%20/%20mean.%20%20The%20mean%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20inter-arrival%20time%20is%20stored%20in%20the%20g%20class.%0A%20%20%20%20%20%20%20%20%20%20%20%20sampled_inter%20%3D%20random.expovariate%281.0%20/%20g.patient_inter%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Freeze%20this%20instance%20of%20this%20function%20in%20place%20until%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20inter-arrival%20time%20we%20sampled%20above%20has%20elapsed.%0A%20%20%20%20%20%20%20%20%20%20%20%20yield%20self.env.timeout%28sampled_inter%29%0A%0A%20%20%20%20%23%20A%20generator%20function%20that%20represents%20the%20pathway%20for%20a%20patient%20going%0A%20%20%20%20%23%20through%20the%20clinic.%0A%20%20%20%20def%20attend_clinic%28self%2C%20patient%29%3A%0A%20%20%20%20%20%20%20%20%23%20Record%20the%20time%20the%20patient%20started%20queuing%20for%20a%20nurse%0A%20%20%20%20%20%20%20%20start_q_nurse%20%3D%20self.env.now%0A%0A%20%20%20%20%20%20%20%20%23%20Request%20a%20nurse%20resource%2C%20and%20do%20all%20of%20the%20following%20block%20of%20code%20with%0A%20%20%20%20%20%20%20%20%23%20that%20nurse%20resource%20held%20in%20place%20%28and%20therefore%20not%20usable%20by%20another%20patient%29%0A%20%20%20%20%20%20%20%20with%20self.nurse.request%28%29%20as%20req%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Freeze%20the%20function%20until%20the%20request%20for%20a%20nurse%20can%20be%20met.%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20The%20patient%20is%20currently%20queuing.%0A%20%20%20%20%20%20%20%20%20%20%20%20yield%20req%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20When%20we%20get%20to%20this%20bit%20of%20code%2C%20control%20has%20been%20passed%20back%20to%20the%20generator%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20function%2C%20and%20therefore%20the%20request%20for%20a%20nurse%20has%20been%20met.%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20We%20now%20have%20the%20nurse%2C%20and%20have%20stopped%20queuing%2C%20so%20we%20can%20record%20the%20current%20time%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20as%20the%20time%20we%20finished%20queuing.%0A%20%20%20%20%20%20%20%20%20%20%20%20end_q_nurse%20%3D%20self.env.now%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Calculate%20the%20time%20this%20patient%20was%20queuing%20for%20the%20nurse%2C%20and%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20record%20it%20in%20the%20patient%27s%20attribute%20for%20this.%0A%20%20%20%20%20%20%20%20%20%20%20%20patient.q_time_nurse%20%3D%20end_q_nurse%20-%20start_q_nurse%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Now%20we%27ll%20randomly%20sample%20the%20time%20this%20patient%20with%20the%20nurse.%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Here%2C%20we%20use%20an%20Exponential%20distribution%20for%20simplicity%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20As%20with%20sampling%20the%20inter-arrival%20times%2C%20we%20grab%20the%20mean%20from%20the%20g%20class%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20and%20pass%20in%201%20/%20mean%20as%20the%20lambda%20value.%0A%20%20%20%20%20%20%20%20%20%20%20%20sampled_nurse_act_time%20%3D%20random.expovariate%281.0%20/%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20g.mean_n_consult_time%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Here%20we%27ll%20store%20the%20queuing%20time%20for%20the%20nurse%20and%20the%20sampled%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20time%20to%20spend%20with%20the%20nurse%20in%20the%20results%20DataFrame%20against%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20ID%20for%20this%20patient.%0A%20%20%20%20%20%20%20%20%20%20%20%20self.results_df.at%5Bpatient.id%2C%20%22Q%20Time%20Nurse%22%5D%20%3D%20%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20patient.q_time_nurse%29%0A%20%20%20%20%20%20%20%20%20%20%20%20self.results_df.at%5Bpatient.id%2C%20%22Time%20with%20Nurse%22%5D%20%3D%20%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sampled_nurse_act_time%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Freeze%20this%20function%20in%20place%20for%20the%20activity%20time%20we%20sampled%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20above.%20%20This%20is%20the%20patient%20spending%20time%20with%20the%20nurse.%0A%20%20%20%20%20%20%20%20%20%20%20%20yield%20self.env.timeout%28sampled_nurse_act_time%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20When%20the%20time%20above%20elapses%2C%20the%20generator%20function%20will%20return%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20here.%20%20As%20there%27s%20nothing%20more%20that%20we%27ve%20written%2C%20the%20function%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20will%20simply%20end.%20%20This%20is%20a%20sink.%20%20We%20could%20choose%20to%20add%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20something%20here%20if%20we%20wanted%20to%20record%20something%20-%20e.g.%20a%20counter%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20for%20number%20of%20patients%20that%20left%2C%20recording%20something%20about%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20patients%20that%20left%20at%20a%20particular%20sink%20etc.%0A%0A%20%20%20%20def%20calculate_run_results%28self%29%3A%0A%20%20%20%20%20%20%20%20%23%20Take%20the%20mean%20of%20the%20queuing%20times%20for%20the%20nurse%20across%20patients%20in%0A%20%20%20%20%20%20%20%20%23%20this%20run%20of%20the%20model.%0A%20%20%20%20%20%20%20%20self.mean_q_time_nurse%20%3D%20self.results_df%5B%22Q%20Time%20Nurse%22%5D.mean%28%29%0A%0A%20%20%20%20%23%20The%20run%20method%20starts%20up%20the%20DES%20entity%20generators%2C%20runs%20the%20simulation%2C%0A%20%20%20%20%23%20and%20in%20turns%20calls%20anything%20we%20need%20to%20generate%20results%20for%20the%20run%0A%20%20%20%20def%20run%28self%29%3A%0A%20%20%20%20%20%20%20%20%23%20Start%20up%20our%20DES%20entity%20generators%20that%20create%20new%20patients.%0A%20%20%20%20%20%20%20%20%23%20We%27ve%20only%20got%20one%20in%20this%20model%2C%20but%20we%27d%20need%0A%20%20%20%20%20%20%20%20%23%20to%20do%20this%20for%20each%20one%20if%20we%20had%20multiple%20generators.%0A%20%20%20%20%20%20%20%20self.env.process%28self.generator_patient_arrivals%28%29%29%0A%0A%20%20%20%20%20%20%20%20%23%20Run%20the%20model%20for%20the%20duration%20specified%20in%20g%20class%0A%20%20%20%20%20%20%20%20self.env.run%28until%3Dg.sim_duration%29%0A%0A%20%20%20%20%20%20%20%20%23%20Now%20the%20simulation%20run%20has%20finished%2C%20call%20the%20method%20that%20calculates%0A%20%20%20%20%20%20%20%20%23%20run%20results%0A%20%20%20%20%20%20%20%20self.calculate_run_results%28%29%0A%0A%23%20Class%20representing%20a%20Trial%20for%20our%20simulation%20-%20a%20batch%20of%20simulation%20runs.%0Aclass%20Trial%3A%0A%20%20%20%20%23%20The%20constructor%20sets%20up%20a%20pandas%20dataframe%20that%20will%20store%20the%20key%0A%20%20%20%20%23%20results%20from%20each%20run%20%28just%20the%20mean%20queuing%20time%20for%20the%20nurse%20here%29%0A%20%20%20%20%23%20against%20run%20number%2C%20with%20run%20number%20as%20the%20index.%0A%20%20%20%20def%20%20__init__%28self%29%3A%0A%20%20%20%20%20%20%20%20self.df_trial_results%20%3D%20pd.DataFrame%28%29%0A%20%20%20%20%20%20%20%20self.df_trial_results%5B%22Run%20Number%22%5D%20%3D%20%5B0%5D%0A%20%20%20%20%20%20%20%20self.df_trial_results%5B%22Mean%20Q%20Time%20Nurse%22%5D%20%3D%20%5B0.0%5D%0A%20%20%20%20%20%20%20%20self.df_trial_results.set_index%28%22Run%20Number%22%2C%20inplace%3DTrue%29%0A%0A%20%20%20%20%23%20Method%20to%20run%20a%20trial%0A%20%20%20%20def%20run_trial%28self%29%3A%0A%20%20%20%20%20%20%20%20%23%20Run%20the%20simulation%20for%20the%20number%20of%20runs%20specified%20in%20g%20class.%0A%20%20%20%20%20%20%20%20%23%20For%20each%20run%2C%20we%20create%20a%20new%20instance%20of%20the%20Model%20class%20and%20call%20its%0A%20%20%20%20%20%20%20%20%23%20run%20method.%20%20Once%20the%20run%20has%20completed%2C%20we%20grab%20out%20the%20stored%20run%20results%0A%20%20%20%20%20%20%20%20%23%20%28just%20mean%20queuing%20time%20here%29%20and%20store%20it%20against%20the%20run%20number%0A%20%20%20%20%20%20%20%20%23%20in%20the%20trial%20results%20dataframe.%0A%20%20%20%20%20%20%20%20for%20run%20in%20range%28g.number_of_runs%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20my_model%20%3D%20Model%28run%29%0A%20%20%20%20%20%20%20%20%20%20%20%20my_model.run%28%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.df_trial_results.loc%5Brun%5D%20%3D%20%5Bmy_model.mean_q_time_nurse%5D%0A%0A%20%20%20%20%20%20%20%20%23%20Once%20the%20trial%20%28ie%20all%20runs%29%20has%20completed%2C%20return%20the%20final%20results%0A%20%20%20%20%20%20%20%20return%20self.df_trial_results%0A%0A%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20NEW%20%20%20%20%20%20%23%0A%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20A%20user%20must%20press%20a%20streamlit%20button%20to%20run%20the%20model%0Abutton_run_pressed%20%3D%20st.button%28%22Run%20simulation%22%29%0A%0Aif%20button_run_pressed%3A%0A%0A%20%20%20%20results_df%20%3D%20Trial%28%29.run_trial%28%29%0A%0A%20%20%20%20st.dataframe%28results_df%29%0A%23%23%23%23%23%23%23%23%23%23%23%23%0A%23%20END%20NEW%20%20%23%0A%23%23%23%23%23%23%23%23%23%23%23%23%0A
+
+" class="stlite"></iframe>
+<section id="streamlit-forms" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="streamlit-forms"><span class="header-section-number">27.1</span> Streamlit forms</h2>
+<p>An alternative to this is to use the official Streamlit forms component.</p>
+<p><a href="https://docs.streamlit.io/develop/api-reference/execution-flow/st.form" class="uri">https://docs.streamlit.io/develop/api-reference/execution-flow/st.form</a></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>

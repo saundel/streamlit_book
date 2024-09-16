@@ -412,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./forms_and_run_buttons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -610,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We have two separate sets of filters - one that only affects the left visual, and one that affects the right.</p>
 <p>In a standard app, the whole thing would rerun even though only one of the visuals theoretically needs to be updated. Let’s take a look at the app as we would have generally written it.</p>
 <p>A short delay has been added in to make it clearer when the app is updating. What you will notice is that when any item is changed in the dropdown menu, the whole app fades out as all of the plots are recalculated, even though this is unnecessary as the right drop-downs don’t affect the left plot, and vice-versa.</p>
-<div id="c9e059bf" class="cell" data-execution_count="1">
+<div id="178504d3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -649,7 +649,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-partial-rerun-decorator" class="level2" data-number="28.1">
 <h2 data-number="28.1" class="anchored" data-anchor-id="the-partial-rerun-decorator"><span class="header-section-number">28.1</span> The Partial Rerun Decorator</h2>
 <p>Now let’s rewrite this using the fragment code.</p>
-<div id="3f0d623d" class="cell" data-execution_count="2">
+<div id="0bfa46c5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -1629,8 +1629,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./forms_and_run_buttons.html" class="pagination-link" aria-label="(Coming Soon!) Adding a 'Run' Button">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></span>
+      <a href="./forms_and_run_buttons.html" class="pagination-link" aria-label="Adding a 'Run' Button">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

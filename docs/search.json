@@ -364,7 +364,7 @@
     "href": "file_uploads.html#uploading-image-files",
     "title": "12  File Uploads",
     "section": "12.2 Uploading image files",
-    "text": "12.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n12.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-09-16 22:54:41.863 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
+    "text": "12.2 Uploading image files\nWe can easily upload image files too.\nLet’s try loading an image file and displaying it for the user.\n\nimport streamlit as st\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    st.image(uploaded_image)\n\n\n\n12.2.1 Manipulating uploaded image files\nWe have to undertake a few extra steps to be able to manipulate image files people have uploaded.\nWe’ll be using the pillow library (referred to as PIL in code) - but it expects the image to be converted to a series of bytes first.\nOnce we’ve adjusted the image into the format pillow expects, we can use the library to run a range of edits and enhancements to our image.\n\n\n\n\n\n\nTip\n\n\n\nThe code below shows just a couple of the things pillow (PIL) can do - take a look at the documentation to find more!\n\n\nLet’s have a go at it here.\n\nimport streamlit as st\nimport io\nfrom PIL import Image, ImageEnhance\nimport PIL.ImageOps\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    threshold = st.slider(\"Choose a threshold\", 1, 100, value=80, step=1)\n    contrast_factor = st.slider(\"Contrast Enhancement Strength\", 0.0, 2.0, value=1.0, step=0.05)\n    invert = st.checkbox(\"Invert Output Image?\")\n\n    enhancer = ImageEnhance.Contrast(im)\n    img_edited = enhancer.enhance(contrast_factor)\n\n    img_edited = img_edited.convert(\"L\").point(\n        lambda x: 255 if x &gt; threshold else 0\n    )\n\n    if invert:\n        img_edited = PIL.ImageOps.invert(img_edited)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n\n\n\n\n\n\n\nBackground removal\n\n\n\nWe could take this even further with the rembg library, which removes the image’s background.\nWe can’t demonstrate this interactively on this page, but the code below would work for a standard streamlit app run or hosted locally, or on streamlit community cloud.\nIt doesn’t work with stlite/browser-based Python due to dependencies of the rembg library that are unavailable via that method.\n\nimport streamlit as st\nimport io\nfrom PIL import Image\nfrom rembg import remove\n\nuploaded_image = st.file_uploader(\"Please upload an image file\", type=['png','jpg','jpeg','bmp', 'bitmap'])\n\nif uploaded_image is not None:\n\n    imagefile = io.BytesIO(uploaded_image.read())\n\n    im = Image.open(imagefile)\n\n    img_edited = remove(im)\n\n    st.write(\"Original Image\")\n    st.image(uploaded_image)\n\n    st.write(\"Edited Image\")\n    st.image(img_edited)\n\n2024-09-16 23:08:32.013 \n  Warning: to view this Streamlit app on a browser, run it with the following\n  command:\n\n    streamlit run c:\\HSMA\\streamlit_book\\.venv\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]",
     "crumbs": [
       "User Inputs",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>File Uploads</span>"
@@ -723,6 +723,17 @@
     ]
   },
   {
+    "objectID": "forms_and_run_buttons.html",
+    "href": "forms_and_run_buttons.html",
+    "title": "27  Adding a ‘Run’ Button",
+    "section": "",
+    "text": "27.1 Streamlit forms\nAn alternative to this is to use the official Streamlit forms component.\nhttps://docs.streamlit.io/develop/api-reference/execution-flow/st.form",
+    "crumbs": [
+      "Controlling Application Flow",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Adding a 'Run' Button</span>"
+    ]
+  },
+  {
     "objectID": "partial_reruns.html",
     "href": "partial_reruns.html",
     "title": "28  Partial Reruns",
@@ -742,6 +753,17 @@
     "crumbs": [
       "Controlling Application Flow",
       "<span class='chapter-number'>28</span>  <span class='chapter-title'>Partial Reruns</span>"
+    ]
+  },
+  {
+    "objectID": "caching.html",
+    "href": "caching.html",
+    "title": "30  (Coming Soon!) Caching",
+    "section": "",
+    "text": "We often want to load data files into Streamlit.\nThere are two main issues we might run into\n\nEach time you rerun something in your app (e.g. filtering the dataframe by using a drop-down select box), then the code to load the dataframe gets run again too. This can make your app feel really sluggish with larger data files\nWhen we reach the stage of deploying our app to the web, we have to be a bit more conscious of how much memory our app is using when being accessed by multiple people simultaneously By default, the data will be loaded in separately for each user - even though it’s identical This can quickly lead to memory requirements ballooning (and your app crashing!)",
+    "crumbs": [
+      "Advanced Concepts",
+      "<span class='chapter-number'>30</span>  <span class='chapter-title'>(Coming Soon!) Caching</span>"
     ]
   },
   {

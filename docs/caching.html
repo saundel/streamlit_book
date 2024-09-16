@@ -375,7 +375,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./forms_and_run_buttons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Adding a ‘Run’ Button</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Adding a ‘Run’ Button</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -562,6 +562,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We often want to load data files into Streamlit.</p>
+<p>There are two main issues we might run into</p>
+<ol type="1">
+<li><p>Each time you rerun something in your app (e.g.&nbsp;filtering the dataframe by using a drop-down select box), then the code to load the dataframe gets run again too. This can make your app feel really sluggish with larger data files</p></li>
+<li><p>When we reach the stage of deploying our app to the web, we have to be a bit more conscious of how much memory our app is using when being accessed by multiple people simultaneously By default, the data will be loaded in separately for each user - even though it’s identical This can quickly lead to memory requirements ballooning (and your app crashing!)</p></li>
+</ol>
 
 
 
