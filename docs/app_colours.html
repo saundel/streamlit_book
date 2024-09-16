@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -538,7 +572,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#config.toml" id="toc-config.toml" class="nav-link active" data-scroll-target="#config.toml"><span class="header-section-number">24.0.1</span> config.toml</a></li>
+  <li><a href="#app.py" id="toc-app.py" class="nav-link" data-scroll-target="#app.py"><span class="header-section-number">24.0.2</span> app.py</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -562,8 +603,49 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>There are a few parts of Streamlit’s theming that we can officially change using a configuration file.</p>
+<p>This file needs to be called config.toml and lives inside a subfolder called .streamlit</p>
+<p><img src="assets/2024-09-16-22-11-49.png" class="img-fluid"></p>
+<p>The config.toml file contains a variable number of parameters.</p>
+<p>It can determine whether the default colourscheme is light or dark, and whether the default streamlit colours are overridden.</p>
+<p>You can create a template config.toml from within streamlit, then paste the output into a config.toml file you create yourself.</p>
+<p><img src="assets/firefox_qB7kSDDCyA.gif" class="img-fluid"></p>
+<p>Let’s look at an example app.</p>
+<section id="config.toml" class="level3" data-number="24.0.1">
+<h3 data-number="24.0.1" class="anchored" data-anchor-id="config.toml"><span class="header-section-number">24.0.1</span> config.toml</h3>
+<pre><code>[theme]
+base="light"
+primaryColor="#005EB8"
+secondaryBackgroundColor="#00e0ff"</code></pre>
+</section>
+<section id="app.py" class="level3" data-number="24.0.2">
+<h3 data-number="24.0.2" class="anchored" data-anchor-id="app.py"><span class="header-section-number">24.0.2</span> app.py</h3>
+<div id="7356f93e" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">'Simple Calculator App'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>num_1 <span class="op">=</span> st.number_input(label<span class="op">=</span><span class="st">"First Number"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>num_2 <span class="op">=</span> st.number_input(label<span class="op">=</span><span class="st">"Second Number"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>operator <span class="op">=</span> st.selectbox(label<span class="op">=</span><span class="st">"Operation"</span>, options<span class="op">=</span>[<span class="st">"Add"</span>, <span class="st">"Subtract"</span>, <span class="st">"Multiply"</span>, <span class="st">"Divide"</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> operator <span class="op">==</span> <span class="st">"Add"</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> num_1 <span class="op">+</span> num_2</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> operator <span class="op">==</span> <span class="st">"Subtract"</span>:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> num_1 <span class="op">-</span> num_2</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> operator <span class="op">==</span> <span class="st">"Multiply"</span>:</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> num_1 <span class="op">*</span> num_2</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> operator <span class="op">==</span> <span class="st">"Divide"</span>:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> num_1 <span class="op">/</span> num_2</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>st.text(<span class="ss">f"The answer is </span><span class="sc">{</span>output<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="assets/2024-09-16-22-22-29.png" class="img-fluid"></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>

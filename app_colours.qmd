@@ -56,3 +56,5 @@ elif operator == "Divide":
 st.text(f"The answer is {output}")
 
 ```
+
+![](assets/2024-09-16-22-22-29.png)

@@ -3,3 +3,187 @@ title: "Logos"
 filters:
   - whitphx/stlite
 ---
+
+Streamlit has basic support for small logos in your app.
+
+It will look for a file you specify relative to the currently running streamlit file
+here, for example, it looks for a folder called ‘resources’ and then looks for the ‘hsma_logo.png’ file.
+
+![](assets/2024-09-16-22-24-06.png)
+
+The logo will appear in the top left of your app.
+
+:::{.callout-tip}
+The command to insert a logo is
+
+`st.logo("your_filepath_here")`
+
+e.g. `st.logo("resources/hsma_logo.png")`
+:::
+
+
+
+```{python}
+#| eval: false
+import streamlit as st
+
+st.logo("resources/hsma_logo.png")
+
+st.title('Simple Calculator App')
+
+num_1 = st.number_input(label="First Number")
+
+num_2 = st.number_input(label="Second Number")
+
+operator = st.selectbox(label="Operation", options=["Add", "Subtract", "Multiply", "Divide"])
+
+if operator == "Add":
+    output = num_1 + num_2
+elif operator == "Subtract":
+    output = num_1 - num_2
+elif operator == "Multiply":
+    output = num_1 * num_2
+elif operator == "Divide":
+    output = num_1 / num_2
+
+st.text(f"The answer is {output}")
+
+```
+
+
+If it’s a multi page app or an app using a streamlit sidebar that you have manually defined, it will appear at the top of the sidebar.
+
+```{python}
+#| eval: false
+import streamlit as st
+
+st.logo("resources/hsma_logo.png")
+
+st.title('Simple Calculator App')
+
+with st.sidebar:
+  num_1 = st.number_input(label="First Number")
+
+  num_2 = st.number_input(label="Second Number")
+
+  operator = st.selectbox(label="Operation", options=["Add", "Subtract", "Multiply", "Divide"])
+
+if operator == "Add":
+    output = num_1 + num_2
+elif operator == "Subtract":
+    output = num_1 - num_2
+elif operator == "Multiply":
+    output = num_1 * num_2
+elif operator == "Divide":
+    output = num_1 / num_2
+
+st.text(f"The answer is {output}")
+
+```
+
+:::{.callout-tip}
+Ideally, your logo should be close to 24 pixels tall by 240 pixels wide.
+:::
+
+## Larger logos
+
+It is possible to include larger logos through more advanced tricks, but they are fragile and prone to breaking as changes are made to the Streamlit library.
+
+![](assets/2024-09-16-22-27-41.png)
+
+The approach requires using some markdown to inject some custom CSS (see the fonts chapter for more details on CSS).
+
+Here is a reusable function you could adapt to your own use:
+
+```{python}
+#| eval: false
+def add_logo():
+    '''
+    Add a logo at the top of the page navigation sidebar
+
+    Approach written by blackary on
+    https://discuss.streamlit.io/t/put-logo-and-title-above-on-top-of-page-navigation-in-sidebar-of-multipage-app/28213/5
+
+    '''
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                background-image: url(https://raw.githubusercontent.com/hsma-programme/Teaching_DES_Concepts_Streamlit/main/resources/hsma_logo_transparent_background_small.png);
+                background-repeat: no-repeat;
+                padding-top: 175px;
+                background-position: 40px 30px;
+            }
+            [data-testid="stSidebarNav"]::before {
+                content: "The DES Playground";
+                padding-left: 20px;
+                margin-top: 50px;
+                font-size: 30px;
+                position: relative;
+                top: 100px;
+            }
+
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+```
+
+```{python}
+#| eval: false
+import streamlit as st
+
+def add_logo():
+    '''
+    Add a logo at the top of the page navigation sidebar
+
+    Approach written by blackary on
+    https://discuss.streamlit.io/t/put-logo-and-title-above-on-top-of-page-navigation-in-sidebar-of-multipage-app/28213/5
+
+    '''
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                background-image: url(https://raw.githubusercontent.com/hsma-programme/Teaching_DES_Concepts_Streamlit/main/resources/hsma_logo_transparent_background_small.png);
+                background-repeat: no-repeat;
+                padding-top: 175px;
+                background-position: 40px 30px;
+            }
+            [data-testid="stSidebarNav"]::before {
+                content: "The DES Playground";
+                padding-left: 20px;
+                margin-top: 50px;
+                font-size: 30px;
+                position: relative;
+                top: 100px;
+            }
+
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+add_logo()
+
+st.title('Simple Calculator App')
+
+with st.sidebar:
+  num_1 = st.number_input(label="First Number")
+
+  num_2 = st.number_input(label="Second Number")
+
+  operator = st.selectbox(label="Operation", options=["Add", "Subtract", "Multiply", "Divide"])
+
+if operator == "Add":
+    output = num_1 + num_2
+elif operator == "Subtract":
+    output = num_1 - num_2
+elif operator == "Multiply":
+    output = num_1 * num_2
+elif operator == "Divide":
+    output = num_1 / num_2
+
+st.text(f"The answer is {output}")
+
+```

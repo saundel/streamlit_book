@@ -721,5 +721,27 @@
       "Additional Resources",
       "<span class='chapter-number'>45</span>  <span class='chapter-title'>Streamlit Cheat Sheet</span>"
     ]
+  },
+  {
+    "objectID": "logos.html",
+    "href": "logos.html",
+    "title": "25  Logos",
+    "section": "",
+    "text": "25.1 Larger logos\nIt is possible to include larger logos through more advanced tricks, but they are fragile and prone to breaking as changes are made to the Streamlit library.\nThe approach requires using some markdown to inject some custom CSS (see the fonts chapter for more details on CSS).\nHere is a reusable function you could adapt to your own use:\ndef add_logo():\n    '''\n    Add a logo at the top of the page navigation sidebar\n\n    Approach written by blackary on\n    https://discuss.streamlit.io/t/put-logo-and-title-above-on-top-of-page-navigation-in-sidebar-of-multipage-app/28213/5\n\n    '''\n    st.markdown(\n        \"\"\"\n        &lt;style&gt;\n            [data-testid=\"stSidebarNav\"] {\n                background-image: url(https://raw.githubusercontent.com/hsma-programme/Teaching_DES_Concepts_Streamlit/main/resources/hsma_logo_transparent_background_small.png);\n                background-repeat: no-repeat;\n                padding-top: 175px;\n                background-position: 40px 30px;\n            }\n            [data-testid=\"stSidebarNav\"]::before {\n                content: \"The DES Playground\";\n                padding-left: 20px;\n                margin-top: 50px;\n                font-size: 30px;\n                position: relative;\n                top: 100px;\n            }\n\n        &lt;/style&gt;\n        \"\"\",\n        unsafe_allow_html=True,\n    )",
+    "crumbs": [
+      "Styling",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>Logos</span>"
+    ]
+  },
+  {
+    "objectID": "app_colours.html",
+    "href": "app_colours.html",
+    "title": "24  App Colours",
+    "section": "",
+    "text": "There are a few parts of Streamlit’s theming that we can officially change using a configuration file.\nThis file needs to be called config.toml and lives inside a subfolder called .streamlit\n\nThe config.toml file contains a variable number of parameters.\nIt can determine whether the default colourscheme is light or dark, and whether the default streamlit colours are overridden.\nYou can create a template config.toml from within streamlit, then paste the output into a config.toml file you create yourself.\n\nLet’s look at an example app.\n\n24.0.1 config.toml\n[theme]\nbase=\"light\"\nprimaryColor=\"#005EB8\"\nsecondaryBackgroundColor=\"#00e0ff\"\n\n\n24.0.2 app.py\n\nimport streamlit as st\n\nst.title('Simple Calculator App')\n\nnum_1 = st.number_input(label=\"First Number\")\n\nnum_2 = st.number_input(label=\"Second Number\")\n\noperator = st.selectbox(label=\"Operation\", options=[\"Add\", \"Subtract\", \"Multiply\", \"Divide\"])\n\nif operator == \"Add\":\n    output = num_1 + num_2\nelif operator == \"Subtract\":\n    output = num_1 - num_2\nelif operator == \"Multiply\":\n    output = num_1 * num_2\nelif operator == \"Divide\":\n    output = num_1 / num_2\n\nst.text(f\"The answer is {output}\")",
+    "crumbs": [
+      "Styling",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>App Colours</span>"
+    ]
   }
 ]

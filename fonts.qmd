@@ -3,3 +3,54 @@ title: "Fonts"
 filters:
   - whitphx/stlite
 ---
+
+To customise the look of your app much more than this, we need to turn to custom css.
+
+CSS stands for ‘cascading style sheets’ and is a language used for theming much of the web!
+
+We can create our own .css file and force Streamlit to load it in.
+
+![](assets/2024-09-16-22-37-35.png)
+
+To load the file into the app, we need to include the following command:
+
+```{python}
+#| eval: false
+with open("style.css") as css:
+    st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
+```
+
+This points towards the css file and wrapss it in some HTML tags that will ensure the css is recognised by the web browser.
+
+The css file can contain any valid css, but we are interested in this chapter in targeting fonts specifically.
+
+To begin with, we load in a font from the Google font families.
+
+We then choose some areas of this app to apply it to.
+
+`h1, h2, h3, h4, p` will target all headers and the main body text in the app.
+
+More advanced or Streamlit-specific elements may be harder to target.
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap');
+
+html, body, st-emotion-cache [class*="css"] {
+    font-family: 'Lexend', sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    color: #091747;
+}
+
+h1, h2, h3, h4, p {
+	font-family: "Lexend", sans-serif;
+}
+```
+
+:::{.callout-tip}
+
+You can right click when running your app and choose 'inspect' to get an idea of the possible tags to target with your custom CSS.
+
+The streamlit forums and StackOverflow are also good ways to find examples of people applying custom theming to similar things to what you are looking to do.
+
+:::
