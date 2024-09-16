@@ -54,3 +54,35 @@ You can right click when running your app and choose 'inspect' to get an idea of
 The streamlit forums and StackOverflow are also good ways to find examples of people applying custom theming to similar things to what you are looking to do.
 
 :::
+
+
+Here is an example of a Streamlit title with and without the custom theming applied.
+
+![](assets/2024-09-16-22-49-15.png)
+
+:::{.callout-tip}
+Google fonts provide a good option that is easy to load in via the method above.
+
+You can explore the wide range of fonts offered here:
+
+<https://fonts.google.com/>
+
+**Istok Web** is often cited as being the closest Google Font equivalent to the standard NHS font *Frutiger*.
+
+To apply this, you would use
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@200&display=swap');
+
+html, body, st-emotion-cache [class*="css"] {
+    font-family: 'Istok Web', sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    color: #091747;
+}
+
+h1, h2, h3, h4, p {
+	font-family: "Istok Web", sans-serif;
+}
+```
+:::
