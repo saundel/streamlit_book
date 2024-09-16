@@ -3,3 +3,32 @@ title: "(Coming Soon!) Caching"
 filters:
   - whitphx/stlite
 ---
+
+We often want to load data files into Streamlit.
+
+There are two main issues we might run into
+
+1. Each time you rerun something in your app (e.g. filtering the dataframe by using a drop-down select box), then the code to load the dataframe gets run again too.
+This can make your app feel really sluggish with larger data files
+
+
+2. When we reach the stage of deploying our app to the web, we have to be a bit more conscious of how much memory our app is using when being accessed by multiple people simultaneously
+By default, the data will be loaded in separately for each user - even though it’s identical
+This can quickly lead to memory requirements ballooning (and your app crashing!)
+
+By using the `@st.cache_data` decorator, Streamlit will intelligently handle the loading in of datasets to minimize unnecessary reloads and memory use.
+
+To switch from doing a standard data import to using caching, we
+- Turn our data import into a function that returns the data
+- Add the @st.cache_data decorator directly above the function
+- Call the function in our code to load the data in, assigning the output (the dataframe) to a variable
+
+We can then just use our dataframe like normal - Streamlit will handle the awkward bits.
+
+![](assets/2024-09-16-23-09-58.png)
+
+Caching can also be used for other large files - for example, if you wanted to load in a trained machine learning model that’s the same for all users who will interact with your app.
+
+![](assets/2024-09-16-23-10-39.png)
+
+It’s not always obvious which to use, so head to [the Streamlit documentation](https://docs.streamlit.io/develop/concepts/architecture/caching#deciding-which-caching-decorator-to-use) if you’re a bit unsure.
