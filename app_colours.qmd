@@ -3,3 +3,56 @@ title: "App Colours"
 filters:
   - whitphx/stlite
 ---
+
+There are a few parts of Streamlit’s theming that we can officially change using a configuration file.
+
+This file needs to be called config.toml and lives inside a subfolder called .streamlit
+
+![](assets/2024-09-16-22-11-49.png)
+
+The config.toml file contains a variable number of parameters.
+
+It can determine whether the default colourscheme is light or dark, and whether the default streamlit colours are overridden.
+
+You can create a template config.toml from within streamlit, then paste the output into a config.toml file you create yourself.
+
+![](assets/firefox_qB7kSDDCyA.gif)
+
+Let's look at an example app.
+
+### config.toml
+
+```
+[theme]
+base="light"
+primaryColor="#005EB8"
+secondaryBackgroundColor="#00e0ff"
+```
+
+### app.py
+
+```{python}
+#| eval: false
+
+import streamlit as st
+
+st.title('Simple Calculator App')
+
+num_1 = st.number_input(label="First Number")
+
+num_2 = st.number_input(label="Second Number")
+
+operator = st.selectbox(label="Operation", options=["Add", "Subtract", "Multiply", "Divide"])
+
+if operator == "Add":
+    output = num_1 + num_2
+elif operator == "Subtract":
+    output = num_1 - num_2
+elif operator == "Multiply":
+    output = num_1 * num_2
+elif operator == "Divide":
+    output = num_1 / num_2
+
+st.text(f"The answer is {output}")
+
+```
