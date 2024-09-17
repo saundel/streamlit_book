@@ -18,3 +18,5 @@ elif operator == "Divide":
     output = num_1 / num_2
 
 st.text(f"The answer is {output}")
+
+Print ("Lee is cool")
