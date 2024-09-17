@@ -19,4 +19,4 @@ elif operator == "Divide":
 
 st.text(f"The answer is {output}")
 
-Print ("Lee is cool")
+print ("Lee is cool")
